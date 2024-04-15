@@ -13,8 +13,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/#about">Tentang</a>
-                <a class="nav-link" href="/#aktivitas">Aktivitas</a>
+                {{-- <a class="nav-link" href="/#about">Tentang</a>
+                <a class="nav-link" href="/#kegiatan">Kegiatan</a> --}}
+                <div class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Tentang
+                    </a>
+                    <div class="dropdown-menu">
+						<a class="dropdown-item" target="blank" href="https://rosma.ac.id">STMIK Rosma</a>
+                        <a class="dropdown-item" href="/#cara-daftar">Cara Mendaftar</a>
+                        <a class="dropdown-item" href="/#kegiatan">Kegiatan Mahasiswa</a>
+                    </div>
+                </div>
                 <div class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Program Studi

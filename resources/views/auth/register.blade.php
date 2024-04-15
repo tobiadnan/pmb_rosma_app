@@ -54,9 +54,9 @@
 	<div class="row">
 		<div class="col-12">
 			<!-- Form START -->
-			<form class="file-upload mt-3">
+			<form method="post" class="file-upload mt-3">
 				<div class="row justify-content-md-center gx-5">
-					<!-- Upload profile -->
+					<!-- Upload foto profile -->
 					<div class="col-xxl-3">
                         <div class="bg-secondary-soft px-2 py-5 rounded">
                             <div class="row g-3">
@@ -129,58 +129,10 @@
 									<label class="form-label">No. Telepon 2</label>
 									<input type="tel" class="form-control" placeholder="Opsional" aria-label="No. Telepon 2">
 								</div>
-                                {{-- Asal Sekolah --}}
-								{{-- <div class="col-md-6">
-									<label class="form-label">Asal Sekolah</label>
-									<input type="text" class="form-control" placeholder="SMA Negeri XYZ" aria-label="Asal Sekolah" required>
-								</div> --}}
-                                <div class="col-md-6">
-                                    <label for="asalSekolah" class="form-label">Asal Sekolah</label>
-                                    <select class="form-select" name="asalSekolah" id="asalSekolah" required>
-                                        <option selected>Pilih...</option>
-                                        <option value="laki-laki">Laki-laki</option>
-                                        <option value="perempuan">Perempuan</option>
-                                    </select>
-                                </div>
-                                {{-- Tahun Lulus --}}
-								<div class="col-md-6">
-									<label class="form-label">Tahun Lulus</label>
-									<input type="text" class="form-control" placeholder="2024" aria-label="Tahun Lulus" required>
-								</div>
-                            </div> <!-- Row END -->
-                        </div>
-					</div>
-				</div> <!-- Row END -->
-
-				<!-- Alamat Domisili -->
-				<div class="row justify-content-md-center gx-5">
-					<!-- change password -->
-					<div class="col-xxl-3">
-						{{-- <div class="bg-secondary-soft px-2 py-5 rounded">
-							<div class="row g-3">
-								<h4 class="my-4">Change Password</h4>
-								<!-- Old password -->
-								<div class="col-md-6">
-									<label for="exampleInputPassword1" class="form-label">Old password *</label>
-									<input type="password" class="form-control" id="exampleInputPassword1">
-								</div>
-								<!-- New password -->
-								<div class="col-md-6">
-									<label for="exampleInputPassword2" class="form-label">New password *</label>
-									<input type="password" class="form-control" id="exampleInputPassword2">
-								</div>
-								<!-- Confirm password -->
-								<div class="col-md-12">
-									<label for="exampleInputPassword3" class="form-label">Confirm Password *</label>
-									<input type="password" class="form-control" id="exampleInputPassword3">
-								</div>
-							</div>
-						</div> --}}
-					</div>
-					<div class="col-xxl-7 mb-5 mb-xxl-0">
-						<div class="bg-secondary-soft px-2 rounded">
-							<div class="row g-3">
-								<h4 class="mb-4 mt-0">Alamat Domisili</h4>
+                            </div> 
+							<!-- Alamat -->
+							<div class="row g-3 mt-5">
+								<h4 class="mb-12 mt-0">Alamat Domisili</h4>
 								{{-- provinsi --}}
                                 <div class="col-md-6">
                                     <label for="provinsi" class="form-label">Provinsi</label>
@@ -217,12 +169,30 @@
                                         <option value="perempuan">Perempuan</option>
                                     </select>
                                 </div>
-								<div class="">
-									<label for="alamat">Alamat:</label>
+								<div class="col-md-12">
+									<label for="alamat">Alamat</label>
 									<textarea class="form-control" rows="5" id="alamat" name="alamat" placeholder="Jl. XYZ No. X RT XX/RW YY" required></textarea>
 								</div>
-							</div> <!-- Row END -->
-						</div>
+							</div>
+							{{-- Data Sekolah --}}
+							<div class="row g-3 mt-5">
+								<h4 class="">Data Sekolah</h4>
+								{{-- asal sekolah --}}
+								<div class="col-md-6">
+									<label for="asalSekolah" class="form-label">Asal Sekolah</label>
+									<select class="form-select" name="asalSekolah" id="asalSekolah" required>
+										<option selected>Pilih...</option>
+										<option value="laki-laki">Laki-laki</option>
+										<option value="perempuan">Perempuan</option>
+									</select>
+								</div>
+								{{-- Tahun Lulus --}}
+								<div class="col-md-6">
+									<label class="form-label">Tahun Lulus</label>
+									<input type="text" class="form-control" placeholder="2024" aria-label="Tahun Lulus" required>
+								</div>
+							</div>
+                        </div>
 					</div>
 				</div> <!-- Row END -->
 				<!-- button -->
@@ -232,7 +202,6 @@
 							<button type="submit" class="btn btn-primary btn-lg">SIMPAN</button>
 							{{-- <button type="button" class="btn btn-danger btn-lg">Delete profile</button> --}}
 						</div>
-
 					</div>
 				</div>
 			</form> <!-- Form END -->
