@@ -11515,7 +11515,7 @@ body {
     position: relative;
     width: 100%;
     height: auto;
-    min-height: 35rem;
+    min-height: 25rem;
     padding: 15rem 0;
     background: linear-gradient(
             to bottom,
@@ -11576,7 +11576,7 @@ body {
 }
 
 .about-section {
-    padding-top: 10rem;
+    padding-top: 5rem;
     background: linear-gradient(
         to bottom,
         #000 0%,

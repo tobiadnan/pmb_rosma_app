@@ -20,7 +20,7 @@
         </div>
         <form action="" method="post" class="login">
             <div class="mb-2 position-relative">
-                <input type="email" class="form-control" placeholder=" example@email.com" name="email">
+                <input type="email" class="form-control" placeholder=" example@email.com" name="email" id="input">
             </div>
             <div class="mb-3 position-relative">
                 <input type="password" class="form-control" placeholder=" password" id="password" name="password">
@@ -29,9 +29,12 @@
                 </span>
             </div>
             <div class="position-relative">
-                <button type="submit" class="btn btn-primary login-btn" id="loginButton">Login</button>
+                <button type="submit" class="btn btn-primary login-btn" id="loginButton">Masuk</button>
             </div>
         </form>
+        <div class="text-center mt-3">
+            <p id="textMsg" style="color: red; display: none">Caps Lock ON !!!</p>
+        </div>
         <div class="text-center mt-3">
             <div class="mb-2">
                 <a href="lupa-password.html" class="form-text">Lupa Password?</a>
@@ -45,6 +48,34 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     <script src="js/auth.js"></script>
+    <script>
+        // Get the input field
+        var input = document.getElementById("input");
+        var password = document.getElementById("password");
+        
+        // Get the warning text
+        var text = document.getElementById("textMsg");
+        
+        // When the user presses any key on the keyboard, run the function
+        input.addEventListener("keyup", function(event) {
+        
+            // If "caps lock" is pressed, display the warning text
+            if (event.getModifierState("CapsLock")) {
+            text.style.display = "block";
+        } else {
+            text.style.display = "none"
+        }
+    });
+        password.addEventListener("keyup", function(event) {
+        
+            // If "caps lock" is pressed, display the warning text
+            if (event.getModifierState("CapsLock")) {
+            text.style.display = "block";
+        } else {
+            text.style.display = "none"
+        }
+    });
+    </script>
 
 </body>
 

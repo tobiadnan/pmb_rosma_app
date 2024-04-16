@@ -40,3 +40,9 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('auth.register');
 });
+Route::get('/profile', function () {
+    return view('auth.profile');
+});
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+});
