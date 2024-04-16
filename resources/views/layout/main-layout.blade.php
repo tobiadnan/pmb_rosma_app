@@ -18,9 +18,9 @@
     </head>
     <body id="page-top">
         
-        @include('template.navbar')
+        @include('layout.main-nav')
         @yield('content')
-        @include('template.footer')
+        @include('layout.main-footer')
 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -16,8 +16,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
         }
         if (window.scrollY === 0) {
             navbarCollapsible.classList.remove("navbar-shrink");
+            navbarCollapsible.classList.remove("shadow");
         } else {
             navbarCollapsible.classList.add("navbar-shrink");
+            navbarCollapsible.classList.add("shadow");
         }
     };
 

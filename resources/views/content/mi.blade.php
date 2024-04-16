@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('layout.main-layout')
 
 @section('title')
     MI

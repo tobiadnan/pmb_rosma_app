@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,20 +16,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('main-page');
 });
 
 Route::get('/ti', function () {
-    return view('prodi.ti');
+    return view('content.ti');
 });
 Route::get('/si', function () {
-    return view('prodi.si');
+    return view('content.si');
 });
 Route::get('/mi', function () {
-    return view('prodi.mi');
+    return view('content.mi');
 });
 Route::get('/ka', function () {
-    return view('prodi.ka');
+    return view('content.ka');
 });
 
 Route::get('/kacer', function () {
@@ -46,4 +47,16 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::get('login', 'login')->name('login');
     Route::post('login', 'loginAction')->name('login.action');
+
+    Route::get('logout', 'logout')->middleware('auth')->name('logout');
+});
+
+// User Guests 
+Route::middleware(['auth', 'user-access:user'])->group(function () {
+    Route::get('/home',  [HomeController::class, 'index'])->name('home');
+});
+
+// Admin Access Only
+Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(function () {
+    Route::get('/home',  [HomeController::class, 'admin_home'])->name('admin/home');
 });
