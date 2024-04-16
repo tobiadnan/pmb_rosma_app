@@ -16,9 +16,25 @@
     <div class="body"></div>
     <div class="container">
         <div class="header">
-            <span class="login-text">Login</span> PMB Rosma
+            <span class="login-text">Masuk</span> PMB Rosma
         </div>
-        <form action="" method="post" class="login">
+        <form action="{{ route('login.action') }}" method="post" class="login">
+            @csrf
+            @if ($errors->any())
+            <div id="errorAlert" class="alert alert-danger alert-dismissible fade show rounded-3" role="alert">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <strong class="font-bold">Error!</strong>
+                        <ul class="mb-0" style="font-family: 'Arial', sans-serif; font-size: 14px;">
+                            @foreach ($errors->all() as $error)
+                            <li><span class="block sm:inline">{{ $error }}</span></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            @endif
             <div class="mb-2 position-relative">
                 <input type="email" class="form-control" placeholder=" example@email.com" name="email" id="input">
             </div>
@@ -28,7 +44,18 @@
                     <i class="fas fa-eye-slash"></i>
                 </span>
             </div>
-            <div class="position-relative">
+            <div class="d-flex justify-content-between">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="remember" name="remember">
+                    <label class="form-check-label" for="remember">
+                        Remember me
+                    </label>
+                </div>
+                <div >
+                    <a href="lupa-password.html" style="color: white">Lupa Password?</a>
+                </div>
+            </div>
+            <div class="position-relative mt-2">
                 <button type="submit" class="btn btn-primary login-btn" id="loginButton">Masuk</button>
             </div>
         </form>
@@ -36,10 +63,7 @@
             <p id="textMsg" style="color: red; display: none">Caps Lock ON !!!</p>
         </div>
         <div class="text-center mt-3">
-            <div class="mb-2">
-                <a href="lupa-password.html" class="form-text">Lupa Password?</a>
-            </div>
-            <p class="mb-0">Belum punya akun? <a class="form-text" href="register" style="color: rgb(0, 208, 255);">Daftar di sini</a></p>
+            <p class="mb-0">Belum punya akun? <a class="form-text" href="{{ route('register') }}" style="color: rgb(0, 208, 255);">Daftar di sini</a></p>
         </div>
     </div>
 
@@ -75,6 +99,10 @@
             text.style.display = "none"
         }
     });
+
+      setTimeout(function() {
+        document.getElementById('errorAlert').remove();
+    }, 5000);
     </script>
 
 </body>

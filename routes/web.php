@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,15 +35,15 @@ Route::get('/kacer', function () {
     return view('beasiswa.kacer');
 });
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
-Route::get('/register', function () {
-    return view('auth.register');
-});
-Route::get('/profile', function () {
-    return view('auth.profile');
-});
+
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
+});
+
+Route::controller(AuthController::class)->group(function () {
+    Route::get('register', 'register')->name('register');
+    Route::post('register', 'registerSave')->name('register.save');
+
+    Route::get('login', 'login')->name('login');
+    Route::post('login', 'loginAction')->name('login.action');
 });

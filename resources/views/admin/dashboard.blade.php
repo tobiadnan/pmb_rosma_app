@@ -11,9 +11,9 @@
   <!-- Google Fonts Roboto -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
   <!-- MDB -->
-  <link rel="stylesheet" href="css/mdb.min.css" />
+  <link rel="stylesheet" href="css/dashboard/mdb.min.css" />
   <!-- Custom styles -->
-  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="stylesheet" href="css/dashboard/admin.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
     crossorigin="anonymous"></script>
 </head>
@@ -67,7 +67,7 @@
 
         <!-- Brand -->
         <a class="navbar-brand" href="#">
-          <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="25" alt="" loading="lazy" />
+          <img src="../img/logo.png" height="25" alt="" loading="lazy" />
         </a>
         <!-- Search form -->
         <form class="d-none d-md-flex input-group w-auto my-auto">
@@ -586,9 +586,9 @@
   </main>
   <!--Main layout-->
   <!-- MDB -->
-  <script type="text/javascript" src="js/mdb.umd.min.js"></script>
+  <script type="text/javascript" src="js/dashboard/mdb.umd.min.js"></script>
   <!-- Custom scripts -->
-  <script type="text/javascript" src="js/admin.js"></script>
+  <script type="text/javascript" src="js/dashboard/admin.js"></script>
 
 </body>
 

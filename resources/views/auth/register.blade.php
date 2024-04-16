@@ -17,20 +17,23 @@
     <div class="body"></div>
     <div class="container">
         <div class="header">
-            <span class="register-text">Register</span> PMB 
+            <span class="register-text">Buat Akun</span> 
         </div>
-        <form action="" method="post" class="login">
+        <form action="{{ route('register.save') }}" method="post" class="login">
+            @csrf
             <div class="mb-2 position-relative">
                 <label for="nama" hidden></label>
                 <input type="text" class="form-control" placeholder="Nama" name="nama">
+                @error('nama')
+                    <span class="text-red-600 mt-2">{{ $message }}</span>
+                @enderror
             </div>
             <div class="mb-2 position-relative">
                 <label for="email" hidden></label>
                 <input type="email" class="form-control" placeholder="Email" name="email">
-            </div>
-            <div class="mb-2 position-relative">
-                <label for="nohp" hidden></label>
-                <input type="text" class="form-control" placeholder="no. HP" name="nohp">
+                @error('email')
+                    <span class="text-red-600 mt-2">{{ $message }}</span>
+                @enderror
             </div>
             <div class="mb-3 position-relative">
                 <label for="password" hidden></label>
@@ -38,16 +41,23 @@
                 <span class="toggle-password">
                     <i class="fas fa-eye-slash"></i>
                 </span>
+                @error('password')
+                    <span class="text-red-600 mt-2">{{ $message }}</span>
+                @enderror
             </div>
+            {{-- <div class="mb-3 position-relative">
+                <label for="confirm-password" hidden></label>
+                <input type="password" class="form-control" placeholder="Confirm Password" id="confirm-password" name="confirm-password">
+            </div> --}}
             <div class="position-relative">
-                <button type="submit" class="btn btn-primary register-btn">Daftar</button>
+                <button type="submit" class="btn btn-primary register-btn">Buat Akun</button>
             </div>
         </form>
         <div class="text-center mt-3">
             <p id="textMsg" style="color: red; display: none">Caps Lock ON !!!</p>
         </div>
         <div class="text-center mt-3">
-            <p class="mb-0">Sudah punya akun? <a class="form-text" href="login" style="color: rgb(0, 208, 255);">Masuk di sini</a></p>
+            <p class="mb-0">Sudah punya akun? <a class="form-text" href="{{ route('login') }}" style="color: rgb(0, 208, 255);">Masuk di sini</a></p>
         </div>
     </div>
 
@@ -73,6 +83,7 @@
             text.style.display = "none"
         }
     });
+    
     </script>
 </body>
 
