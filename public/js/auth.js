@@ -16,16 +16,31 @@ function togglePasswordVisibility() {
 var togglePassword = document.querySelector(".toggle-password");
 togglePassword.addEventListener("click", togglePasswordVisibility);
 
-// checkbox
-// document.addEventListener("DOMContentLoaded", function () {
-//     document
-//         .querySelector("#loginButton")
-//         .addEventListener("click", function (e) {
-//             if (document.querySelector("#lupaPassword").checked) {
-//                 e.preventDefault(); // Menghentikan aksi default dari tombol login
-//                 window.location.href = "lupa-password.html"; // Arahkan ke halaman lupa password
-//             } else {
-//                 // Lakukan proses login (tambahkan kode login Anda di sini)
-//             }
-//         });
-// });
+// Get the input field
+var input = document.getElementById("input");
+var password = document.getElementById("password");
+
+// Get the warning text
+var text = document.getElementById("textMsg");
+
+// When the user presses any key on the keyboard, run the function
+input.addEventListener("keyup", function (event) {
+    // If "caps lock" is pressed, display the warning text
+    if (event.getModifierState("CapsLock")) {
+        text.style.display = "block";
+    } else {
+        text.style.display = "none";
+    }
+});
+password.addEventListener("keyup", function (event) {
+    // If "caps lock" is pressed, display the warning text
+    if (event.getModifierState("CapsLock")) {
+        text.style.display = "block";
+    } else {
+        text.style.display = "none";
+    }
+});
+
+setTimeout(function () {
+    document.getElementById("errorAlert").remove();
+}, 5000);

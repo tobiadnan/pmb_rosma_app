@@ -8,11 +8,11 @@
 		<div class="collapse navbar-collapse mx-2" id="navbarNavDropdown">
 			{{-- brand --}}
 			<a class="navbar-brand" href="/">
-				<img src="img/logo.png" height="52" class="h-8" alt="STMIK Rosma logo"/>
+				<img src="img/logo.png" height="32" class="h-8" alt="STMIK Rosma logo"/>
 			</a>
-			{{-- left --}}
-			<div class="navbar-nav me-auto mb-2 mb-lg-0">
-				<div class="nav-item dropdown">
+            {{-- left --}}
+			<div class="navbar-nav me-auto mb-2 mb-lg-0" style="font-family: Inter, ui-sans-serif, system-ui, -apple-system, system-ui, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji; font-size: 1rem">
+                <div class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Tentang PMB Rosma
 					</a>
@@ -58,29 +58,6 @@
 					
 				</div>
 			</div>
-		</div>
-		{{-- right --}}
-		<div class="d-flex align-items-center">
-			@if (Route::has('login'))
-			@auth
-			<!-- Avatar -->
-			<div class="dropdown">
-				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-				<img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt="" loading="lazy" /></a>
-				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-					<li><a class="dropdown-item" href="{{ route('home') }}">My profile</a></li>
-					<li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
-				</ul>
-			</div>
-			
-			@else
-			<a class="nav-link mr-0" href="{{ route('login') }}">Masuk</a>
-			@if (Route::has('register'))
-			<a class="nav-link btn btn-info p-2" style="color: white" href="{{ route('register') }}">Daftar</a>
-			@endif
-			@endauth
-			@endif
-
 		</div>
     </div>
 </nav>

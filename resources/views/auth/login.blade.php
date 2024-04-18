@@ -13,6 +13,8 @@
 </head>
 
 <body>
+    @include('layout.auth-nav')
+
     <div class="body"></div>
     <div class="container">
         <div class="header">
@@ -21,25 +23,25 @@
         <form action="{{ route('login.action') }}" method="post" class="login">
             @csrf
             @if ($errors->any())
-            <div id="errorAlert" class="alert alert-danger alert-dismissible fade show rounded-3" role="alert">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                        <strong class="font-bold">Error!</strong>
-                        <ul class="mb-0" style="font-family: 'Arial', sans-serif; font-size: 14px;">
-                            @foreach ($errors->all() as $error)
-                            <li><span class="block sm:inline">{{ $error }}</span></li>
-                            @endforeach
-                        </ul>
+                <div id="errorAlert" class="alert alert-danger alert-dismissible fade show rounded-3" role="alert">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <strong class="font-bold">Error!</strong>
+                            <div class="mb-0" style="font-family: 'Arial', sans-serif; font-size: 14px;">
+                                @foreach ($errors->all() as $error)
+                                    <span class="block sm:inline">{{ $error }}</span><br>
+                                @endforeach
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            </div>
             @endif
             <div class="mb-2 position-relative">
-                <input type="email" class="form-control" placeholder=" example@email.com" name="email" id="input">
+                <input type="email" class="form-control" placeholder=" Email" name="email" id="input">
             </div>
             <div class="mb-3 position-relative">
-                <input type="password" class="form-control" placeholder=" password" id="password" name="password">
+                <input type="password" class="form-control" placeholder=" Password" id="password" name="password">
                 <span class="toggle-password">
                     <i class="fas fa-eye-slash"></i>
                 </span>
@@ -51,7 +53,7 @@
                         Remember me
                     </label>
                 </div>
-                <div >
+                <div>
                     <a href="lupa-password.html" style="color: white">Lupa Password?</a>
                 </div>
             </div>
@@ -63,7 +65,8 @@
             <p id="textMsg" style="color: red; display: none">Caps Lock ON !!!</p>
         </div>
         <div class="text-center mt-3">
-            <p class="mb-0">Belum punya akun? <a class="form-text" href="{{ route('register') }}" style="color: rgb(0, 208, 255);">Daftar di sini</a></p>
+            <p class="mb-0">Belum punya akun? <a class="form-text" href="{{ route('register') }}"
+                    style="color: rgb(0, 208, 255);">Daftar di sini</a></p>
         </div>
     </div>
 
@@ -72,38 +75,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     <script src="js/auth.js"></script>
-    <script>
-        // Get the input field
-        var input = document.getElementById("input");
-        var password = document.getElementById("password");
-        
-        // Get the warning text
-        var text = document.getElementById("textMsg");
-        
-        // When the user presses any key on the keyboard, run the function
-        input.addEventListener("keyup", function(event) {
-        
-            // If "caps lock" is pressed, display the warning text
-            if (event.getModifierState("CapsLock")) {
-            text.style.display = "block";
-        } else {
-            text.style.display = "none"
-        }
-    });
-        password.addEventListener("keyup", function(event) {
-        
-            // If "caps lock" is pressed, display the warning text
-            if (event.getModifierState("CapsLock")) {
-            text.style.display = "block";
-        } else {
-            text.style.display = "none"
-        }
-    });
-
-      setTimeout(function() {
-        document.getElementById('errorAlert').remove();
-    }, 5000);
-    </script>
 
 </body>
 

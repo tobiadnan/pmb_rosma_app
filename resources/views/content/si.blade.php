@@ -1,7 +1,7 @@
 @extends('layout.main-layout')
 
 @section('title')
-    SI
+    SI - 
 @endsection
 @section('content')
 {{--  Content --}}

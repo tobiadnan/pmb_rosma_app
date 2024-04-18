@@ -11401,7 +11401,7 @@ body {
     }
     #mainNav .nav-link {
         transition: none;
-        padding: 2rem 1.5rem;
+        padding: 1rem 1em;
         color: rgba(255, 255, 255, 0.5);
     }
     #mainNav .nav-link:hover {

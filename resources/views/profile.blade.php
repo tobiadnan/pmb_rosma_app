@@ -1,95 +1,94 @@
-@extends('template.template')
+@extends('layout.dashboard-layout')
 
-@section('title')
-    Daftar
-@endsection
+@section('title','Profile - ')
 @section('style')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
-    <style>
-		.rounded {
-			border-radius: 5px !important;
-		}
-		.file-upload .square {
-			height: 250px;
-			width: 250px;
-			margin: auto;
-			vertical-align: middle;
-			border: 2px dotted #a3a3a3;
-			background-color: #fff;
-			border-radius: 5px;
-			position: relative; /* Tambahkan properti position */
-			overflow: hidden; /* Tambahkan properti overflow */
-		}
-		
-		.file-upload .square img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover; /* Tambahkan properti object-fit */
-			position: absolute; /* Tambahkan properti position */
-			top: 0;
-			left: 0;
-			cursor: pointer;
-		}
-		.btn-success-soft {
-			color: #28a745;
-			background-color: rgba(40, 167, 69, 0.1);
-		}
-		.btn-danger-soft {
-			color: #dc3545;
-			background-color: rgba(220, 53, 69, 0.1);
-		}
-		.autocomplete {
-			/*the container must be positioned relative:*/
-			position: relative;
-			display: inline-block;
-		  }
-		  .autocomplete-items {
-			position: absolute;
-			border: 1px solid #d4d4d4;
-			border-bottom: none;
-			border-top: none;
-			z-index: 99;
-			/*position the autocomplete items to be the same width as the container:*/
-			top: 100%;
-			left: 0;
-			right: 0;
-		  }
-		  .autocomplete-items div {
-			padding: 10px;
-			cursor: pointer;
-			background-color: #fff;
-			border-bottom: 1px solid #d4d4d4;
-		  }
-		  .autocomplete-items div:hover {
-			/*when hovering an item:*/
-			background-color: #e9e9e9;
-		  }
-		  .autocomplete-active {
-			/*when navigating through the items using the arrow keys:*/
-			background-color: DodgerBlue !important;
-			color: #ffffff;
-		  }
-    </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<style>
+	.rounded {
+		border-radius: 5px !important;
+	}
+	.file-upload .square {
+		height: 250px;
+		width: 250px;
+		margin: auto;
+		vertical-align: middle;
+		border: 2px dotted #a3a3a3;
+		background-color: #fff;
+		border-radius: 5px;
+		position: relative; /* Tambahkan properti position */
+		overflow: hidden; /* Tambahkan properti overflow */
+	}
+	
+	.file-upload .square img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover; /* Tambahkan properti object-fit */
+		position: absolute; /* Tambahkan properti position */
+		top: 0;
+		left: 0;
+		cursor: pointer;
+	}
+	.btn-success-soft {
+		color: #28a745;
+		background-color: rgba(40, 167, 69, 0.1);
+	}
+	.btn-danger-soft {
+		color: #dc3545;
+		background-color: rgba(220, 53, 69, 0.1);
+	}
+	.autocomplete {
+		/*the container must be positioned relative:*/
+		position: relative;
+		display: inline-block;
+	}
+	.autocomplete-items {
+		position: absolute;
+		border: 1px solid #d4d4d4;
+		border-bottom: none;
+		border-top: none;
+		z-index: 99;
+		/*position the autocomplete items to be the same width as the container:*/
+		top: 100%;
+		left: 0;
+		right: 0;
+	}
+	.autocomplete-items div {
+		padding: 10px;
+		cursor: pointer;
+		background-color: #fff;
+		border-bottom: 1px solid #d4d4d4;
+	}
+	.autocomplete-items div:hover {
+		/*when hovering an item:*/
+		background-color: #e9e9e9;
+	}
+	.autocomplete-active {
+		/*when navigating through the items using the arrow keys:*/
+		background-color: DodgerBlue !important;
+		color: #ffffff;
+	}
+</style>
 @endsection
 @section('content')
+
 <header class="prodihead" id="header">
     <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div class="d-flex justify-content-center">
             <div class="text-center">
-                <h1 class="mx-auto my-0 text-uppercase">Registrasi PMB Rosma</h1>
+                <h1 class="mx-auto my-0 text-uppercase">@section('nama'){{ $user->nama }}@endsection</h1>
             </div>
         </div>
     </div>
 </header>
-<div class="container my-3">
+<div class="">
 	<div class="row">
 		<div class="col-12">
 			<!-- Form START -->
-			<form method="post" class="file-upload mt-3">
+			<form method="post" class="file-upload">
 				<div class="row justify-content-md-center gx-5">
 					<!-- Upload foto profile -->
-					<div class="col-xxl-3">
-                        <div class="bg-secondary-soft px-2 py-5 rounded">
+					<div class="col-md-3">
+                        <div class="bg-secondary-soft pt-5 pb-2 rounded">
                             <div class="row g-3">
                                 <h4 class="mb-4 mt-0 text-center">Pilih Foto Profile</h4>
                                 <div class="text-center">
@@ -97,8 +96,8 @@
                                         <img id="previewImg" src="/img/profile/default-profile-icon.png" alt="Preview Image">
                                     </div>
 									<input type="file" id="customFile" name="file" accept="image/*" onchange="validateAndPreview(event)" hidden>
-                                    <label class="btn btn-success-soft btn-block" for="customFile">Pilih</label>
-                                    <button type="button" id="removeBtn" class="btn btn-danger-soft">Hapus</button>
+									<label class="mx-1 btn btn-success-soft" for="customFile">Pilih</label>
+									<button type="button" id="removeBtn" class="mx-1 btn btn-danger-soft">Hapus</button>
                                     <p class="text-muted mt-3 mb-0"><span class="me-1">Note:</span>.jpg/jpeg/png dengan maksimal 500KB</p>
                                 </div>
                             </div>
@@ -162,8 +161,8 @@
 								</div>
                             </div> 
 							<!-- Alamat -->
-							<div class="row g-3 mt-5">
-								<h4 class="mb-12 mt-0">Alamat Domisili</h4>
+							<div class="row g-3 mt-3">
+								<h4 class="mb-2">Alamat Domisili</h4>
 								{{-- provinsi --}}
                                 <div class="col-md-6">
                                     <label for="provinsi" class="form-label">Provinsi</label>
@@ -206,7 +205,7 @@
 								</div>
 							</div>
 							{{-- Data Sekolah --}}
-							<div class="row g-3 mt-5">
+							<div class="row g-3 mt-3">
 								<h4 class="">Data Sekolah</h4>
 								{{-- asal sekolah --}}
 								<div class="col-md-6">

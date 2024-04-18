@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,9 +12,15 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        // Ambil data user dari database
+        $user = User::where('id', $request->user()->id)->first(); // Anda dapat menyesuaikan dengan cara Anda mengambil data user
+
+        // Kirim data user ke view profile
+        return view('profile', [
+            'user' => $user,
+        ]);
     }
 
     public function admin_home()

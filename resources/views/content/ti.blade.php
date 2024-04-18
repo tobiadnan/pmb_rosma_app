@@ -1,7 +1,7 @@
 @extends('layout.main-layout')
 
 @section('title')
-    TI
+    TI - 
 @endsection
 @section('style')
 <style>

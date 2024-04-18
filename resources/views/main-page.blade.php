@@ -1,8 +1,5 @@
 @extends('layout.main-layout')
 
-@section('title')
-    Halaman Utama
-@endsection
 @section('content')
 <!-- top-->
 <header class="masthead" id="header">
@@ -320,9 +317,4 @@
 {{-- end modal --}}
 
 
-@endsection
-@section('scripts')
-<script>
-
-</script>
 @endsection
