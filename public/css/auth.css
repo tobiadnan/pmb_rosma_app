@@ -265,7 +265,7 @@ body {
     width: 100%;
     box-sizing: border-box;
     font-family: sans-serif;
-    color: #2c3e50;
+    color: white;
     font-size: 16px;
     letter-spacing: 1px;
 }
@@ -277,14 +277,22 @@ body {
     box-shadow: none !important;
     border: none;
     font-weight: bold;
-    border-bottom: 2px solid skyblue;
+    border-bottom: 2px solid rgb(0, 208, 255);
     outline-width: 0;
+}
+input[type="date"] {
+    background-color: transparent;
+}
+
+/* Mengubah warna simbol kalender pada input date menjadi putih */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
 
 /*Blue Buttons*/
 #msform .action-button {
     width: 100px;
-    background: skyblue;
+    background: rgb(0, 208, 255);
     font-weight: bold;
     color: white;
     border: 0 none;
@@ -296,7 +304,7 @@ body {
 
 #msform .action-button:hover,
 #msform .action-button:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px skyblue;
+    box-shadow: 0 0 0 2px white, 0 0 0 3px rgb(0, 208, 255);
 }
 
 /*Previous Buttons*/
@@ -320,14 +328,22 @@ body {
 /*Dropdown List Exp Date*/
 select.list-dt {
     border: none;
+    border-radius: 0;
     outline: 0;
     border-bottom: 1px solid #ccc;
-    padding: 2px 5px 3px 5px;
-    margin: 2px;
+    margin-top: 2px;
+    margin-bottom: 25px;
+    background-color: transparent;
+    color: grey;
 }
 
 select.list-dt:focus {
-    border-bottom: 2px solid skyblue;
+    border-bottom: 2px solid rgb(0, 208, 255);
+    /* background-color: transparent; */
+    /* color: black; */
+}
+select:focus option {
+    color: black;
 }
 
 /*The background card*/
@@ -356,14 +372,15 @@ select.list-dt:focus {
 }
 
 #progressbar .active {
-    color: skyblue;
+    color: rgb(0, 208, 255);
 }
 
 #progressbar li {
     list-style-type: none;
     font-size: 12px;
-    width: 25%;
+    width: 20%;
     float: left;
+    right: 15px;
     position: relative;
 }
 
@@ -378,9 +395,14 @@ select.list-dt:focus {
     content: "\f007";
 }
 
-#progressbar #payment:before {
+#progressbar #address:before {
     font-family: FontAwesome;
-    content: "\f09d";
+    content: "\f5a0";
+}
+
+#progressbar #school:before {
+    font-family: FontAwesome;
+    content: "\f501";
 }
 
 #progressbar #confirm:before {
@@ -417,7 +439,7 @@ select.list-dt:focus {
 /*Color number of the step and the connector before it*/
 #progressbar li.active:before,
 #progressbar li.active:after {
-    background: skyblue;
+    background: rgb(0, 208, 255);
 }
 
 /*Imaged Radio Buttons*/
