@@ -1,7 +1,7 @@
-@extends('template.template')
+@extends('layout.main-layout')
 
 @section('title')
-    TI
+    KA - 
 @endsection
 @section('content')
 {{--  Content --}}
@@ -11,7 +11,7 @@
     <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div class="d-flex justify-content-center">
             <div class="text-center">
-                <h1 class="mx-auto my-0 text-uppercase">Teknik Informatika</h1>
+                <h1 class="mx-auto my-0 text-uppercase">Komputerisasi Akuntansi</h1>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
     <div class="container-fluid">
         <div class="container text-justify justify-content-center py-5 mx-25">
             {{-- Visi dan Misi --}}
-            <h4>Visi Program Studi Teknik Informatika</h4>
+            <h4>Visi Program Studi Komputerisasi Akuntansi</h4>
             <p class="mb-3 blockquote">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore illum animi nemo necessitatibus odit sequi nostrum optio earum incidunt nobis!
             </p>
@@ -42,7 +42,7 @@
 
             {{-- kurikulum --}}
             <h4>Kurikulum</h4>
-            <p>Program studi Teknik Informatika di STMIK Rosma memiliki kurikulum yang menggabungkan teori dan praktik, mencakup:</p>
+            <p>Program studi Komputerisasi Akuntansi di STMIK Rosma memiliki kurikulum yang menggabungkan teori dan praktik, mencakup:</p>
             <ul>
                 <li>Pemrograman Komputer</li>
                 <li>Sistem Operasi</li>
@@ -59,7 +59,7 @@
 
             {{-- prospek karir --}}
             <h4>Peluang Karier yang Luas</h4>
-            <p>Lulusan program Teknik Informatika di STMIK Rosma memiliki peluang karier yang sangat luas. Berikut beberapa posisi yang dapat dijalani:</p>
+            <p>Lulusan program Komputerisasi Akuntansi di STMIK Rosma memiliki peluang karier yang sangat luas. Berikut beberapa posisi yang dapat dijalani:</p>
 
             <section class="page-section bg-light" id="prospek">
                 <div class="container">
@@ -125,8 +125,8 @@
 <section class="prodi-parallax">
     <div class="prodi-overlay-bg"></div>
     <div class="prodi-content">
-        <h2>Ingin Bergabung dengan Program Teknik Informatika?</h2>
-        <p>Jangan lewatkan kesempatan untuk memulai perjalanan karier yang cerah dengan bergabung di program Teknik Informatika di STMIK Rosma!</p>
+        <h2>Ingin Bergabung dengan Program Komputerisasi Akuntansi?</h2>
+        <p>Jangan lewatkan kesempatan untuk memulai perjalanan karier yang cerah dengan bergabung di program Komputerisasi Akuntansi di STMIK Rosma!</p>
         <a href="#" class="prodi-btn-daftar">Daftar Sekarang</a>
         <div class="prodi-contact-info">
             <p>atau</p>
@@ -143,7 +143,7 @@
 {{-- end daftar sekarang --}}
 
 {{-- floating button --}}
-<a href="ti#header" class="floating-btn" id="floatingBtn"></a>
+<a href="ka#header" class="floating-btn" id="floatingBtn"></a>
 
 {{-- modal --}}
 {{--  prospek Modals--}}
@@ -256,4 +256,5 @@
 </div>
 {{-- end prospek modals --}}
 {{-- end modal --}}
+
 @endsection
