@@ -28,7 +28,8 @@
                     <div class="row">
                         <div class="col-md-12 mx-0">
                             <!-- Form -->
-                            <form id="msform" class="login">
+                            <form action="{{ route('register.save') }}" method="post" id="msform" class="login">
+                                @csrf
                                 <!-- progressbar -->
                                 <ul id="progressbar">
                                     <li class="active" id="account"><strong>Akun</strong></li>
@@ -70,12 +71,12 @@
                                                     required />
                                             </div>
                                             <div class="col-6">
-                                                <input type="text" name="kk" placeholder="No. KK*" required />
+                                                <input type="text" name="nkk" placeholder="No. KK*" required />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <input type="text" name="tmpt_lahir" placeholder="Tempat Lahir*"
+                                                <input type="text" name="tempat_lahir" placeholder="Tempat Lahir*"
                                                     required />
                                             </div>
                                             <div class="col-2 text-end">
@@ -109,10 +110,10 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <input type="text" name="nohp" placeholder="No. Hp*" required />
+                                                <input type="text" name="no_hp" placeholder="No. Hp*" required />
                                             </div>
                                             <div class="col-6">
-                                                <input type="text" name="nohp2"
+                                                <input type="text" name="no_hp2"
                                                     placeholder="No. Hp 2 (opsional)" />
                                             </div>
                                         </div>
@@ -157,15 +158,15 @@
                                 <fieldset>
                                     <div class="form-card">
                                         <h4 class="fs-title">Pendidikan Terakhir</h4>
-                                        <input type="text" name="sekolah" placeholder="Pendidikan Terakhir*"
+                                        <input type="text" name="pend_terakhir" placeholder="Pendidikan Terakhir*"
                                             required />
                                         <div class="row">
                                             <div class="col-6 mt-1">
-                                                <input type="text" name="ijazah" placeholder="No. Ijazah*"
+                                                <input type="text" name="no_ijazah" placeholder="No. Ijazah*"
                                                     required />
                                             </div>
                                             <div class="col-6">
-                                                <select class="list-dt form-select" id="tahun" name="tahun"
+                                                <select class="list-dt form-select" id="tahun" name="tahun_lulus"
                                                     required>
                                                     <option value="" selected disabled>Tahun lulus</option>
                                                     <!-- Contoh pilihan tahun dari 1900 hingga tahun sekarang -->
@@ -181,10 +182,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div id="divCheckInput" class="text-danger"></div>
                                     <input type="button" name="previous" class="previous action-button-previous"
                                         value="Previous" />
-                                    <input type="button" name="make_payment" class="next action-button"
-                                        value="Confirm" />
+                                    <input type="submit" id="submitButton" name="make_payment"
+                                        class="action-button" value="Daftar" />
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
