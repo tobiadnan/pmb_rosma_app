@@ -45,7 +45,7 @@
                                         <h4 class="fs-title">Informasi Akun</h4>
                                         <input class="form-control" type="email" name="email" placeholder="Email*"
                                             required />
-                                        <input type="password" name="pwd" id="pwd" placeholder="Password"
+                                        <input type="password" name="password" id="pwd" placeholder="Password"
                                             required />
                                         <input type="password" name="cpwd" id="cpwd"
                                             placeholder="Confirm Password" required />

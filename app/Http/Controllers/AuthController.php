@@ -24,6 +24,7 @@ class AuthController extends Controller
 
     public function registerSave(Request $request)
     {
+        // Validate the request...
         Validator::make(request()->all(), [
             'nama' => 'required',
             'email' => 'required|email',
@@ -45,11 +46,13 @@ class AuthController extends Controller
         ])->validate();
 
         // save to users
-        User::create([
+        $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'is_admin' => "0"
         ]);
+
+        // dd($user);
 
         // save to profiles
         // Enkripsi NIK dan NKK
@@ -72,7 +75,7 @@ class AuthController extends Controller
             'pend_terakhir' => $request->pend_terakhir,
             'no_ijazah' => $request->no_ijazah,
             'tahun_lulus' => $request->tahun_lulus,
-            'user_id' => auth()->id(),
+            'user_id' => $user->id,
             'nik' => $encryptedNIK,
             'nkk' => $encryptedNKK,
         ];
@@ -102,7 +105,8 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        if (auth()->user()->type == 'admin') {
+        // dd(auth()->user()->is_admin);
+        if (auth()->user()->is_admin) {
             # code...
             return redirect()->route('admin/home');
         } else {

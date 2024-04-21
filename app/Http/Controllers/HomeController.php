@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         // Ambil data user dari database
-        $user = User::where('id', $request->user()->id)->first(); // Anda dapat menyesuaikan dengan cara Anda mengambil data user
+        $user = User::where('id', $request->user()->id)->first();
 
         // Kirim data user ke view profile
         return view('profile', [

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('main-page');
-});
+})->name('main_page');
 
 Route::get('/ti', function () {
     return view('content.ti');
@@ -33,7 +33,7 @@ Route::get('/ka', function () {
 });
 
 Route::get('/kacer', function () {
-    return view('beasiswa.kacer');
+    return view('kacer');
 });
 
 

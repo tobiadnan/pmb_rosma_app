@@ -15,11 +15,12 @@ class UserAccess
      */
     public function handle(Request $request, Closure $next, $userType)
     {
-        if (auth()->user()->type == $userType) {
+        // dd(auth()->user()->type);
+        if (auth()->user()->is_admin == $userType) {
             # code...
             return $next($request);
         }
 
-        return response()->json(['Kamu tidak memiliki akses.']);
+        return redirect()->route('main_page');
     }
 }
