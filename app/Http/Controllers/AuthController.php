@@ -26,7 +26,7 @@ class AuthController extends Controller
     {
         // Validate the request...
         Validator::make(request()->all(), [
-            'nama' => 'required',
+            'nama_d' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:6',
             'tempat_lahir' => 'required',
@@ -55,12 +55,12 @@ class AuthController extends Controller
         // dd($user);
 
         // save to profiles
-        // Enkripsi NIK dan NKK
-        $encryptedNIK = Hash::make($request->nik);
-        $encryptedNKK = Hash::make($request->nkk);
 
         $profileData = [
-            'nama' => $request->nama,
+            'nama_d' => $request->nama_d,
+            'nama_b' => $request->nama_b,
+            'nik' => Hash::make($request->nik),
+            'nkk' => Hash::make($request->nkk),
             'tempat_lahir' => $request->tempat_lahir,
             'tgl_lahir' => $request->tgl_lahir,
             'jk' => $request->jk,
@@ -76,11 +76,9 @@ class AuthController extends Controller
             'no_ijazah' => $request->no_ijazah,
             'tahun_lulus' => $request->tahun_lulus,
             'user_id' => $user->id,
-            'nik' => $encryptedNIK,
-            'nkk' => $encryptedNKK,
         ];
 
-        Profile::create($profileData);
+        $profile = Profile::create($profileData);
 
         return redirect()->route('login')->withSuccess("Register Successfully!");
     }
@@ -107,10 +105,10 @@ class AuthController extends Controller
 
         // dd(auth()->user()->is_admin);
         if (auth()->user()->is_admin) {
-            # code...
             return redirect()->route('admin/home');
         } else {
-            return redirect()->route('home');
+            $datas = Profile::where('user_id', auth()->id())->first();
+            return redirect()->route('home')->with('datas', $datas);
         }
     }
 

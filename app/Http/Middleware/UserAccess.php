@@ -13,11 +13,22 @@ class UserAccess
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $userType)
+    public function handle(Request $request, Closure $next, $typeCheck)
     {
-        // dd(auth()->user()->type);
-        if (auth()->user()->is_admin == $userType) {
-            # code...
+        // dd($typeCheck);
+        // if (auth()->user()->is_admin == 0) {
+        //     $is_admin = "user";
+        // } else {
+        //     $is_admin = "admin";
+        // }
+
+        // if ($is_admin  == $typeCheck) {
+        //     # code...
+        //     return $next($request);
+        // }
+        if (auth()->user()->is_admin == 0 && $typeCheck == "user") {
+            return $next($request);
+        } elseif (auth()->user()->is_admin == 1 && $typeCheck == "admin") {
             return $next($request);
         }
 

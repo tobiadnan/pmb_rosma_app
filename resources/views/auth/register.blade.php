@@ -64,7 +64,15 @@
                                 <fieldset>
                                     <div class="form-card">
                                         <h4 class="fs-title">Informasi Personal</h4>
-                                        <input type="text" name="nama" placeholder="Nama Lengkap*" required />
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <input type="text" name="nama_d" placeholder="Nama Depan*"
+                                                    required />
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="text" name="nama_b" placeholder="Nama Belakang" />
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="nik" placeholder="No. Induk KTP"
@@ -110,7 +118,8 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <input type="text" name="no_hp" placeholder="No. Hp*" required />
+                                                <input type="text" name="no_hp" placeholder="No. Hp*"
+                                                    required />
                                             </div>
                                             <div class="col-6">
                                                 <input type="text" name="no_hp2"
