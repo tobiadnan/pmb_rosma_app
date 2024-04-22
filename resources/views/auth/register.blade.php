@@ -28,7 +28,8 @@
                     <div class="row">
                         <div class="col-md-12 mx-0">
                             <!-- Form -->
-                            <form action="{{ route('register.save') }}" method="post" id="msform" class="login">
+                            <form action="{{ route('register.save') }}" method="post" id="msform" class="login"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <!-- progressbar -->
                                 <ul id="progressbar">
@@ -64,6 +65,21 @@
                                 <fieldset>
                                     <div class="form-card">
                                         <h4 class="fs-title">Informasi Personal</h4>
+                                        <div class="text-center py-5">
+                                            <div id="imageContainer" class="square position-relative display-2 mb-3">
+                                                <img id="previewImg" src="storage/profiles/default-profile-icon.png"
+                                                    alt="Preview Image">
+                                            </div>
+                                            <input type="file" id="customFile" name="profile_pict" accept="image/*"
+                                                onchange="validateAndPreview(event)" hidden>
+                                            <label class="mx-1 btn btn-success-soft" for="customFile">Pilih</label>
+                                            <button type="button" id="removeBtn"
+                                                class="mx-1 btn btn-danger-soft">Hapus</button>
+                                            <p class="mt-3 mb-0 text-white"><span
+                                                    class="me-1"><b>Note:</b></span>.jpg/jpeg/png
+                                                dengan maksimal 500KB</p>
+                                        </div>
+                                        {{-- .... --}}
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="nama_d" placeholder="Nama Depan*"
@@ -178,8 +194,6 @@
                                                 <select class="list-dt form-select" id="tahun" name="tahun_lulus"
                                                     required>
                                                     <option value="" selected disabled>Tahun lulus</option>
-                                                    <!-- Contoh pilihan tahun dari 1900 hingga tahun sekarang -->
-                                                    <!-- Anda dapat mengubah rentang tahun sesuai kebutuhan -->
                                                     <?php
                                                     $tahunSekarang = date('Y');
                                                     $tahunAwal = 1900;
@@ -194,7 +208,7 @@
                                     <div id="divCheckInput" class="text-danger"></div>
                                     <input type="button" name="previous" class="previous action-button-previous"
                                         value="Previous" />
-                                    <input type="submit" id="submitButton" name="make_payment"
+                                    <input type="button" id="submitButton" name="make_payment"
                                         class="action-button" value="Daftar" />
                                 </fieldset>
                                 <fieldset>
@@ -229,6 +243,87 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script> --}}
     <script src="js/auth/register.js"></script>
+    @if ($errors->any())
+        <script>
+            alert("{{ $errors->first('email') }}");
+        </script>
+    @endif
+    <script>
+        // Fungsi untuk validasi dan preview gambar
+        document.getElementById('imageContainer').addEventListener('click', function() {
+            document.getElementById('customFile').click();
+        });
+
+        function validateAndPreview(event) {
+            var selectedFile = event.target.files[0];
+            var previewImg = document.getElementById('previewImg');
+
+            if (selectedFile) {
+                // Validasi ukuran file
+                if (selectedFile.size > 500 * 1024) {
+                    alert('Ukuran gambar melebihi batas maksimum (500KB).');
+                    document.getElementById('customFile').value = ''; // Reset input file
+                    previewImg.src = 'storage/profiles/default-profile-icon.png'; // Tampilkan gambar default
+                    return;
+                }
+
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    var img = new Image();
+                    img.src = e.target.result;
+
+                    img.onload = function() {
+                        var canvas = document.createElement('canvas');
+                        var ctx = canvas.getContext('2d');
+
+                        // Konversi gambar menjadi ukuran 300x300 pixel
+                        var scaleFactor = Math.min(300 / img.width, 300 / img.height);
+                        canvas.width = img.width * scaleFactor;
+                        canvas.height = img.height * scaleFactor;
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                        previewImg.src = canvas.toDataURL('image/jpeg'); // Tampilkan gambar di dalam canvas
+                    };
+                };
+
+                reader.readAsDataURL(selectedFile);
+            }
+        }
+
+        function removeImage() {
+            var previewImg = document.getElementById('previewImg');
+            previewImg.src = 'storage/img/profile/default-profile-icon.png'; // Tampilkan gambar default
+            var customFileInput = document.getElementById('customFile');
+            customFileInput.value = ''; // Reset input file
+        }
+
+        // Event listener untuk tombol Remove
+        var removeBtn = document.getElementById('removeBtn');
+        removeBtn.addEventListener('click', removeImage);
+
+        document.getElementById('submitButton').addEventListener('click', function() {
+            var formData = new FormData(document.getElementById('msform'));
+
+            // Kirim data ke server menggunakan Ajax
+            $.ajax({
+                url: $('#msform').attr('action'),
+                type: $('#msform').attr('method'),
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    // Handle respon dari server jika berhasil
+                    console.log('Gambar berhasil disimpan.');
+                },
+                error: function(xhr, status, error) {
+                    // Handle respon dari server jika terjadi kesalahan
+                    console.error('Error:', error);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

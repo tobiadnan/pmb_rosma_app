@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('pend_terakhir');
             $table->string('no_ijazah', 20);
             $table->year('tahun_lulus');
+            $table->string('profile_pict')->nullable();
             $table->timestamps();
         });
     }

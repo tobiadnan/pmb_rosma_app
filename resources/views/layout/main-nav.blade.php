@@ -72,8 +72,8 @@
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            <img src="/img/profile/default-profile-icon.png" class="rounded-circle" height="32"
-                                alt="" loading="lazy" /></a>
+                            <img src="{{ asset('storage/profiles/' . $profile->profile_pict) }}" class="rounded-circle"
+                                height="32" alt="" loading="lazy" /></a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('home') }}">Profile</a></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}">Keluar</a></li>

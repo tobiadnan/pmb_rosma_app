@@ -29,6 +29,7 @@ class Profile extends Model
         'pend_terakhir',
         'no_ijazah',
         'tahun_lulus',
+        'profile_pict',
     ];
 
     protected $hidden = [

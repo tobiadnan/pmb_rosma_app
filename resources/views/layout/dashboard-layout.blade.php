@@ -65,8 +65,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
                             id="navbarDropdownMenuLink" role="button" data-mdb-dropdown-init aria-expanded="false">
-                            <img src="/img/profile/default-profile-icon.png" class="rounded-circle" height="32"
-                                alt="" loading="lazy" />
+                            <img src="{{ asset('storage/profiles/' . $profile->profile_pict) }}" class="rounded-circle"
+                                height="32" alt="" loading="lazy" />
                             <span class="mx-2 ml-4 text-sm hidden md:inline-block">@yield('nama')</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">

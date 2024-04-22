@@ -83,11 +83,13 @@
     </style>
 @endsection
 {{-- @dd(auth()->user()->profile->nama_d) --}}
+
 @section('nama')
-    {{ auth()->user()->profile->nama_d }}
+    {{ $profile->nama_d }}
+
 @endsection
 @section('content')
-
+    {{-- @dd($profile->nama_d) --}}
     <header class="prodihead" id="header">
         <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
             <div class="d-flex justify-content-center">
@@ -111,10 +113,11 @@
                                     <h4 class="mb-4 mt-0 text-center">Pilih Foto Profile</h4>
                                     <div class="text-center">
                                         <div id="imageContainer" class="square position-relative display-2 mb-3">
-                                            <img id="previewImg" src="/img/profile/default-profile-icon.png"
-                                                alt="Preview Image">
+                                            <img id="previewImg"
+                                                src="{{ asset('storage/profiles/' . $profile->profile_pict) }}"
+                                                alt="Profile Pict">
                                         </div>
-                                        <input type="file" id="customFile" name="file" accept="image/*"
+                                        <input type="file" id="customFile" name="profile_pict" accept="image/*"
                                             onchange="validateAndPreview(event)" hidden>
                                         <label class="mx-1 btn btn-success-soft" for="customFile">Pilih</label>
                                         <button type="button" id="removeBtn"
@@ -130,61 +133,86 @@
                             <div class="bg-secondary-soft px-2 py-5 rounded">
                                 <div class="row g-3">
                                     <h4 class="mb-4 mt-0">Data Diri</h4>
+                                    {{-- NIK --}}
+                                    <div class="col-md-6">
+                                        <label class="form-label">NIK</label>
+                                        <input type="text" class="form-control" name="nik"
+                                            placeholder="Nomor Induk KTP" aria-label="nik" value="{{ $profile->nik }}"
+                                            required>
+                                    </div>
+                                    {{-- nkk --}}
+                                    <div class="col-md-6">
+                                        <label class="form-label">No. KK</label>
+                                        <input type="text" class="form-control" name="nkk"
+                                            placeholder="Nomor Kartu Keluarga" aria-label="nkk" value="{{ $profile->nkk }}">
+                                    </div>
                                     {{-- nama depan --}}
                                     <div class="col-md-6">
                                         <label class="form-label">Nama Depan</label>
-                                        <input type="text" class="form-control" placeholder="Susi"
-                                            aria-label="nama depan" required>
+                                        <input type="text" class="form-control" name="nama_d" placeholder="Susi"
+                                            aria-label="nama depan" value="{{ $profile->nama_d }}" required>
                                     </div>
                                     {{-- Nama Belakang --}}
                                     <div class="col-md-6">
                                         <label class="form-label">Nama Belakang</label>
-                                        <input type="text" class="form-control" placeholder="Pujiastuti"
-                                            aria-label="Nama Belakang">
+                                        <input type="text" class="form-control" name="nama_b" placeholder="Pujiastuti"
+                                            aria-label="Nama Belakang" value="{{ $profile->nama_b }}">
                                     </div>
                                     {{-- Tempat Lahir --}}
                                     <div class="col-md-6">
                                         <label class="form-label">Tempat Lahir</label>
-                                        <input type="text" class="form-control" placeholder="Karawang"
-                                            aria-label="Tempat Lahir" required>
+                                        <input type="text" class="form-control" name="tempat_lahir"
+                                            placeholder="Karawang" aria-label="Tempat Lahir"
+                                            value="{{ $profile->tempat_lahir }}" required>
                                     </div>
                                     {{-- Tgl Lahir --}}
                                     <div class="col-md-6">
                                         <label class="form-label">Tgl. Lahir</label>
-                                        <input type="date" class="form-control" aria-label="Tgl. Lahir" required>
+                                        <input type="date" class="form-control" name="tgl_lahir" aria-label="Tgl. Lahir"
+                                            value="{{ $profile->tgl_lahir }}" required>
                                     </div>
                                     {{-- jk --}}
                                     <div class="col-md-6">
                                         <label for="jk" class="form-label">Jenis Kelamin</label>
-                                        <select class="form-select" required>
-                                            <option selected>Pilih...</option>
-                                            <option value="laki-laki">Laki-laki</option>
-                                            <option value="perempuan">Perempuan</option>
+                                        <select class="form-select" name="jk" required>
+                                            <option value="laki-laki" {{ $profile->jk == 'laki-laki' ? 'selected' : '' }}>
+                                                Laki-laki</option>
+                                            <option value="perempuan" {{ $profile->jk == 'perempuan' ? 'selected' : '' }}>
+                                                Perempuan</option>
                                         </select>
                                     </div>
                                     {{-- agama --}}
                                     <div class="col-md-6">
                                         <label for="agama" class="form-label">Agama</label>
-                                        <select class="form-select" required>
-                                            <option selected>Pilih...</option>
-                                            <option value="Islam">Islam</option>
-                                            <option value="Kristen">Kristen</option>
-                                            <option value="Hindu">Hindu</option>
-                                            <option value="Budha">Budha</option>
-                                            <option value="Konghucu">Konghucu</option>
+                                        <select class="form-select" name="agama" value="" required>
+                                            <option value="Islam" {{ $profile->agama == 'Islam' ? 'selected' : '' }}>
+                                                Islam
+                                            </option>
+                                            <option value="Kristen" {{ $profile->agama == 'Kristen' ? 'selected' : '' }}>
+                                                Kristen</option>
+                                            <option value="Hindu" {{ $profile->agama == 'Hindu' ? 'selected' : '' }}>
+                                                Hindu
+                                            </option>
+                                            <option value="Budha" {{ $profile->agama == 'Budha' ? 'selected' : '' }}>
+                                                Budha
+                                            </option>
+                                            <option value="Konghucu"
+                                                {{ $profile->agama == 'Konghucu' ? 'selected' : '' }}>
+                                                Konghucu</option>
                                         </select>
                                     </div>
                                     {{-- No. Telepon --}}
                                     <div class="col-md-6">
                                         <label class="form-label">No. Telepon</label>
-                                        <input type="tel" class="form-control" placeholder="085xxxxxxxx"
-                                            aria-label="No. Telepon" required>
+                                        <input type="tel" class="form-control" name="no_hp"
+                                            placeholder="085xxxxxxxx" aria-label="No. Telepon"
+                                            value="{{ $profile->no_hp }}" required>
                                     </div>
                                     {{-- No. Telepon 2 --}}
                                     <div class="col-md-6">
                                         <label class="form-label">No. Telepon 2</label>
-                                        <input type="tel" class="form-control" placeholder="Opsional"
-                                            aria-label="No. Telepon 2">
+                                        <input type="tel" class="form-control" name="no_hp2" placeholder="Opsional"
+                                            aria-label="No. Telepon 2" value="{{ $profile->no_hp2 }}">
                                     </div>
                                 </div>
                                 <!-- Alamat -->
@@ -193,62 +221,65 @@
                                     {{-- provinsi --}}
                                     <div class="col-md-6">
                                         <label for="provinsi" class="form-label">Provinsi</label>
-                                        <select class="form-select" name="provinsi" id="provinsi" required>
-                                            <option selected>Pilih...</option>
-                                            <option value="laki-laki">Laki-laki</option>
-                                            <option value="perempuan">Perempuan</option>
-                                        </select>
+                                        <input type="text" class="form-control" name="provinsi"
+                                            placeholder="Provinsi" aria-label="provinsi"
+                                            value="{{ $profile->provinsi }}" required>
                                     </div>
                                     {{-- kota --}}
                                     <div class="col-md-6">
                                         <label for="kota" class="form-label">Kota/Kabupaten</label>
-                                        <select class="form-select" name="kota" id="kota" required>
-                                            <option selected>Pilih...</option>
-                                            <option value="laki-laki">Laki-laki</option>
-                                            <option value="perempuan">Perempuan</option>
-                                        </select>
+                                        <input type="text" class="form-control" name="kota" placeholder="Kota/Kab"
+                                            aria-label="kota" value="{{ $profile->kota }}" required>
                                     </div>
                                     {{-- kecamatan --}}
                                     <div class="col-md-6">
                                         <label for="kecamatan" class="form-label">Kecamatan</label>
-                                        <select class="form-select" name="kecamatan" id="kecamatan" required>
-                                            <option selected>Pilih...</option>
-                                            <option value="laki-laki">Laki-laki</option>
-                                            <option value="perempuan">Perempuan</option>
-                                        </select>
+                                        <input type="text" class="form-control" name="kecamatan"
+                                            placeholder="Kecamatan" aria-label="kecamatan"
+                                            value="{{ $profile->kecamatan }}" required>
                                     </div>
                                     {{-- desa --}}
                                     <div class="col-md-6">
                                         <label for="desa" class="form-label">Desa/Kelurahan</label>
-                                        <select class="form-select" name="desa" id="desa" required>
-                                            <option selected>Pilih...</option>
-                                            <option value="laki-laki">Laki-laki</option>
-                                            <option value="perempuan">Perempuan</option>
-                                        </select>
+                                        <input type="text" class="form-control" name="desa"
+                                            placeholder="Desa/Kelurahan" aria-label="desa" value="{{ $profile->desa }}"
+                                            required>
                                     </div>
                                     <div class="col-md-12">
                                         <label for="alamat">Alamat</label>
                                         <textarea class="form-control" rows="5" id="alamat" name="alamat" placeholder="Jl. XYZ No. X RT XX/RW YY"
-                                            required></textarea>
+                                            aria-label="alamat" required>{{ $profile->alamat }}</textarea>
                                     </div>
                                 </div>
                                 {{-- Data Sekolah --}}
                                 <div class="row g-3 mt-3">
                                     <h4 class="">Data Sekolah</h4>
                                     {{-- asal sekolah --}}
+                                    <label for="pend_terakhir" class="form-label">Pendidikan Terakhir</label>
+                                    <input type="text" class="form-control" name="pend_terakhir"
+                                        placeholder="SMA Negeri 1 Karawang" aria-label="pend_terakhir"
+                                        value="{{ $profile->pend_terakhir }}" required>
                                     <div class="col-md-6">
-                                        <label for="asalSekolah" class="form-label">Asal Sekolah</label>
-                                        <select class="form-select" name="asalSekolah" id="asalSekolah" required>
-                                            <option selected>Pilih...</option>
-                                            <option value="laki-laki">Laki-laki</option>
-                                            <option value="perempuan">Perempuan</option>
-                                        </select>
+                                        <label for="no_ijazah" class="form-label">No. Ijazah</label>
+                                        <input type="text" class="form-control" name="no_ijazah"
+                                            placeholder="No. Ijazah" aria-label="no_ijazah"
+                                            value="{{ $profile->no_ijazah }}" required>
                                     </div>
                                     {{-- Tahun Lulus --}}
                                     <div class="col-md-6">
                                         <label class="form-label">Tahun Lulus</label>
-                                        <input type="text" class="form-control" placeholder="2024"
-                                            aria-label="Tahun Lulus" required>
+                                        <select class="form-select" name="tahun_lulus" value="" required>
+                                            @php
+                                                $tahunSekarang = date('Y');
+                                                $tahunAwal = 1900;
+                                            @endphp
+                                            @for ($tahun = $tahunSekarang; $tahun >= $tahunAwal; $tahun--)
+                                                <option value="{{ $tahun }}"
+                                                    {{ $profile->tahun_lulus == $tahun ? 'selected' : '' }}>
+                                                    {{ $tahun }}
+                                                </option>
+                                            @endfor
+                                        </select>
                                     </div>
                                 </div>
                             </div>

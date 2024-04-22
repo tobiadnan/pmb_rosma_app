@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -42,8 +43,23 @@ class AuthController extends Controller
             'provinsi' => 'required',
             'pend_terakhir' => 'required',
             'no_ijazah' => 'required',
-            'tahun_lulus' => 'required|digits:4'
+            'tahun_lulus' => 'required|digits:4',
+            'profile_pict' => 'image|mimes:jpeg,png,jpg,gif|max:500'
         ])->validate();
+
+        // Mendapatkan file gambar dari request
+        if ($request->hasFile('profile_pict')) {
+            $image = $request->file('profile_pict');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+
+            // Periksa apakah file dengan nama yang sama sudah ada
+            if (!Storage::disk('public')->exists('profiles/' . $imageName)) {
+                // Simpan gambar ke direktori penyimpanan (contoh: storage/app/public/profiles)
+                $image->storeAs('public/profiles', $imageName);
+            }
+        } else {
+            $imageName = "default-profile-icon.png";
+        }
 
         // save to users
         $user = User::create([
@@ -51,16 +67,13 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'is_admin' => "0"
         ]);
-
-        // dd($user);
-
         // save to profiles
 
-        $profileData = [
+        $profile = Profile::create([
             'nama_d' => $request->nama_d,
             'nama_b' => $request->nama_b,
-            'nik' => Hash::make($request->nik),
-            'nkk' => Hash::make($request->nkk),
+            'nik' => $request->nik,
+            'nkk' => $request->nkk,
             'tempat_lahir' => $request->tempat_lahir,
             'tgl_lahir' => $request->tgl_lahir,
             'jk' => $request->jk,
@@ -75,12 +88,11 @@ class AuthController extends Controller
             'pend_terakhir' => $request->pend_terakhir,
             'no_ijazah' => $request->no_ijazah,
             'tahun_lulus' => $request->tahun_lulus,
+            'profile_pict' => $imageName,
             'user_id' => $user->id,
-        ];
+        ]);
 
-        $profile = Profile::create($profileData);
-
-        return redirect()->route('login')->withSuccess("Register Successfully!");
+        return redirect()->route('login');
     }
 
     public function login()
@@ -107,8 +119,12 @@ class AuthController extends Controller
         if (auth()->user()->is_admin) {
             return redirect()->route('admin/home');
         } else {
-            $datas = Profile::where('user_id', auth()->id())->first();
-            return redirect()->route('home')->with('datas', $datas);
+            $profile = Profile::where('user_id', auth()->id())->first();
+            // dd($profile->nama_d);
+            return
+                redirect()->route('home')->with([
+                    'profile' => $profile,
+                ]);
         }
     }
 
