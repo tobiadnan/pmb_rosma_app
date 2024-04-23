@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MainController;
+use App\Http\Controllers\NavController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,19 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',  [MainController::class, 'index'])->name('main_page');
+Route::get('/',  [NavController::class, 'index'])->name('main_page');
 
-Route::get('/ti', function () {
-    return view('content.ti');
-});
-Route::get('/si', function () {
-    return view('content.si');
-});
-Route::get('/mi', function () {
-    return view('content.mi');
-});
-Route::get('/ka', function () {
-    return view('content.ka');
+Route::prefix('prodi')->group(function () {
+    Route::get('ti', [NavController::class, 'ti'])->name('content.ti');
+    Route::get('si', [NavController::class, 'si'])->name('content.si');
+    Route::get('mi', [NavController::class, 'mi'])->name('content.mi');
+    Route::get('ka', [NavController::class, 'ka'])->name('content.ka');
 });
 
 Route::get('/kacer', function () {
@@ -54,7 +47,8 @@ Route::controller(AuthController::class)->group(function () {
 
 // User User
 Route::middleware(['auth', 'user-access:user'])->group(function () {
-    Route::get('/home',  [ProfileController::class, 'edit'])->name('home');
+    Route::get('/profile/',  [ProfileController::class, 'edit'])->name('profile');
+    Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 // Admin Access Only

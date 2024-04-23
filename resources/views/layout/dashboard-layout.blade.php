@@ -70,7 +70,7 @@
                             <span class="mx-2 ml-4 text-sm hidden md:inline-block">@yield('nama')</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ route('home') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}">Keluar</a></li>
                         </ul>
                     </li>

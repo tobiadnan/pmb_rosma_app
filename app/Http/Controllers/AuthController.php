@@ -47,6 +47,13 @@ class AuthController extends Controller
             'profile_pict' => 'image|mimes:jpeg,png,jpg,gif|max:500'
         ])->validate();
 
+        // save to users
+        $user = User::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'is_admin' => "0"
+        ]);
+
         // Mendapatkan file gambar dari request
         if ($request->hasFile('profile_pict')) {
             $image = $request->file('profile_pict');
@@ -61,14 +68,7 @@ class AuthController extends Controller
             $imageName = "default-profile-icon.png";
         }
 
-        // save to users
-        $user = User::create([
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'is_admin' => "0"
-        ]);
         // save to profiles
-
         $profile = Profile::create([
             'nama_d' => $request->nama_d,
             'nama_b' => $request->nama_b,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -66,7 +67,73 @@ class ProfileController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // $validatedData = $request->validate([
+        //     'nama_d' => 'required',
+        //     'email' => 'required|email',
+        //     'password' => 'required|min:6',
+        //     'tempat_lahir' => 'required',
+        //     'tgl_lahir' => 'required',
+        //     'jk' => 'required',
+        //     'agama' => 'required',
+        //     'no_hp' => 'required|digits_between:11,15', // Ubah menjadi 'required' jika no_hp wajib diisi
+        //     'no_hp2' => 'nullable|digits_between:11,15', // Ubah menjadi 'required' jika no_hp2 wajib diisi
+        //     'alamat' => 'required',
+        //     'desa' => 'required',
+        //     'kecamatan' => 'required',
+        //     'kota' => 'required',
+        //     'provinsi' => 'required',
+        //     'pend_terakhir' => 'required',
+        //     'no_ijazah' => 'required',
+        //     'tahun_lulus' => 'required|digits:4',
+        //     'profile_pict' => 'image|mimes:jpeg,png,jpg,gif|max:500'
+        // ]);
+
+
+        // Cari profil yang akan diupdate
+        // Update data dalam database
+        $profile = Profile::find($id);
+        // dd($profile);
+        // $profile->update($validatedData);
+
+        // Mendapatkan file gambar dari request
+        if ($request->hasFile('profile_pict')) {
+
+            $image = $request->file('profile_pict');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+
+            // Periksa apakah file dengan nama yang sama sudah ada
+            if (!Storage::disk('public')->exists('profiles/' . $imageName)) {
+                // Simpan gambar ke direktori penyimpanan (contoh: storage/app/public/profiles)
+                $image->storeAs('public/profiles', $imageName);
+            }
+        } else {
+            $imageName = "default-profile-icon.png";
+        }
+        // Lakukan update data
+        $profile->update([
+            'nama_d' => $request->nama_d,
+            'nama_b' => $request->nama_b,
+            'nik' => $request->nik,
+            'nkk' => $request->nkk,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
+            'jk' => $request->jk,
+            'agama' => $request->agama,
+            'no_hp' => $request->no_hp,
+            'no_hp2' => $request->no_hp2,
+            'alamat' => $request->alamat,
+            'desa' => $request->desa,
+            'kecamatan' => $request->kecamatan,
+            'kota' => $request->kota,
+            'provinsi' => $request->provinsi,
+            'pend_terakhir' => $request->pend_terakhir,
+            'no_ijazah' => $request->no_ijazah,
+            'tahun_lulus' => $request->tahun_lulus,
+            'profile_pict' => $imageName,
+        ]);
+
+        // Redirect atau tampilkan respons sesuai kebutuhan
+        return redirect()->route('profile')->with('success', 'Profil berhasil diperbarui.');
     }
 
     /**

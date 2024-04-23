@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse mx-2" id="navbarNavDropdown">
             {{-- brand --}}
             <a class="navbar-brand" href="/">
-                <img src="img/logo.png" height="52" class="h-8" alt="STMIK Rosma logo" />
+                <img src="../img/logo.png" height="52" class="h-8" alt="STMIK Rosma logo" />
             </a>
             {{-- left --}}
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -43,10 +43,10 @@
                         Program Studi
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/ti">Teknik Informatika</a></li>
-                        <li><a class="dropdown-item" href="/si">Sistem Informasi</a></li>
-                        <li><a class="dropdown-item" href="/mi">Manajemen Informatika</a></li>
-                        <li><a class="dropdown-item" href="/ka">Komputerisasi Akuntansi</a></li>
+                        <li><a class="dropdown-item" href="{{ route('content.ti') }}">Teknik Informatika</a></li>
+                        <li><a class="dropdown-item" href="{{ route('content.si') }}">Sistem Informasi</a></li>
+                        <li><a class="dropdown-item" href="{{ route('content.mi') }}">Manajemen Informatika</a></li>
+                        <li><a class="dropdown-item" href="{{ route('content.ka') }}">Komputerisasi Akuntansi</a></li>
                     </ul>
                 </div>
                 <div class="nav-item dropdown">
@@ -75,7 +75,7 @@
                             <img src="{{ asset('storage/profiles/' . $profile->profile_pict) }}" class="rounded-circle"
                                 height="32" alt="" loading="lazy" /></a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ route('home') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}">Keluar</a></li>
                         </ul>
                     </div>

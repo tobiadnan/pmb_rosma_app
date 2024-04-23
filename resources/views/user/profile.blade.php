@@ -100,11 +100,16 @@
             </div>
         </div>
     </header>
+    <div id="alertContainer" class="alert alert-success fade-in" style="display: none;">
+        <strong>Success!</strong> Profil berhasil diperbarui.
+    </div>
     <div class="">
         <div class="row">
             <div class="col-12">
                 <!-- Form START -->
-                <form method="post" class="file-upload">
+                <form class="file-upload" method="post" action="{{ route('profile.update', $profile->id) }}"
+                    enctype="multipart/form-data">
+                    @csrf
                     <div class="row justify-content-md-center gx-5">
                         <!-- Upload foto profile -->
                         <div class="col-md-3">
@@ -113,14 +118,15 @@
                                     <h4 class="mb-4 mt-0 text-center">Pilih Foto Profile</h4>
                                     <div class="text-center">
                                         <div id="imageContainer" class="square position-relative display-2 mb-3">
-                                            <img id="previewImg"
+                                            <img disabled id="previewImg"
                                                 src="{{ asset('storage/profiles/' . $profile->profile_pict) }}"
                                                 alt="Profile Pict">
                                         </div>
-                                        <input type="file" id="customFile" name="profile_pict" accept="image/*"
+                                        <input disabled type="file" id="customFile" name="profile_pict" accept="image/*"
                                             onchange="validateAndPreview(event)" hidden>
-                                        <label class="mx-1 btn btn-success-soft" for="customFile">Pilih</label>
-                                        <button type="button" id="removeBtn"
+                                        <label disabled id="pilihBtn" class="mx-1 btn btn-success-soft"
+                                            for="customFile">Pilih</label>
+                                        <button disabled type="button" id="removeBtn"
                                             class="mx-1 btn btn-danger-soft">Hapus</button>
                                         <p class="text-muted mt-3 mb-0"><span class="me-1">Note:</span>.jpg/jpeg/png
                                             dengan maksimal 500KB</p>
@@ -136,45 +142,47 @@
                                     {{-- NIK --}}
                                     <div class="col-md-6">
                                         <label class="form-label">NIK</label>
-                                        <input type="text" class="form-control" name="nik"
+                                        <input disabled type="text" class="form-control" name="nik"
                                             placeholder="Nomor Induk KTP" aria-label="nik" value="{{ $profile->nik }}"
                                             required>
                                     </div>
                                     {{-- nkk --}}
                                     <div class="col-md-6">
                                         <label class="form-label">No. KK</label>
-                                        <input type="text" class="form-control" name="nkk"
+                                        <input disabled type="text" class="form-control" name="nkk"
                                             placeholder="Nomor Kartu Keluarga" aria-label="nkk" value="{{ $profile->nkk }}">
                                     </div>
                                     {{-- nama depan --}}
                                     <div class="col-md-6">
                                         <label class="form-label">Nama Depan</label>
-                                        <input type="text" class="form-control" name="nama_d" placeholder="Susi"
-                                            aria-label="nama depan" value="{{ $profile->nama_d }}" required>
+                                        <input disabled type="text" class="form-control" name="nama_d"
+                                            placeholder="Susi" aria-label="nama depan" value="{{ $profile->nama_d }}"
+                                            required>
                                     </div>
                                     {{-- Nama Belakang --}}
                                     <div class="col-md-6">
                                         <label class="form-label">Nama Belakang</label>
-                                        <input type="text" class="form-control" name="nama_b" placeholder="Pujiastuti"
-                                            aria-label="Nama Belakang" value="{{ $profile->nama_b }}">
+                                        <input disabled type="text" class="form-control" name="nama_b"
+                                            placeholder="Pujiastuti" aria-label="Nama Belakang"
+                                            value="{{ $profile->nama_b }}">
                                     </div>
                                     {{-- Tempat Lahir --}}
                                     <div class="col-md-6">
                                         <label class="form-label">Tempat Lahir</label>
-                                        <input type="text" class="form-control" name="tempat_lahir"
+                                        <input disabled type="text" class="form-control" name="tempat_lahir"
                                             placeholder="Karawang" aria-label="Tempat Lahir"
                                             value="{{ $profile->tempat_lahir }}" required>
                                     </div>
                                     {{-- Tgl Lahir --}}
                                     <div class="col-md-6">
                                         <label class="form-label">Tgl. Lahir</label>
-                                        <input type="date" class="form-control" name="tgl_lahir" aria-label="Tgl. Lahir"
-                                            value="{{ $profile->tgl_lahir }}" required>
+                                        <input disabled type="date" class="form-control" name="tgl_lahir"
+                                            aria-label="Tgl. Lahir" value="{{ $profile->tgl_lahir }}" required>
                                     </div>
                                     {{-- jk --}}
                                     <div class="col-md-6">
                                         <label for="jk" class="form-label">Jenis Kelamin</label>
-                                        <select class="form-select" name="jk" required>
+                                        <select disabled class="form-select" name="jk" required>
                                             <option value="laki-laki" {{ $profile->jk == 'laki-laki' ? 'selected' : '' }}>
                                                 Laki-laki</option>
                                             <option value="perempuan" {{ $profile->jk == 'perempuan' ? 'selected' : '' }}>
@@ -184,7 +192,7 @@
                                     {{-- agama --}}
                                     <div class="col-md-6">
                                         <label for="agama" class="form-label">Agama</label>
-                                        <select class="form-select" name="agama" value="" required>
+                                        <select disabled class="form-select" name="agama" value="" required>
                                             <option value="Islam" {{ $profile->agama == 'Islam' ? 'selected' : '' }}>
                                                 Islam
                                             </option>
@@ -204,15 +212,16 @@
                                     {{-- No. Telepon --}}
                                     <div class="col-md-6">
                                         <label class="form-label">No. Telepon</label>
-                                        <input type="tel" class="form-control" name="no_hp"
+                                        <input disabled type="tel" class="form-control" name="no_hp"
                                             placeholder="085xxxxxxxx" aria-label="No. Telepon"
                                             value="{{ $profile->no_hp }}" required>
                                     </div>
                                     {{-- No. Telepon 2 --}}
                                     <div class="col-md-6">
                                         <label class="form-label">No. Telepon 2</label>
-                                        <input type="tel" class="form-control" name="no_hp2" placeholder="Opsional"
-                                            aria-label="No. Telepon 2" value="{{ $profile->no_hp2 }}">
+                                        <input disabled type="tel" class="form-control" name="no_hp2"
+                                            placeholder="Opsional" aria-label="No. Telepon 2"
+                                            value="{{ $profile->no_hp2 }}">
                                     </div>
                                 </div>
                                 <!-- Alamat -->
@@ -221,34 +230,35 @@
                                     {{-- provinsi --}}
                                     <div class="col-md-6">
                                         <label for="provinsi" class="form-label">Provinsi</label>
-                                        <input type="text" class="form-control" name="provinsi"
+                                        <input disabled type="text" class="form-control" name="provinsi"
                                             placeholder="Provinsi" aria-label="provinsi"
                                             value="{{ $profile->provinsi }}" required>
                                     </div>
                                     {{-- kota --}}
                                     <div class="col-md-6">
                                         <label for="kota" class="form-label">Kota/Kabupaten</label>
-                                        <input type="text" class="form-control" name="kota" placeholder="Kota/Kab"
-                                            aria-label="kota" value="{{ $profile->kota }}" required>
+                                        <input disabled type="text" class="form-control" name="kota"
+                                            placeholder="Kota/Kab" aria-label="kota" value="{{ $profile->kota }}"
+                                            required>
                                     </div>
                                     {{-- kecamatan --}}
                                     <div class="col-md-6">
                                         <label for="kecamatan" class="form-label">Kecamatan</label>
-                                        <input type="text" class="form-control" name="kecamatan"
+                                        <input disabled type="text" class="form-control" name="kecamatan"
                                             placeholder="Kecamatan" aria-label="kecamatan"
                                             value="{{ $profile->kecamatan }}" required>
                                     </div>
                                     {{-- desa --}}
                                     <div class="col-md-6">
                                         <label for="desa" class="form-label">Desa/Kelurahan</label>
-                                        <input type="text" class="form-control" name="desa"
+                                        <input disabled type="text" class="form-control" name="desa"
                                             placeholder="Desa/Kelurahan" aria-label="desa" value="{{ $profile->desa }}"
                                             required>
                                     </div>
                                     <div class="col-md-12">
                                         <label for="alamat">Alamat</label>
-                                        <textarea class="form-control" rows="5" id="alamat" name="alamat" placeholder="Jl. XYZ No. X RT XX/RW YY"
-                                            aria-label="alamat" required>{{ $profile->alamat }}</textarea>
+                                        <textarea disabled class="form-control" rows="5" id="alamat" name="alamat"
+                                            placeholder="Jl. XYZ No. X RT XX/RW YY" aria-label="alamat" required>{{ $profile->alamat }}</textarea>
                                     </div>
                                 </div>
                                 {{-- Data Sekolah --}}
@@ -256,19 +266,19 @@
                                     <h4 class="">Data Sekolah</h4>
                                     {{-- asal sekolah --}}
                                     <label for="pend_terakhir" class="form-label">Pendidikan Terakhir</label>
-                                    <input type="text" class="form-control" name="pend_terakhir"
+                                    <input disabled type="text" class="form-control" name="pend_terakhir"
                                         placeholder="SMA Negeri 1 Karawang" aria-label="pend_terakhir"
                                         value="{{ $profile->pend_terakhir }}" required>
                                     <div class="col-md-6">
                                         <label for="no_ijazah" class="form-label">No. Ijazah</label>
-                                        <input type="text" class="form-control" name="no_ijazah"
+                                        <input disabled type="text" class="form-control" name="no_ijazah"
                                             placeholder="No. Ijazah" aria-label="no_ijazah"
                                             value="{{ $profile->no_ijazah }}" required>
                                     </div>
                                     {{-- Tahun Lulus --}}
                                     <div class="col-md-6">
                                         <label class="form-label">Tahun Lulus</label>
-                                        <select class="form-select" name="tahun_lulus" value="" required>
+                                        <select disabled class="form-select" name="tahun_lulus" value="" required>
                                             @php
                                                 $tahunSekarang = date('Y');
                                                 $tahunAwal = 1900;
@@ -289,8 +299,12 @@
                     <div class="row justify-content-center">
                         <div class="col-xxl-11">
                             <div class="gap-3 p-5 d-md-flex justify-content-md-end text-center">
-                                <button type="submit" class="btn btn-primary btn-lg">SIMPAN</button>
-                                {{-- <button type="button" class="btn btn-danger btn-lg">Delete profile</button> --}}
+                                <!-- Tombol Simpan -->
+                                <button type="submit" id="btnSubmit" class="btn btn-primary btn-lg"
+                                    style="display: none;">Simpan</button>
+                                <!-- Tombol Edit -->
+                                <button type="button" id="btnEdit" class="btn btn-warning btn-lg">Edit</button>
+
                             </div>
                         </div>
                     </div>
@@ -305,7 +319,7 @@
 
 @endsection
 @section('scripts')
-    <script>
+    {{-- <script>
         // Fungsi untuk validasi dan preview gambar
         document.getElementById('imageContainer').addEventListener('click', function() {
             document.getElementById('customFile').click();
@@ -320,7 +334,7 @@
                 if (selectedFile.size > 500 * 1024) {
                     alert('Ukuran gambar melebihi batas maksimum (500KB).');
                     document.getElementById('customFile').value = ''; // Reset input file
-                    previewImg.src = '/img/profile/default-profile-icon.png'; // Tampilkan gambar default
+                    previewImg.src ='/storage/profiles/{{ $profile->profile_pict }}'; // Tampilkan gambar default
                     return;
                 }
 
@@ -350,7 +364,7 @@
 
         function removeImage() {
             var previewImg = document.getElementById('previewImg');
-            previewImg.src = '/img/profile/default-profile-icon.png'; // Tampilkan gambar default
+            previewImg.src ='/storage/profiles/{{ $profile->profile_pict }}'; // Tampilkan gambar default
             var customFileInput = document.getElementById('customFile');
             customFileInput.value = ''; // Reset input file
         }
@@ -358,6 +372,280 @@
         // Event listener untuk tombol Remove
         var removeBtn = document.getElementById('removeBtn');
         removeBtn.addEventListener('click', removeImage);
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var btnEdit = document.getElementById("btnEdit");
+            var btnSubmit = document.getElementById("btnSubmit");
+
+            // Fungsi untuk mengaktifkan mode Edit
+            function enableEditMode() {
+                btnEdit.innerText = "Batal";
+                btnSubmit.style.display = "block";
+
+                // Aktifkan semua input
+                var inputs = document.querySelectorAll("input, select, textarea");
+                inputs.forEach(function(input) {
+                    input.removeAttribute("disabled");
+                });
+            }
+
+            // Fungsi untuk menonaktifkan mode Edit
+            function disableEditMode() {
+                btnEdit.innerText = "Edit";
+                btnSubmit.style.display = "none";
+
+                // Nonaktifkan semua input
+                var inputs = document.querySelectorAll("input, select, textarea");
+                inputs.forEach(function(input) {
+                    input.setAttribute("disabled", true);
+                });
+            }
+
+            // Event listener untuk tombol Edit
+            btnEdit.addEventListener("click", function() {
+                if (btnEdit.innerText === "Edit") {
+                    enableEditMode();
+                } else {
+                    disableEditMode();
+                }
+            });
+
+            // Default: mode Edit dinonaktifkan saat halaman dimuat
+            disableEditMode();
+        });
+    </script> --}}
+    {{-- <script>
+        // Fungsi untuk validasi dan preview gambar
+        document.getElementById('imageContainer').addEventListener('click', function() {
+            document.getElementById('customFile').click();
+        });
+
+        function validateAndPreview(event) {
+            if (!isEditMode) {
+                var selectedFile = event.target.files[0];
+                var previewImg = document.getElementById('previewImg');
+
+                if (selectedFile) {
+                    // Validasi ukuran file
+                    if (selectedFile.size > 500 * 1024) {
+                        alert('Ukuran gambar melebihi batas maksimum (500KB).');
+                        document.getElementById('customFile').value = ''; // Reset input file
+                        previewImg.src ='/storage/profiles/{{ $profile->profile_pict }}'; // Tampilkan gambar default
+                        return;
+                    }
+
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        var img = new Image();
+                        img.src = e.target.result;
+
+                        img.onload = function() {
+                            var canvas = document.createElement('canvas');
+                            var ctx = canvas.getContext('2d');
+
+                            // Konversi gambar menjadi ukuran 300x300 pixel
+                            var scaleFactor = Math.min(300 / img.width, 300 / img.height);
+                            canvas.width = img.width * scaleFactor;
+                            canvas.height = img.height * scaleFactor;
+                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                            previewImg.src = canvas.toDataURL('image/jpeg'); // Tampilkan gambar di dalam canvas
+                        };
+                    };
+
+                    reader.readAsDataURL(selectedFile);
+                }
+            }
+        }
+
+        function removeImage() {
+            if (!isEditMode) {
+                var previewImg = document.getElementById('previewImg');
+                previewImg.src ='/storage/profiles/{{ $profile->profile_pict }}'; // Tampilkan gambar default
+                var customFileInput = document.getElementById('customFile');
+                customFileInput.value = ''; // Reset input file
+            }
+        }
+
+        // Variabel untuk menyimpan status mode Edit
+        var isEditMode = false;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var btnEdit = document.getElementById("btnEdit");
+            var btnSubmit = document.getElementById("btnSubmit");
+
+            // Fungsi untuk mengaktifkan mode Edit
+            function enableEditMode() {
+                isEditMode = true;
+                btnEdit.innerText = "Batal";
+                btnSubmit.style.display = "block";
+
+                // Aktifkan semua input
+                var inputs = document.querySelectorAll("input, select, textarea");
+                inputs.forEach(function(input) {
+                    input.removeAttribute("disabled");
+                });
+            }
+
+            // Fungsi untuk menonaktifkan mode Edit
+            function disableEditMode() {
+                isEditMode = false;
+                btnEdit.innerText = "Edit";
+                btnSubmit.style.display = "none";
+
+                // Nonaktifkan semua input
+                var inputs = document.querySelectorAll("input, select, textarea");
+                inputs.forEach(function(input) {
+                    input.setAttribute("disabled", true);
+                });
+
+                // Reset validasi gambar dan hapus gambar jika ada
+                document.getElementById('customFile').value = ''; // Reset input file
+                var previewImg = document.getElementById('previewImg');
+                previewImg.src ='/storage/profiles/{{ $profile->profile_pict }}'; // Tampilkan gambar default
+            }
+
+            // Event listener untuk tombol Edit
+            btnEdit.addEventListener("click", function(event) {
+                event.preventDefault(); // Mencegah refresh halaman
+                if (!isEditMode) {
+                    enableEditMode();
+                } else {
+                    disableEditMode();
+                }
+            });
+
+            // Default: mode Edit dinonaktifkan saat halaman dimuat
+            disableEditMode();
+        });
+    </script> --}}
+
+    <script>
+        // Fungsi untuk validasi dan preview gambar
+        document.getElementById('imageContainer').addEventListener('click', function() {
+            document.getElementById('customFile').click();
+        });
+
+        function validateAndPreview(event) {
+            var selectedFile = event.target.files[0];
+            var previewImg = document.getElementById('previewImg');
+
+            if (selectedFile) {
+                // Validasi ukuran file
+                if (selectedFile.size > 500 * 1024) {
+                    alert('Ukuran gambar melebihi batas maksimum (500KB).');
+                    document.getElementById('customFile').value = ''; // Reset input file
+                    previewImg.src = '/storage/profiles/{{ $profile->profile_pict }}'; // Tampilkan gambar default
+                    return;
+                }
+
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    var img = new Image();
+                    img.src = e.target.result;
+
+                    img.onload = function() {
+                        var canvas = document.createElement('canvas');
+                        var ctx = canvas.getContext('2d');
+
+                        // Konversi gambar menjadi ukuran 300x300 pixel
+                        var scaleFactor = Math.min(300 / img.width, 300 / img.height);
+                        canvas.width = img.width * scaleFactor;
+                        canvas.height = img.height * scaleFactor;
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                        previewImg.src = canvas.toDataURL('image/jpeg'); // Tampilkan gambar di dalam canvas
+                    };
+                };
+
+                reader.readAsDataURL(selectedFile);
+            }
+        }
+
+        // fungsi remove button
+        function removeImage() {
+            var previewImg = document.getElementById('previewImg');
+            previewImg.src = 'storage/img/profile/default-profile-icon.png'; // Tampilkan gambar default
+            var customFileInput = document.getElementById('customFile');
+            customFileInput.value = ''; // Reset input file
+        }
+
+        // Event listener untuk tombol Remove
+        var removeBtn = document.getElementById('removeBtn');
+        removeBtn.addEventListener('click', removeImage);
+
+
+        // Variabel untuk menyimpan status mode Edit
+        var isEditMode = false;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var btnEdit = document.getElementById("btnEdit");
+            var btnSubmit = document.getElementById("btnSubmit");
+            var removeBtn = document.getElementById("removeBtn");
+            var pilihBtn = document.getElementById("pilihBtn");
+
+            // Fungsi untuk mengaktifkan mode Edit
+            function enableEditMode() {
+                isEditMode = true;
+                btnEdit.innerText = "Batal";
+                btnSubmit.style.display = "block";
+                removeBtn.removeAttribute("disabled")
+                pilihBtn.removeAttribute("disabled")
+
+                // Aktifkan semua input
+                var inputs = document.querySelectorAll("input, select, textarea");
+                inputs.forEach(function(input) {
+                    input.removeAttribute("disabled");
+                });
+            }
+
+            // Fungsi untuk menonaktifkan mode Edit
+            function disableEditMode() {
+                isEditMode = false;
+                btnEdit.innerText = "Edit";
+                btnSubmit.style.display = "none";
+                removeBtn.setAttribute("disabled", true);
+                pilihBtn.setAttribute("disabled", true);
+
+                // Nonaktifkan semua input
+                var inputs = document.querySelectorAll("input, select, textarea");
+                inputs.forEach(function(input) {
+                    input.setAttribute("disabled", true);
+                });
+
+                // Reset validasi gambar dan hapus gambar jika ada
+                document.getElementById('customFile').value = ''; // Reset input file
+                var previewImg = document.getElementById('previewImg');
+                previewImg.src =
+                    '/storage/profiles/{{ $profile->profile_pict }}'; // Tampilkan gambar default
+            }
+
+            // Event listener untuk tombol Edit
+            btnEdit.addEventListener("click", function(event) {
+                event.preventDefault(); // Mencegah refresh halaman
+                if (!isEditMode) {
+                    enableEditMode();
+                } else {
+                    disableEditMode();
+                }
+            });
+
+            // Default: mode Edit dinonaktifkan saat halaman dimuat
+            disableEditMode();
+
+            // alert 
+            var alertContainer = document.getElementById('alertContainer');
+            var successMessage = "{{ session('success') }}";
+
+            if (successMessage) {
+                alertContainer.style.display = 'block';
+                setTimeout(function() {
+                    alertContainer.style.display = 'none';
+                }, 3000); // Menghilangkan alert setelah 3 detik (3000 milidetik)
+            }
+        });
     </script>
 
 @endsection

@@ -208,8 +208,7 @@
                                     <div id="divCheckInput" class="text-danger"></div>
                                     <input type="button" name="previous" class="previous action-button-previous"
                                         value="Previous" />
-                                    <input type="button" id="submitButton" name="make_payment"
-                                        class="action-button" value="Daftar" />
+                                    <input type="submit" id="submitButton" class="action-button" value="Daftar" />
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
@@ -301,28 +300,6 @@
         // Event listener untuk tombol Remove
         var removeBtn = document.getElementById('removeBtn');
         removeBtn.addEventListener('click', removeImage);
-
-        document.getElementById('submitButton').addEventListener('click', function() {
-            var formData = new FormData(document.getElementById('msform'));
-
-            // Kirim data ke server menggunakan Ajax
-            $.ajax({
-                url: $('#msform').attr('action'),
-                type: $('#msform').attr('method'),
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    // Handle respon dari server jika berhasil
-                    console.log('Gambar berhasil disimpan.');
-                },
-                error: function(xhr, status, error) {
-                    // Handle respon dari server jika terjadi kesalahan
-                    console.error('Error:', error);
-                }
-            });
-        });
     </script>
 </body>
 
