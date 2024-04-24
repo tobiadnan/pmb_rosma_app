@@ -44,4 +44,9 @@ class Profile extends Model
     {
         return $this->belongsTo(User::class);
     }
+    // Relasi dengan model Registration
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class, 'profile_id');
+    }
 }

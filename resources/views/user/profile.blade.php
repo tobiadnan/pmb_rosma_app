@@ -567,7 +567,7 @@
         // fungsi remove button
         function removeImage() {
             var previewImg = document.getElementById('previewImg');
-            previewImg.src = 'storage/img/profile/default-profile-icon.png'; // Tampilkan gambar default
+            previewImg.src = 'storage/profiles/default-profile-icon.png'; // Tampilkan gambar default
             var customFileInput = document.getElementById('customFile');
             customFileInput.value = ''; // Reset input file
         }

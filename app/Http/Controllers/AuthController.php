@@ -122,7 +122,7 @@ class AuthController extends Controller
             $profile = Profile::where('user_id', auth()->id())->first();
             // dd($profile->nama_d);
             return
-                redirect()->route('home')->with([
+                redirect()->route('profile')->with([
                     'profile' => $profile,
                 ]);
         }
