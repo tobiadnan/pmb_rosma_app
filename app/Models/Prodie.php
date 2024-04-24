@@ -15,6 +15,6 @@ class Prodie extends Model
     // Relasi dengan model Registration
     public function registrations()
     {
-        return $this->hasMany(Registration::class, 'kode_prodi');
+        return $this->belongsToMany(Registration::class, 'kode_prodi');
     }
 }

@@ -47,6 +47,6 @@ class Profile extends Model
     // Relasi dengan model Registration
     public function registrations()
     {
-        return $this->hasMany(Registration::class, 'profile_id');
+        return $this->hasOne(Registration::class, 'profile_id');
     }
 }
