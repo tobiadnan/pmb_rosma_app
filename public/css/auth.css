@@ -359,7 +359,7 @@ select:focus option {
 .fs-title {
     font-size: 25px;
     color: #ffffff;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-weight: bold;
     text-align: left;
 }
@@ -405,9 +405,9 @@ select:focus option {
     content: "\f501";
 }
 
-#progressbar #confirm:before {
+#progressbar #prodi:before {
     font-family: FontAwesome;
-    content: "\f00c";
+    content: "\f518";
 }
 
 /*ProgressBar before any progress*/

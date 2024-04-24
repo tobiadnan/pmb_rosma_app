@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prodie;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,7 +21,9 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('auth.register');
+        $prodies = Prodie::pluck('prodi', 'kode_prodi');
+
+        return view('auth.register', compact('prodies'));
     }
 
     public function registerSave(Request $request)

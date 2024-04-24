@@ -37,7 +37,7 @@
                                     <li id="personal"><strong>Personal</strong></li>
                                     <li id="address"><strong>Alamat</strong></li>
                                     <li id="school"><strong>Pendidikan</strong></li>
-                                    <li id="confirm"><strong>Finish</strong></li>
+                                    <li id="prodi"><strong>Prodi</strong></li>
                                 </ul>
                                 <!-- fieldsets -->
                                 {{-- informasi akun --}}
@@ -65,6 +65,7 @@
                                 <fieldset>
                                     <div class="form-card">
                                         <h4 class="fs-title">Informasi Personal</h4>
+                                        {{-- profil pict --}}
                                         <div class="text-center py-5">
                                             <div id="imageContainer" class="square position-relative display-2 mb-3">
                                                 <img id="previewImg" src="storage/profiles/default-profile-icon.png"
@@ -79,7 +80,7 @@
                                                     class="me-1"><b>Note:</b></span>.jpg/jpeg/png
                                                 dengan maksimal 500KB</p>
                                         </div>
-                                        {{-- .... --}}
+                                        {{-- data --}}
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="nama_d" placeholder="Nama Depan*"
@@ -180,6 +181,7 @@
                                     <input type="button" name="next" class="next action-button" value="Next"
                                         id="next" />
                                 </fieldset>
+                                {{-- pedndidikan --}}
                                 <fieldset>
                                     <div class="form-card">
                                         <h4 class="fs-title">Pendidikan Terakhir</h4>
@@ -205,28 +207,84 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <input type="button" name="previous" class="previous action-button-previous"
+                                        value="Previous" />
+                                    <input type="button" name="next" class="next action-button" value="Next"
+                                        id="next" />
+                                </fieldset>
+                                {{-- prodi --}}
+                                <fieldset>
+                                    <div class="form-card">
+                                        <h4 class="fs-title">Program Study</h4>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="row">
+                                                    <div class="row justify-content-end">
+                                                        <select class="list-dt form-select" id="prodi"
+                                                            name="prodi" required>
+                                                            <option value="" selected disabled>Pilih
+                                                                prodi</option>
+                                                            @foreach ($prodies as $kode_prodi => $prodi)
+                                                                <option value="{{ $kode_prodi }}">
+                                                                    {{ $prodi }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="row justify-content-end">
+                                                        <select class="list-dt form-select" id="jalur"
+                                                            name="jalur" required>
+                                                            <option value="" selected disabled>Pilih
+                                                                jalur</option>
+                                                            <option value="Reguler">Reguler</option>
+                                                            <option value="Prestaka">Prestaka</option>
+                                                            <option value="KIP">KIP</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="row justify-content-end">
+
+                                                        <select class="list-dt form-select" id="tahun_akademik"
+                                                            name="tahun_akademik" required>
+                                                            <option value="" selected disabled>Pilih
+                                                                tahun akademik
+                                                            </option>
+                                                            <option value="{{ date('Y') }}/{{ date('Y') + 1 }}">
+                                                                {{ date('Y') }}/{{ date('Y') + 1 }}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6" style="text-align: justify;">
+                                                <h6 class="">Penting!!</h6>
+                                                <p class="my-2">
+                                                    Kepada calon mahasiswa, pastikan Anda melakukan riset sebelum
+                                                    memilih program studi. Pahami kurikulum, prospek karir, dan
+                                                    fasilitas pendukung. Ini sangat penting agar Anda bisa membuat
+                                                    keputusan yang tepat sesuai dengan minat dan tujuan Anda di masa
+                                                    depan.
+                                                </p>
+                                                <p class="mb-2">
+                                                    Selain itu, pastikan juga bahwa Anda telah memenuhi
+                                                    <strong>syarat-syarat</strong> yang
+                                                    dibutuhkan untuk program studi tersebut dan memilih jalur
+                                                    pendaftaran
+                                                    yang sesuai.
+                                                </p>
+                                                <p class="mb-3">
+                                                    Untuk informasi lebih lanjut mengenai syarat prodi dan jalur
+                                                    pendaftaran, silakan <a class="badge text-bg-light"
+                                                        href="/#persyaratan" target="_blank"
+                                                        rel="noopener noreferrer">Klik di sini!</a>
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                     <div id="divCheckInput" class="text-danger"></div>
                                     <input type="button" name="previous" class="previous action-button-previous"
                                         value="Previous" />
                                     <input type="submit" id="submitButton" class="action-button" value="Daftar" />
-                                </fieldset>
-                                <fieldset>
-                                    <div class="form-card">
-                                        <h4 class="fs-title text-center">Success !</h4>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-3">
-                                                <img src="https://img.icons8.com/color/96/000000/ok--v2.png"
-                                                    class="fit-image">
-                                            </div>
-                                        </div>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-7 text-center">
-                                                <h5>You Have Successfully Signed Up</h5>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </fieldset>
                             </form>
                         </div>
@@ -292,7 +350,7 @@
 
         function removeImage() {
             var previewImg = document.getElementById('previewImg');
-            previewImg.src = 'storage/img/profile/default-profile-icon.png'; // Tampilkan gambar default
+            previewImg.src = 'storage/profiles/default-profile-icon.png'; // Tampilkan gambar default
             var customFileInput = document.getElementById('customFile');
             customFileInput.value = ''; // Reset input file
         }

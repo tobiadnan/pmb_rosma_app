@@ -19,11 +19,12 @@ return new class extends Migration
             $table->foreign('kode_prodi')->references('kode_prodi')->on('prodies')->onDelete('cascade');
             $table->string('tahun_akademik');
             $table->string('jalur');
-            $table->string('kk'); // Kolom untuk gambar scan KK
-            $table->string('ktp')->nullable(); // Kolom untuk gambar scan KTP
-            $table->string('ijazah'); // Kolom untuk gambar scan ijazah
-            $table->string('transkip'); // Kolom untuk gambar scan transkip nilai
-            $table->string('bukti_tf'); // Kolom untuk gambar scan bukti transfer biaya registrasi
+            $table->string('ktp')->nullable();
+            $table->string('kk')->nullable();
+            $table->string('ijazah')->nullable();
+            $table->string('transkip')->nullable();
+            $table->string('bukti_tf')->nullable();
+            $table->dateTime('tgl_registration')->nullable();
             $table->timestamps();
         });
     }
