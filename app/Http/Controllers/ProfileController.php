@@ -48,15 +48,6 @@ class ProfileController extends Controller
         // Ambil data user dari database
         $profile = Profile::where('id', $request->user()->id)->first();
 
-        // Kirim data user ke view profile
-        // dd($request->profile_pict);
-        // if ($request->profile_pict == null) {
-        //     $profile_pict = "default-profile-icon.png";
-        // }else(
-        //     $profile_pict = $request->profile_pict;
-        // )
-
-        // dd($imageName);
         return view('user.profile', [
             'profile' => $profile,
         ]);
@@ -67,28 +58,6 @@ class ProfileController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // $validatedData = $request->validate([
-        //     'nama_d' => 'required',
-        //     'email' => 'required|email',
-        //     'password' => 'required|min:6',
-        //     'tempat_lahir' => 'required',
-        //     'tgl_lahir' => 'required',
-        //     'jk' => 'required',
-        //     'agama' => 'required',
-        //     'no_hp' => 'required|digits_between:11,15', // Ubah menjadi 'required' jika no_hp wajib diisi
-        //     'no_hp2' => 'nullable|digits_between:11,15', // Ubah menjadi 'required' jika no_hp2 wajib diisi
-        //     'alamat' => 'required',
-        //     'desa' => 'required',
-        //     'kecamatan' => 'required',
-        //     'kota' => 'required',
-        //     'provinsi' => 'required',
-        //     'pend_terakhir' => 'required',
-        //     'no_ijazah' => 'required',
-        //     'tahun_lulus' => 'required|digits:4',
-        //     'profile_pict' => 'image|mimes:jpeg,png,jpg,gif|max:500'
-        // ]);
-
-
         // Cari profil yang akan diupdate
         // Update data dalam database
         $profile = Profile::find($id);

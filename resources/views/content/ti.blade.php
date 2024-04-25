@@ -187,7 +187,7 @@
             <h2>Ingin Bergabung dengan Program Teknik Informatika?</h2>
             <p>Jangan lewatkan kesempatan untuk memulai perjalanan karier yang cerah dengan bergabung di program Teknik
                 Informatika di STMIK Rosma!</p>
-            <a href="#" class="prodi-btn-daftar">Daftar Sekarang</a>
+            <a href="{{ route('register') }}" class="prodi-btn-daftar">Daftar Sekarang</a>
             <div class="prodi-contact-info">
                 <p>atau</p>
                 <p>Hubungi kami untuk informasi lebih lanjut:</p>

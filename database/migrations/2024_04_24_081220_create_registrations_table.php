@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('ijazah')->nullable();
             $table->string('transkip')->nullable();
             $table->string('bukti_tf')->nullable();
-            $table->dateTime('tgl_registration')->nullable();
+            $table->dateTime('tgl_verif')->nullable();
             $table->timestamps();
         });
     }

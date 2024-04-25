@@ -19,7 +19,7 @@ class Registration extends Model
         'ijazah',
         'transkip',
         'bukti_tf',
-        'tgl_registration',
+        'tgl_verif',
     ];
 
     // Relasi dengan model Profile

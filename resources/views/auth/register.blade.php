@@ -266,7 +266,7 @@
                                                 </p>
                                                 <p class="mb-2">
                                                     Selain itu, pastikan juga bahwa Anda telah memenuhi
-                                                    <strong>syarat-syarat</strong> yang
+                                                    <strong><u>syarat-syarat</u></strong> yang
                                                     dibutuhkan untuk program studi tersebut dan memilih jalur
                                                     pendaftaran
                                                     yang sesuai.

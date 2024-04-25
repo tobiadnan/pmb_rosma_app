@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Prodie;
 use App\Models\Profile;
+use App\Models\Registration;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +47,9 @@ class AuthController extends Controller
             'provinsi' => 'required',
             'pend_terakhir' => 'required',
             'no_ijazah' => 'required',
+            'prodi' => 'required',
+            'jalur' => 'required',
+            'tahun_akademik' => 'required',
             'tahun_lulus' => 'required|digits:4',
             'profile_pict' => 'image|mimes:jpeg,png,jpg,gif|max:500'
         ])->validate();
@@ -95,6 +99,15 @@ class AuthController extends Controller
             'user_id' => $user->id,
         ]);
 
+        // save to registrations
+        $registration = Registration::create([
+            'kode_prodi' => $request->prodi,
+            'jalur' => $request->jalur,
+            'tahun_akademik' => $request->tahun_akademik,
+            'profile_id' => $profile->id,
+
+        ]);
+
         return redirect()->route('login');
     }
 
@@ -125,7 +138,7 @@ class AuthController extends Controller
             $profile = Profile::where('user_id', auth()->id())->first();
             // dd($profile->nama_d);
             return
-                redirect()->route('profile')->with([
+                redirect()->route('home')->with([
                     'profile' => $profile,
                 ]);
         }

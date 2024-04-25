@@ -5,15 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Registration;
 use App\Http\Requests\StoreRegistrationRequest;
 use App\Http\Requests\UpdateRegistrationRequest;
+use Illuminate\Http\Request;
 
 class RegistrationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $profile = Registration::where('id', $request->user()->id)->first();
+
+        return view('user.registration', [
+            'profile' => $profile,
+        ]);
     }
 
     /**

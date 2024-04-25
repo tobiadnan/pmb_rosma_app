@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\NavController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +49,8 @@ Route::controller(AuthController::class)->group(function () {
 
 // User User
 Route::middleware(['auth', 'user-access:user'])->group(function () {
+    Route::get('/home/',  [HomeUserController::class, 'index'])->name('home');
+    Route::get('/registration/',  [RegistrationController::class, 'index'])->name('registration');
     Route::get('/profile/',  [ProfileController::class, 'edit'])->name('profile');
     Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
 });
