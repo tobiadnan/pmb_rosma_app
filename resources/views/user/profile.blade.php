@@ -100,8 +100,11 @@
             </div>
         </div>
     </header>
-    <div id="alertContainer" class="alert alert-success fade-in" style="display: none;">
-        <strong>Success!</strong> Profil berhasil diperbarui.
+    <div class="position-fixed end-0 px-3" style="width: 50%; z-index: 1050;display: none;" id="alertContainer">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> Profil berhasil diperbarui.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </div>
     <div class="">
         <div class="row">
@@ -319,208 +322,6 @@
 
 @endsection
 @section('scripts')
-    {{-- <script>
-        // Fungsi untuk validasi dan preview gambar
-        document.getElementById('imageContainer').addEventListener('click', function() {
-            document.getElementById('customFile').click();
-        });
-
-        function validateAndPreview(event) {
-            var selectedFile = event.target.files[0];
-            var previewImg = document.getElementById('previewImg');
-
-            if (selectedFile) {
-                // Validasi ukuran file
-                if (selectedFile.size > 500 * 1024) {
-                    alert('Ukuran gambar melebihi batas maksimum (500KB).');
-                    document.getElementById('customFile').value = ''; // Reset input file
-                    previewImg.src ='/storage/profiles/{{ $profile->profile_pict }}'; // Tampilkan gambar default
-                    return;
-                }
-
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    var img = new Image();
-                    img.src = e.target.result;
-
-                    img.onload = function() {
-                        var canvas = document.createElement('canvas');
-                        var ctx = canvas.getContext('2d');
-
-                        // Konversi gambar menjadi ukuran 300x300 pixel
-                        var scaleFactor = Math.min(300 / img.width, 300 / img.height);
-                        canvas.width = img.width * scaleFactor;
-                        canvas.height = img.height * scaleFactor;
-                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-                        previewImg.src = canvas.toDataURL('image/jpeg'); // Tampilkan gambar di dalam canvas
-                    };
-                };
-
-                reader.readAsDataURL(selectedFile);
-            }
-        }
-
-        function removeImage() {
-            var previewImg = document.getElementById('previewImg');
-            previewImg.src ='/storage/profiles/{{ $profile->profile_pict }}'; // Tampilkan gambar default
-            var customFileInput = document.getElementById('customFile');
-            customFileInput.value = ''; // Reset input file
-        }
-
-        // Event listener untuk tombol Remove
-        var removeBtn = document.getElementById('removeBtn');
-        removeBtn.addEventListener('click', removeImage);
-
-        document.addEventListener("DOMContentLoaded", function() {
-            var btnEdit = document.getElementById("btnEdit");
-            var btnSubmit = document.getElementById("btnSubmit");
-
-            // Fungsi untuk mengaktifkan mode Edit
-            function enableEditMode() {
-                btnEdit.innerText = "Batal";
-                btnSubmit.style.display = "block";
-
-                // Aktifkan semua input
-                var inputs = document.querySelectorAll("input, select, textarea");
-                inputs.forEach(function(input) {
-                    input.removeAttribute("disabled");
-                });
-            }
-
-            // Fungsi untuk menonaktifkan mode Edit
-            function disableEditMode() {
-                btnEdit.innerText = "Edit";
-                btnSubmit.style.display = "none";
-
-                // Nonaktifkan semua input
-                var inputs = document.querySelectorAll("input, select, textarea");
-                inputs.forEach(function(input) {
-                    input.setAttribute("disabled", true);
-                });
-            }
-
-            // Event listener untuk tombol Edit
-            btnEdit.addEventListener("click", function() {
-                if (btnEdit.innerText === "Edit") {
-                    enableEditMode();
-                } else {
-                    disableEditMode();
-                }
-            });
-
-            // Default: mode Edit dinonaktifkan saat halaman dimuat
-            disableEditMode();
-        });
-    </script> --}}
-    {{-- <script>
-        // Fungsi untuk validasi dan preview gambar
-        document.getElementById('imageContainer').addEventListener('click', function() {
-            document.getElementById('customFile').click();
-        });
-
-        function validateAndPreview(event) {
-            if (!isEditMode) {
-                var selectedFile = event.target.files[0];
-                var previewImg = document.getElementById('previewImg');
-
-                if (selectedFile) {
-                    // Validasi ukuran file
-                    if (selectedFile.size > 500 * 1024) {
-                        alert('Ukuran gambar melebihi batas maksimum (500KB).');
-                        document.getElementById('customFile').value = ''; // Reset input file
-                        previewImg.src ='/storage/profiles/{{ $profile->profile_pict }}'; // Tampilkan gambar default
-                        return;
-                    }
-
-                    var reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        var img = new Image();
-                        img.src = e.target.result;
-
-                        img.onload = function() {
-                            var canvas = document.createElement('canvas');
-                            var ctx = canvas.getContext('2d');
-
-                            // Konversi gambar menjadi ukuran 300x300 pixel
-                            var scaleFactor = Math.min(300 / img.width, 300 / img.height);
-                            canvas.width = img.width * scaleFactor;
-                            canvas.height = img.height * scaleFactor;
-                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-                            previewImg.src = canvas.toDataURL('image/jpeg'); // Tampilkan gambar di dalam canvas
-                        };
-                    };
-
-                    reader.readAsDataURL(selectedFile);
-                }
-            }
-        }
-
-        function removeImage() {
-            if (!isEditMode) {
-                var previewImg = document.getElementById('previewImg');
-                previewImg.src ='/storage/profiles/{{ $profile->profile_pict }}'; // Tampilkan gambar default
-                var customFileInput = document.getElementById('customFile');
-                customFileInput.value = ''; // Reset input file
-            }
-        }
-
-        // Variabel untuk menyimpan status mode Edit
-        var isEditMode = false;
-
-        document.addEventListener("DOMContentLoaded", function() {
-            var btnEdit = document.getElementById("btnEdit");
-            var btnSubmit = document.getElementById("btnSubmit");
-
-            // Fungsi untuk mengaktifkan mode Edit
-            function enableEditMode() {
-                isEditMode = true;
-                btnEdit.innerText = "Batal";
-                btnSubmit.style.display = "block";
-
-                // Aktifkan semua input
-                var inputs = document.querySelectorAll("input, select, textarea");
-                inputs.forEach(function(input) {
-                    input.removeAttribute("disabled");
-                });
-            }
-
-            // Fungsi untuk menonaktifkan mode Edit
-            function disableEditMode() {
-                isEditMode = false;
-                btnEdit.innerText = "Edit";
-                btnSubmit.style.display = "none";
-
-                // Nonaktifkan semua input
-                var inputs = document.querySelectorAll("input, select, textarea");
-                inputs.forEach(function(input) {
-                    input.setAttribute("disabled", true);
-                });
-
-                // Reset validasi gambar dan hapus gambar jika ada
-                document.getElementById('customFile').value = ''; // Reset input file
-                var previewImg = document.getElementById('previewImg');
-                previewImg.src ='/storage/profiles/{{ $profile->profile_pict }}'; // Tampilkan gambar default
-            }
-
-            // Event listener untuk tombol Edit
-            btnEdit.addEventListener("click", function(event) {
-                event.preventDefault(); // Mencegah refresh halaman
-                if (!isEditMode) {
-                    enableEditMode();
-                } else {
-                    disableEditMode();
-                }
-            });
-
-            // Default: mode Edit dinonaktifkan saat halaman dimuat
-            disableEditMode();
-        });
-    </script> --}}
-
     <script>
         // Fungsi untuk validasi dan preview gambar
         document.getElementById('imageContainer').addEventListener('click', function() {
@@ -643,7 +444,7 @@
                 alertContainer.style.display = 'block';
                 setTimeout(function() {
                     alertContainer.style.display = 'none';
-                }, 3000); // Menghilangkan alert setelah 3 detik (3000 milidetik)
+                }, 5000); // Menghilangkan alert setelah 3 detik (3000 milidetik)
             }
         });
     </script>

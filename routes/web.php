@@ -50,6 +50,8 @@ Route::controller(AuthController::class)->group(function () {
 // User User
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home/',  [HomeUserController::class, 'index'])->name('home');
+    Route::post('/home/{id}',  [HomeUserController::class, 'update'])->name('home.update');
+
     Route::get('/registration/',  [RegistrationController::class, 'index'])->name('registration');
     Route::get('/profile/',  [ProfileController::class, 'edit'])->name('profile');
     Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
