@@ -80,4 +80,22 @@ $(document).ready(function () {
         var selectedValue = $(this).val();
         $(this).css("color", selectedValue ? "white" : ""); // Ubah warna teks berdasarkan nilai terpilih
     });
+
+    document
+        .getElementById("submitButton")
+        .addEventListener("click", function () {
+            var form = document.getElementById("msform");
+            var isValid = form.checkValidity();
+
+            if (!isValid) {
+                var errorDiv = document.getElementById("divCheckInput");
+                errorDiv.innerHTML =
+                    "Sepertinya ada data yang belum kamu isi. Pastikan kamu mengisi semua data yang diperlukan :)";
+            } else {
+                var errorDiv = document.getElementById("divCheckInput");
+                errorDiv.innerHTML = ""; // Hapus pesan error jika form valid
+                // Lakukan aksi pengiriman form jika valid
+                form.submit();
+            }
+        });
 });

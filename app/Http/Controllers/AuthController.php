@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prodie;
+use App\Models\Profile;
+use App\Models\Registration;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -18,25 +22,93 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('auth.register');
+        $prodies = Prodie::pluck('prodi', 'kode_prodi');
+
+        return view('auth.register', compact('prodies'));
     }
 
     public function registerSave(Request $request)
     {
+        // Validate the request...
         Validator::make(request()->all(), [
-            'nama' => 'required',
+            'nama_d' => 'required',
             'email' => 'required|email',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
+            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'required',
+            'jk' => 'required',
+            'agama' => 'required',
+            'no_hp' => 'required|digits_between:11,15', // Ubah menjadi 'required' jika no_hp wajib diisi
+            'no_hp2' => 'nullable|digits_between:11,15', // Ubah menjadi 'required' jika no_hp2 wajib diisi
+            'alamat' => 'required',
+            'desa' => 'required',
+            'kecamatan' => 'required',
+            'kota' => 'required',
+            'provinsi' => 'required',
+            'pend_terakhir' => 'required',
+            'no_ijazah' => 'required',
+            'prodi' => 'required',
+            'jalur' => 'required',
+            'tahun_akademik' => 'required',
+            'tahun_lulus' => 'required|digits:4',
+            'profile_pict' => 'image|mimes:jpeg,png,jpg,gif|max:500'
         ])->validate();
 
-        User::create([
-            'nama' => $request->nama,
+        // save to users
+        $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'type' => "0"
+            'is_admin' => "0"
         ]);
 
-        return redirect()->route('login')->withSuccess("Register Successfully!");
+        // Mendapatkan file gambar dari request
+        if ($request->hasFile('profile_pict')) {
+            $image = $request->file('profile_pict');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+
+            // Periksa apakah file dengan nama yang sama sudah ada
+            if (!Storage::disk('public')->exists('profiles/' . $imageName)) {
+                // Simpan gambar ke direktori penyimpanan (contoh: storage/app/public/profiles)
+                $image->storeAs('public/profiles', $imageName);
+            }
+        } else {
+            $imageName = "default-profile-icon.png";
+        }
+
+        // save to profiles
+        $profile = Profile::create([
+            'nama_d' => $request->nama_d,
+            'nama_b' => $request->nama_b,
+            'nik' => $request->nik,
+            'nkk' => $request->nkk,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
+            'jk' => $request->jk,
+            'agama' => $request->agama,
+            'no_hp' => $request->no_hp,
+            'no_hp2' => $request->no_hp2,
+            'alamat' => $request->alamat,
+            'desa' => $request->desa,
+            'kecamatan' => $request->kecamatan,
+            'kota' => $request->kota,
+            'provinsi' => $request->provinsi,
+            'pend_terakhir' => $request->pend_terakhir,
+            'no_ijazah' => $request->no_ijazah,
+            'tahun_lulus' => $request->tahun_lulus,
+            'profile_pict' => $imageName,
+            'user_id' => $user->id,
+        ]);
+
+        // save to registrations
+        $registration = Registration::create([
+            'kode_prodi' => $request->prodi,
+            'jalur' => $request->jalur,
+            'tahun_akademik' => $request->tahun_akademik,
+            'profile_id' => $profile->id,
+
+        ]);
+
+        return redirect()->route('login');
     }
 
     public function login()
@@ -59,11 +131,16 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        if (auth()->user()->type == 'admin') {
-            # code...
+        // dd(auth()->user()->is_admin);
+        if (auth()->user()->is_admin) {
             return redirect()->route('admin/home');
         } else {
-            return redirect()->route('home');
+            $profile = Profile::where('user_id', auth()->id())->first();
+            // dd($profile->nama_d);
+            return
+                redirect()->route('home')->with([
+                    'profile' => $profile,
+                ]);
         }
     }
 

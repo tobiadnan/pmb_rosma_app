@@ -28,14 +28,16 @@
                     <div class="row">
                         <div class="col-md-12 mx-0">
                             <!-- Form -->
-                            <form id="msform" class="login">
+                            <form action="{{ route('register.save') }}" method="post" id="msform" class="login"
+                                enctype="multipart/form-data">
+                                @csrf
                                 <!-- progressbar -->
                                 <ul id="progressbar">
                                     <li class="active" id="account"><strong>Akun</strong></li>
                                     <li id="personal"><strong>Personal</strong></li>
                                     <li id="address"><strong>Alamat</strong></li>
                                     <li id="school"><strong>Pendidikan</strong></li>
-                                    <li id="confirm"><strong>Finish</strong></li>
+                                    <li id="prodi"><strong>Prodi</strong></li>
                                 </ul>
                                 <!-- fieldsets -->
                                 {{-- informasi akun --}}
@@ -44,7 +46,7 @@
                                         <h4 class="fs-title">Informasi Akun</h4>
                                         <input class="form-control" type="email" name="email" placeholder="Email*"
                                             required />
-                                        <input type="password" name="pwd" id="pwd" placeholder="Password"
+                                        <input type="password" name="password" id="pwd" placeholder="Password"
                                             required />
                                         <input type="password" name="cpwd" id="cpwd"
                                             placeholder="Confirm Password" required />
@@ -63,19 +65,43 @@
                                 <fieldset>
                                     <div class="form-card">
                                         <h4 class="fs-title">Informasi Personal</h4>
-                                        <input type="text" name="nama" placeholder="Nama Lengkap*" required />
+                                        {{-- profil pict --}}
+                                        <div class="text-center py-5">
+                                            <div id="imageContainer" class="square position-relative display-2 mb-3">
+                                                <img id="previewImg" src="storage/profiles/default-profile-icon.png"
+                                                    alt="Preview Image">
+                                            </div>
+                                            <input type="file" id="customFile" name="profile_pict" accept="image/*"
+                                                onchange="validateAndPreview(event)" hidden>
+                                            <label class="mx-1 btn btn-success-soft" for="customFile">Pilih</label>
+                                            <button type="button" id="removeBtn"
+                                                class="mx-1 btn btn-danger-soft">Hapus</button>
+                                            <p class="mt-3 mb-0 text-white"><span
+                                                    class="me-1"><b>Note:</b></span>.jpg/jpeg/png
+                                                dengan maksimal 500KB</p>
+                                        </div>
+                                        {{-- data --}}
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <input type="text" name="nama_d" placeholder="Nama Depan*"
+                                                    required />
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="text" name="nama_b" placeholder="Nama Belakang" />
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="nik" placeholder="No. Induk KTP"
                                                     required />
                                             </div>
                                             <div class="col-6">
-                                                <input type="text" name="kk" placeholder="No. KK*" required />
+                                                <input type="text" name="nkk" placeholder="No. KK*" required />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <input type="text" name="tmpt_lahir" placeholder="Tempat Lahir*"
+                                                <input type="text" name="tempat_lahir" placeholder="Tempat Lahir*"
                                                     required />
                                             </div>
                                             <div class="col-2 text-end">
@@ -109,10 +135,11 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <input type="text" name="nohp" placeholder="No. Hp*" required />
+                                                <input type="text" name="no_hp" placeholder="No. Hp*"
+                                                    required />
                                             </div>
                                             <div class="col-6">
-                                                <input type="text" name="nohp2"
+                                                <input type="text" name="no_hp2"
                                                     placeholder="No. Hp 2 (opsional)" />
                                             </div>
                                         </div>
@@ -154,22 +181,21 @@
                                     <input type="button" name="next" class="next action-button" value="Next"
                                         id="next" />
                                 </fieldset>
+                                {{-- pedndidikan --}}
                                 <fieldset>
                                     <div class="form-card">
                                         <h4 class="fs-title">Pendidikan Terakhir</h4>
-                                        <input type="text" name="sekolah" placeholder="Pendidikan Terakhir*"
+                                        <input type="text" name="pend_terakhir" placeholder="Pendidikan Terakhir*"
                                             required />
                                         <div class="row">
                                             <div class="col-6 mt-1">
-                                                <input type="text" name="ijazah" placeholder="No. Ijazah*"
+                                                <input type="text" name="no_ijazah" placeholder="No. Ijazah*"
                                                     required />
                                             </div>
                                             <div class="col-6">
-                                                <select class="list-dt form-select" id="tahun" name="tahun"
+                                                <select class="list-dt form-select" id="tahun" name="tahun_lulus"
                                                     required>
                                                     <option value="" selected disabled>Tahun lulus</option>
-                                                    <!-- Contoh pilihan tahun dari 1900 hingga tahun sekarang -->
-                                                    <!-- Anda dapat mengubah rentang tahun sesuai kebutuhan -->
                                                     <?php
                                                     $tahunSekarang = date('Y');
                                                     $tahunAwal = 1900;
@@ -183,26 +209,82 @@
                                     </div>
                                     <input type="button" name="previous" class="previous action-button-previous"
                                         value="Previous" />
-                                    <input type="button" name="make_payment" class="next action-button"
-                                        value="Confirm" />
+                                    <input type="button" name="next" class="next action-button" value="Next"
+                                        id="next" />
                                 </fieldset>
+                                {{-- prodi --}}
                                 <fieldset>
                                     <div class="form-card">
-                                        <h4 class="fs-title text-center">Success !</h4>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-3">
-                                                <img src="https://img.icons8.com/color/96/000000/ok--v2.png"
-                                                    class="fit-image">
+                                        <h4 class="fs-title">Program Study</h4>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="row">
+                                                    <div class="row justify-content-end">
+                                                        <select class="list-dt form-select" id="prodi"
+                                                            name="prodi" required>
+                                                            <option value="" selected disabled>Pilih
+                                                                prodi</option>
+                                                            @foreach ($prodies as $kode_prodi => $prodi)
+                                                                <option value="{{ $kode_prodi }}">
+                                                                    {{ $prodi }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="row justify-content-end">
+                                                        <select class="list-dt form-select" id="jalur"
+                                                            name="jalur" required>
+                                                            <option value="" selected disabled>Pilih
+                                                                jalur</option>
+                                                            <option value="Reguler">Reguler</option>
+                                                            <option value="Prestaka">Prestaka</option>
+                                                            <option value="KIP">KIP</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="row justify-content-end">
+
+                                                        <select class="list-dt form-select" id="tahun_akademik"
+                                                            name="tahun_akademik" required>
+                                                            <option value="" selected disabled>Pilih
+                                                                tahun akademik
+                                                            </option>
+                                                            <option value="{{ date('Y') }}/{{ date('Y') + 1 }}">
+                                                                {{ date('Y') }}/{{ date('Y') + 1 }}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br><br>
-                                        <div class="row justify-content-center">
-                                            <div class="col-7 text-center">
-                                                <h5>You Have Successfully Signed Up</h5>
+                                            <div class="col-sm-6" style="text-align: justify;">
+                                                <h6 class="">Penting!!</h6>
+                                                <p class="my-2">
+                                                    Kepada calon mahasiswa, pastikan Anda melakukan riset sebelum
+                                                    memilih program studi. Pahami kurikulum, prospek karir, dan
+                                                    fasilitas pendukung. Ini sangat penting agar Anda bisa membuat
+                                                    keputusan yang tepat sesuai dengan minat dan tujuan Anda di masa
+                                                    depan.
+                                                </p>
+                                                <p class="mb-2">
+                                                    Selain itu, pastikan juga bahwa Anda telah memenuhi
+                                                    <strong><u>syarat-syarat</u></strong> yang
+                                                    dibutuhkan untuk program studi tersebut dan memilih jalur
+                                                    pendaftaran
+                                                    yang sesuai.
+                                                </p>
+                                                <p class="mb-3">
+                                                    Untuk informasi lebih lanjut mengenai syarat prodi dan jalur
+                                                    pendaftaran, silakan <a class="badge text-bg-light"
+                                                        href="/#persyaratan" target="_blank"
+                                                        rel="noopener noreferrer">Klik di sini!</a>
+                                                </p>
                                             </div>
+
                                         </div>
                                     </div>
+                                    <div id="divCheckInput" class="text-danger"></div>
+                                    <input type="button" name="previous" class="previous action-button-previous"
+                                        value="Previous" />
+                                    <input type="submit" id="submitButton" class="action-button" value="Daftar" />
                                 </fieldset>
                             </form>
                         </div>
@@ -218,6 +300,65 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script> --}}
     <script src="js/auth/register.js"></script>
+    @if ($errors->any())
+        <script>
+            alert("{{ $errors->first('email') }}");
+        </script>
+    @endif
+    <script>
+        // Fungsi untuk validasi dan preview gambar
+        document.getElementById('imageContainer').addEventListener('click', function() {
+            document.getElementById('customFile').click();
+        });
+
+        function validateAndPreview(event) {
+            var selectedFile = event.target.files[0];
+            var previewImg = document.getElementById('previewImg');
+
+            if (selectedFile) {
+                // Validasi ukuran file
+                if (selectedFile.size > 500 * 1024) {
+                    alert('Ukuran gambar melebihi batas maksimum (500KB).');
+                    document.getElementById('customFile').value = ''; // Reset input file
+                    previewImg.src = 'storage/profiles/default-profile-icon.png'; // Tampilkan gambar default
+                    return;
+                }
+
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    var img = new Image();
+                    img.src = e.target.result;
+
+                    img.onload = function() {
+                        var canvas = document.createElement('canvas');
+                        var ctx = canvas.getContext('2d');
+
+                        // Konversi gambar menjadi ukuran 300x300 pixel
+                        var scaleFactor = Math.min(300 / img.width, 300 / img.height);
+                        canvas.width = img.width * scaleFactor;
+                        canvas.height = img.height * scaleFactor;
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                        previewImg.src = canvas.toDataURL('image/jpeg'); // Tampilkan gambar di dalam canvas
+                    };
+                };
+
+                reader.readAsDataURL(selectedFile);
+            }
+        }
+
+        function removeImage() {
+            var previewImg = document.getElementById('previewImg');
+            previewImg.src = 'storage/profiles/default-profile-icon.png'; // Tampilkan gambar default
+            var customFileInput = document.getElementById('customFile');
+            customFileInput.value = ''; // Reset input file
+        }
+
+        // Event listener untuk tombol Remove
+        var removeBtn = document.getElementById('removeBtn');
+        removeBtn.addEventListener('click', removeImage);
+    </script>
 </body>
 
 </html>

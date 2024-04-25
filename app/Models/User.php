@@ -14,15 +14,21 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'nama',
         'email',
         'password',
+        'is_admin',
     ];
 
     /**
@@ -45,7 +51,7 @@ class User extends Authenticatable
         'password' => 'hashed', //menggunakan enkripsi sha1
     ];
 
-    protected function type(): Attribute
+    protected function is_admin(): Attribute
     {
         return new Attribute(
             get: fn ($value) => ['user', 'admin'][$value],
