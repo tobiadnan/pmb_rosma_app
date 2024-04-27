@@ -20,6 +20,8 @@ class Registration extends Model
         'transkip',
         'bukti_tf',
         'tgl_verif',
+        'is_verif',
+        'is_set',
     ];
 
     // Relasi dengan model Profile

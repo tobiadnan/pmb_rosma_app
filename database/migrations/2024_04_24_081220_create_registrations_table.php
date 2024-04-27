@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('transkip')->nullable();
             $table->string('bukti_tf')->nullable();
             $table->dateTime('tgl_verif')->nullable();
+            $table->boolean('is_verif')->default(false);
+            $table->boolean('is_set')->default(false);
             $table->timestamps();
         });
     }

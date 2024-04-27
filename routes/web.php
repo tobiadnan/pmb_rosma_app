@@ -28,8 +28,8 @@ Route::prefix('prodi')->group(function () {
     Route::get('ka', [NavController::class, 'ka'])->name('content.ka');
 });
 
-Route::get('/kacer', function () {
-    return view('kacer');
+Route::get('/email', function () {
+    return view('emails.payment_info');
 });
 
 
@@ -50,7 +50,8 @@ Route::controller(AuthController::class)->group(function () {
 // User User
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home/',  [HomeUserController::class, 'index'])->name('home');
-    Route::post('/home/{id}',  [HomeUserController::class, 'update'])->name('home.update');
+    Route::post('/home/{id}/update',  [HomeUserController::class, 'update'])->name('home.update');
+    Route::post('/home/{id}/verif',  [HomeUserController::class, 'verif'])->name('home.verif');
 
     Route::get('/registration/',  [RegistrationController::class, 'index'])->name('registration');
     Route::get('/profile/',  [ProfileController::class, 'edit'])->name('profile');

@@ -65,7 +65,7 @@
 
                 <!-- Brand -->
                 <a class="navbar-brand" href="/">
-                    <img src="../img/logo.png" height="35" alt="" loading="lazy" />
+                    <img src="storage/logo.png" height="35" alt="" loading="lazy" />
                 </a>
 
                 <!-- Right links -->

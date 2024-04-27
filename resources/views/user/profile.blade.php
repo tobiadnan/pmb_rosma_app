@@ -126,6 +126,7 @@
                                                 alt="Profile Pict">
                                         </div>
                                         <input disabled type="file" id="customFile" name="profile_pict" accept="image/*"
+                                            value="/storage/profiles/{{ $profile->profile_pict }}"
                                             onchange="validateAndPreview(event)" hidden>
                                         <label disabled id="pilihBtn" class="mx-1 btn btn-success-soft"
                                             for="customFile">Pilih</label>
@@ -331,6 +332,7 @@
         function validateAndPreview(event) {
             var selectedFile = event.target.files[0];
             var previewImg = document.getElementById('previewImg');
+            // Reset input file
 
             if (selectedFile) {
                 // Validasi ukuran file
@@ -386,6 +388,7 @@
             var btnSubmit = document.getElementById("btnSubmit");
             var removeBtn = document.getElementById("removeBtn");
             var pilihBtn = document.getElementById("pilihBtn");
+            var previewImg = document.getElementById('previewImg');
 
             // Fungsi untuk mengaktifkan mode Edit
             function enableEditMode() {
@@ -395,11 +398,16 @@
                 removeBtn.removeAttribute("disabled")
                 pilihBtn.removeAttribute("disabled")
 
+                // var customFileInput = document.getElementById('customFile');
+                // console.log(customFileInput.files[0]);
+                // customFileInput.value = customFileInput.files[0].name;
+
                 // Aktifkan semua input
                 var inputs = document.querySelectorAll("input, select, textarea");
                 inputs.forEach(function(input) {
                     input.removeAttribute("disabled");
                 });
+
             }
 
             // Fungsi untuk menonaktifkan mode Edit
@@ -417,8 +425,7 @@
                 });
 
                 // Reset validasi gambar dan hapus gambar jika ada
-                document.getElementById('customFile').value = ''; // Reset input file
-                var previewImg = document.getElementById('previewImg');
+                // document.getElementById('customFile').value = ''; // Reset input file
                 previewImg.src =
                     '/storage/profiles/{{ $profile->profile_pict }}'; // Tampilkan gambar default
             }

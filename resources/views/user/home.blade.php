@@ -17,7 +17,7 @@
     </div> --}}
     <div class="position-fixed end-0 px-3" style="width: 50%; z-index: 1050;display: none;" id="alertContainer">
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Success!</strong> Jurusan dan atau Jalur berhasil diperbarui. Silahkan Selesaikan pendaftaran !!
+            <strong>Success!</strong> {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
@@ -36,12 +36,33 @@
                             <h2 class="accordion-header" id="headingOne">
                                 <button data-mdb-collapse-init class="accordion-button" type="button"
                                     data-mdb-toggle="collapse" data-mdb-target="#collapseOne" aria-expanded="true"
-                                    aria-controls="collapseOne">
+                                    aria-controls="collapseOne"><i class="fa-solid fa-circle-check me-2 opacity-70"></i>Buat
+                                    Akun dan Lengkapi Data Diri!!
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                data-mdb-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    Buat akun dengan mengisi semua data yang dibutuhkan, seperti informasi data diri, alamat
+                                    tempat btinggal hingga riwayat pendidikan teralhir. Selanjutnya login melalui alamat
+                                    email dan password yang telah didaftarkan.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button data-mdb-collapse-init class="accordion-button" type="button"
+                                    data-mdb-toggle="collapse" data-mdb-target="#collapseTwo" aria-expanded="true"
+                                    aria-controls="collapseTwo">
+                                    @if ($registration->is_verif == true)
+                                        <i class="fa-solid fa-circle-check me-2 opacity-70"></i>
+                                    @endif
                                     Selesaikan Pendaftaran!!
                                 </button>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                                data-mdb-parent="#accordionExample">
+                            <div id="collapseTwo"
+                                class="accordion-collapse collapse {{ $registration->is_verif == true ? '' : 'show' }}"
+                                aria-labelledby="headingTwo" data-mdb-parent="#accordionExample">
                                 <div class="accordion-body">
                                     Setelah kamu melakukan pendaftaran dengan mengisi informasi akun, data diri
                                     hingga
@@ -53,15 +74,19 @@
                             </div>
                         </div>
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
+                            <h2 class="accordion-header" id="headingThree">
                                 <button data-mdb-collapse-init class="accordion-button collapsed" type="button"
-                                    data-mdb-toggle="collapse" data-mdb-target="#collapseTwo" aria-expanded="false"
-                                    aria-controls="collapseTwo">
+                                    data-mdb-toggle="collapse" data-mdb-target="#collapseThree" aria-expanded="false"
+                                    aria-controls="collapseThree">
+                                    @if ($registration->is_set == true)
+                                        <i class="fa-solid fa-circle-check me-2 opacity-70"></i>
+                                    @endif
                                     Pembayaran Administrasi
                                 </button>
                             </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                data-mdb-parent="#accordionExample">
+                            <div id="collapseThree"
+                                class="accordion-collapse collapse {{ $registration->is_verif == true && $registration->is_set == false ? 'show' : '' }}"
+                                aria-labelledby="headingThree" data-mdb-parent="#accordionExample">
                                 <div class="accordion-body">
                                     Setelah kamu melakukan konfirmasi pendaftaran, maka kamu harus melakuan
                                     pembayaran biaya administrasi awal sesuai dengan <strong>program studi</strong>
@@ -70,20 +95,22 @@
                                     pembayaran akan kamu
                                     terima melalui alamat emal yang kamu daftarkan di awal pada web ini.
                                     <strong>Pastikan
-                                        bukti pembayaranmu disimpan dengan baik.</strong>
+                                        bukti pembayaranmu disimpan dengan baik.</strong> Dan silahkan upload bukti
+                                    pembayaran pada tombol yang tersedia pada kartu pendaftaranmu!
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
+                            <h2 class="accordion-header" id="headingFour">
                                 <button data-mdb-collapse-init class="accordion-button collapsed" type="button"
-                                    data-mdb-toggle="collapse" data-mdb-target="#collapseThree" aria-expanded="false"
-                                    aria-controls="collapseThree">
+                                    data-mdb-toggle="collapse" data-mdb-target="#collapseFour" aria-expanded="false"
+                                    aria-controls="collapseFour">
                                     Daftar Ulang
                                 </button>
                             </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                                data-mdb-parent="#accordionExample">
+                            <div id="collapseFour"
+                                class="accordion-collapse collapse {{ $registration->is_set == true ? 'show' : '' }}"
+                                aria-labelledby="headingFour" data-mdb-parent="#accordionExample">
                                 <div class="accordion-body">
                                     Setelah selesai melakukan pembayaran biaya administrasi awal, langkah selanjutnya adalah
                                     melakukan pendaftaran ulang dengan mengunggah dokumen yang diperlukan, termasuk bukti
@@ -100,12 +127,25 @@
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title">{{ $profile->nama_d }} {{ $profile->nama_b }}</h3>
-                            <h6 class="card-subtitle mb-2 text-muted">No. Reg: <strong>PMBRSM0001</strong></h6>
-                            <p class="card-text">Pastikan kamu sudah melengkapi data diri, memilih jalur dan program
-                                studi
-                                yang sesuai. Jika sudah, klik lanjutkan dengan
-                                mengklik
-                                <strong>"Konfirmasi Daftar"</strong> dan selesaikan biaya administrasi.
+                            <h6 class="card-subtitle mb-2 text-muted">No. Reg: <strong>{{ $no_reg }}</strong>
+                            </h6>
+                            <p class="card-text">
+                                @if ($registration->is_verif == false)
+                                    Pastikan kamu sudah melengkapi data diri, memilih jalur dan program
+                                    studi
+                                    yang sesuai. Jika sudah, klik lanjutkan dengan
+                                    mengklik
+                                    <strong>"Konfirmasi Daftar"</strong> dan selesaikan biaya administrasi.
+                                @elseif($registration->is_verif == true && $registration->is_set == false)
+                                    Cek email yang kamu daftarkan pada akun ini untuk melihat besaran dan tata cara
+                                    pembayaran... <strong>Pastikan
+                                        bukti pembayaranmu disimpan dengan baik.</strong>
+                                @elseif($registration->is_set == true)
+                                    Lakukan pendaftaran ulang dengan mengunggah dokumen yang diperlukan, termasuk bukti
+                                    pembayaran administrasi. Setelah proses pendaftaran ulang selesai, Anda akan menerima
+                                    bukti registrasi dan informasi mengenai jadwal tes yang akan dilakukan.
+                                @endif
+
                             </p>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">Jurusan: <strong
@@ -113,18 +153,33 @@
                                 <li class="list-group-item">Jalur: <strong
                                         class="badge text-bg-secondary">{{ $registration->jalur }}</strong></li>
                                 <li class="list-group-item">Status:
-                                    @if ($registration->tgl_verif == null)
-                                        <strong class="badge text-bg-warning">Belum menyelesaikan daftar</strong>
-                                    @else
-                                        <strong class="badge text-bg-info">Menunggu jadwal test</strong>
+                                    @if ($registration->is_verif == false)
+                                        <strong class="badge text-bg-danger">Belum Konfirmasi</strong>
+                                    @elseif($registration->is_verif == true && $registration->is_set == false)
+                                        <strong class="badge text-bg-warning">Menunggu Pembayaran</strong>
+                                    @elseif($registration->is_set == true)
+                                        <strong class="badge text-bg-info">Menunggu Jadwal Test</strong>
                                     @endif
                                 </li>
                             </ul>
                             <div class="card-body d-flex flex-row-reverse">
-                                <button href="#" class="btn btn-primary px-1 mx-1">Konfirmasi Daftar</button>
-                                <button class="btn btn-light px-1 mx-1" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop">Ubah
-                                    Jurusan/Jalur</button>
+                                @if ($registration->is_verif == false)
+                                    <form action="{{ route('home.verif', $registration->id) }}" method="post">
+                                        @csrf
+                                        <input type="text" name="is_verif" id="is_verif" value="1" hidden>
+                                        <button type="submit" class="btn btn-primary px-1 mx-1">Konfirmasi Daftar</button>
+                                    </form>
+                                    <button class="btn btn-light px-1 mx-1" data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop">Ubah
+                                        Jurusan/Jalur</button>
+                                @elseif($registration->is_verif == true && $registration->is_set == false)
+                                    <a href="{{ route('registration') }}" class="btn btn-primary px-1 mx-1">Upload bukti
+                                        pembayaran</a>
+                                @elseif($registration->is_set == true)
+                                    <a href="{{ route('registration') }}" class="btn btn-primary px-1 mx-1">Daftar
+                                        Ulang</a>
+                                @endif
+
                             </div>
                         </div>
                     </div>

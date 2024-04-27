@@ -61,9 +61,8 @@ class ProfileController extends Controller
         // Cari profil yang akan diupdate
         // Update data dalam database
         $profile = Profile::find($id);
-        // dd($profile);
-        // $profile->update($validatedData);
 
+        dd($request->hasFile('profile_pict'));
         // Mendapatkan file gambar dari request
         if ($request->hasFile('profile_pict')) {
 
