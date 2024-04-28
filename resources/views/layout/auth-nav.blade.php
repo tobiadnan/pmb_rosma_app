@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top p-3" id="mainNav">
     <div class="container-fluid mx-2">
         <button class="navbar-toggler navbar-toggler-right mb-2" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse mx-2" id="navbarNavDropdown">
             {{-- brand --}}
             <a class="navbar-brand" href="/">
-                <img src="img/logo.png" height="32" class="h-8" alt="STMIK Rosma logo" />
+                <img src="storage/logo.png" height="32" class="h-8" alt="STMIK Rosma logo" />
             </a>
             {{-- left --}}
             <div class="navbar-nav me-auto mb-2 mb-lg-0"
