@@ -15,6 +15,7 @@ class Registration extends Model
         'tahun_akademik',
         'jalur',
         'tgl_registration',
+        'reg_fee',
         'is_verif',
         'is_set',
     ];
@@ -28,8 +29,9 @@ class Registration extends Model
     // Relasi dengan model Prody
     public function prodie()
     {
-        return $this->hasMany(Prodie::class, 'kode_prodi');
+        return $this->belongsTo(Prodie::class, 'kode_prodi');
     }
+
 
     // Relasi dengan model Appendix
     public function appendix()

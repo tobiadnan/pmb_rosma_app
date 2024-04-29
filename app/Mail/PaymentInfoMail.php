@@ -13,31 +13,29 @@ class PaymentInfoMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $paymentInfo;
+    protected $profile;
+    protected $prodi;
+    protected $registration;
+    protected $no_reg;
 
-    public function __construct($paymentInfo)
+    public function __construct($profile, $prodi, $registration, $no_reg)
     {
-        $this->paymentInfo = $paymentInfo;
+        $this->profile = $profile;
+        $this->prodi = $prodi;
+        $this->registration = $registration;
+        $this->no_reg = $no_reg;
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
+    public function build()
     {
-        return new Envelope(
-            subject: 'Info Pembayaran Administrasi',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'emails.payment_info',
-        );
+        return $this->view('emails.payment_info')
+            ->with([
+                'profile' => $this->profile,
+                'prodi' => $this->prodi,
+                'registration' => $this->registration,
+                'no_reg' => $this->no_reg,
+            ])
+            ->subject('Info Pembayaran Administrasi');
     }
 
     /**

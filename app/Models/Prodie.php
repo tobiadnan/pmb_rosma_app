@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Prodie extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'kode_prodi';
     protected $fillable = [
         'kode_prodi', 'prodi',
     ];
 
-    // Relasi dengan model Registration
+
     public function registrations()
     {
-        return $this->belongsToMany(Registration::class, 'kode_prodi');
+        return $this->hasMany(Registration::class, 'kode_prodi');
     }
 }
