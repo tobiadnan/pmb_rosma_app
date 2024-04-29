@@ -129,6 +129,28 @@
                             <h3 class="card-title">{{ $profile->nama_d }} {{ $profile->nama_b }}</h3>
                             <h6 class="card-subtitle mb-2 text-muted">No. Reg: <strong>{{ $no_reg }}</strong>
                             </h6>
+                            <div class="d-flex align-items-start flex-column my-3">
+                                <div class="d-flex flex-row">
+                                    <span>Prodi:
+                                        <strong class="badge text-bg-secondary">{{ $prodi->prodi }}</strong>
+                                    </span>
+                                    <span>
+                                        <strong class="badge text-bg-secondary mx-1">{{ $registration->jalur }}</strong>
+                                    </span>
+                                </div>
+                                <span>Status:
+                                    @if ($registration->is_verif == false)
+                                        <strong class="badge text-bg-danger">Belum Konfirmasi</strong>
+                                    @elseif($registration->is_verif == true && $registration->is_set == false)
+                                        <strong class="badge text-bg-warning">Menunggu Pembayaran</strong>
+                                </span>
+                                <span class="list-group-item">Total pembayaran: <strong class="badge text-bg-success">Rp.
+                                        {{ number_format($registration->reg_fee, 0, ',', '.') }}</strong>
+                                @elseif($registration->is_set == true)
+                                    <strong class="badge text-bg-info">Menunggu Jadwal Test</strong>
+                                    @endif
+                                </span>
+                            </div>
                             <p class="card-text">
                                 @if ($registration->is_verif == false)
                                     Pastikan kamu sudah melengkapi data diri, memilih jalur dan program
@@ -147,27 +169,14 @@
                                 @endif
 
                             </p>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Jurusan: <strong
-                                        class="badge text-bg-secondary">{{ $prodi->prodi }}</strong></li>
-                                <li class="list-group-item">Jalur: <strong
-                                        class="badge text-bg-secondary">{{ $registration->jalur }}</strong></li>
-                                <li class="list-group-item">Status:
-                                    @if ($registration->is_verif == false)
-                                        <strong class="badge text-bg-danger">Belum Konfirmasi</strong>
-                                    @elseif($registration->is_verif == true && $registration->is_set == false)
-                                        <strong class="badge text-bg-warning">Menunggu Pembayaran</strong>
-                                    @elseif($registration->is_set == true)
-                                        <strong class="badge text-bg-info">Menunggu Jadwal Test</strong>
-                                    @endif
-                                </li>
-                            </ul>
+
                             <div class="card-body d-flex flex-row-reverse">
                                 @if ($registration->is_verif == false)
                                     <form action="{{ route('home.verif', $registration->id) }}" method="post">
                                         @csrf
                                         <input type="text" name="is_verif" id="is_verif" value="1" hidden>
-                                        <button type="submit" class="btn btn-primary px-1 mx-1">Konfirmasi Daftar</button>
+                                        <button type="submit" class="btn btn-primary px-1 mx-1">Konfirmasi
+                                            Daftar</button>
                                     </form>
                                     <button class="btn btn-light px-1 mx-1" data-bs-toggle="modal"
                                         data-bs-target="#staticBackdrop">Ubah
