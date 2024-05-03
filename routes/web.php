@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AppendixController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\NavController;
@@ -52,6 +53,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home/',  [HomeUserController::class, 'index'])->name('home');
     Route::post('/home/{id}/update',  [HomeUserController::class, 'update'])->name('home.update');
     Route::post('/home/{id}/verif',  [HomeUserController::class, 'verif'])->name('home.verif');
+    Route::post('/home/{id}/store',  [AppendixController::class, 'store'])->name('appendix.store');
 
     Route::get('/registration/',  [RegistrationController::class, 'index'])->name('registration');
     Route::get('/profile/',  [ProfileController::class, 'edit'])->name('profile');

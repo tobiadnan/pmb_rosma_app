@@ -12,6 +12,7 @@ class Registration extends Model
     protected $fillable = [
         'profile_id',
         'kode_prodi',
+        'appendix_id',
         'tahun_akademik',
         'jalur',
         'tgl_registration',

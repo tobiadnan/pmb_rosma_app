@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('appendixes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('registration_id');
-            $table->foreign('registration_id')->references('id')->on('registrations')->onDelete('cascade');
             $table->string('ktp')->nullable();
-            $table->string('kk')->nullable();
-            $table->string('ijazah')->nullable();
-            $table->string('transkip')->nullable();
-            $table->string('bukti_tf')->nullable();
+            $table->string('kk');
+            $table->string('ijazah');
+            $table->string('transkip');
+            $table->string('bukti_tf');
             $table->timestamps();
         });
     }

@@ -132,7 +132,7 @@
                                             for="customFile">Pilih</label>
                                         <button disabled type="button" id="removeBtn"
                                             class="mx-1 btn btn-danger-soft">Hapus</button>
-                                        <p class="text-muted mt-3 mb-0"><span class="me-1">Note:</span>.jpg/jpeg/png
+                                        <p class="text-muted mt-3 mb-0" id="textPict" hidden>.jpg/jpeg/png
                                             dengan maksimal 500KB</p>
                                     </div>
                                 </div>
@@ -215,7 +215,7 @@
                                     </div>
                                     {{-- No. Telepon --}}
                                     <div class="col-md-6">
-                                        <label class="form-label">No. Telepon</label>
+                                        <label class="form-label">No. Telepon/WhatsApp</label>
                                         <input disabled type="tel" class="form-control" name="no_hp"
                                             placeholder="085xxxxxxxx" aria-label="No. Telepon"
                                             value="{{ $profile->no_hp }}" required>
@@ -389,6 +389,7 @@
             var removeBtn = document.getElementById("removeBtn");
             var pilihBtn = document.getElementById("pilihBtn");
             var previewImg = document.getElementById('previewImg');
+            var textPict = document.getElementById('textPict');
 
             // Fungsi untuk mengaktifkan mode Edit
             function enableEditMode() {
@@ -397,6 +398,7 @@
                 btnSubmit.style.display = "block";
                 removeBtn.removeAttribute("disabled")
                 pilihBtn.removeAttribute("disabled")
+                textPict.removeAttribute("hidden")
 
                 // var customFileInput = document.getElementById('customFile');
                 // console.log(customFileInput.files[0]);
@@ -417,6 +419,7 @@
                 btnSubmit.style.display = "none";
                 removeBtn.setAttribute("disabled", true);
                 pilihBtn.setAttribute("disabled", true);
+                textPict.setAttribute("hidden", true);
 
                 // Nonaktifkan semua input
                 var inputs = document.querySelectorAll("input, select, textarea");

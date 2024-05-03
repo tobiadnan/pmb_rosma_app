@@ -10,9 +10,8 @@ class Appendix extends Model
     use HasFactory;
 
     protected  $fillable = [
-        'registration_id',
-        'kk',
         'ktp',
+        'kk',
         'ijazah',
         'transkip',
         'bukti_tf',

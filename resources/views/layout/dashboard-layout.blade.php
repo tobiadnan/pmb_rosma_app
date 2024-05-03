@@ -33,18 +33,18 @@
                     <a href="{{ route('home') }}"
                         class="list-group-item list-group-item-action py-2 {{ request()->routeIs('home') ? 'active' : '' }}"
                         data-mdb-ripple-init>
-                        <i class="fa-solid fa-table-columns fa-fw me-3"></i><span>Dashboard</span>
+                        <i class="fa-solid fa-table-columns fa-fw me-3"></i><span>Home</span>
                     </a>
                     <a href="{{ route('profile') }}"
                         class="list-group-item list-group-item-action py-2 {{ request()->routeIs('profile') ? 'active' : '' }}"
                         data-mdb-ripple-init aria-current="true">
                         <i class="fa-solid fa-address-card fa-fw me-3"></i><span>Data Diri</span>
                     </a>
-                    <a href="{{ route('registration') }}"
+                    {{-- <a href="{{ route('registration') }}"
                         class="list-group-item list-group-item-action py-2 {{ request()->routeIs('registration') ? 'active' : '' }}"
                         data-mdb-ripple-init>
                         <i class="fa-solid fa-check-double fa-fw me-3"></i><span>Daftar Ulang</span>
-                    </a>
+                    </a> --}}
                     <a href="#" class="list-group-item list-group-item-action py-2" data-mdb-ripple-init><i
                             class="fa-solid fa-puzzle-piece fa-fw me-3"></i><span>Test</span>
                     </a>
@@ -80,7 +80,7 @@
                             <span class="mx-2 ml-4 text-sm hidden md:inline-block">@yield('nama')</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('home') }}">Home</a></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}">Keluar</a></li>
                         </ul>
                     </li>

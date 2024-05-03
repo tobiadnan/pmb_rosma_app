@@ -78,14 +78,14 @@
                                 <button data-mdb-collapse-init class="accordion-button collapsed" type="button"
                                     data-mdb-toggle="collapse" data-mdb-target="#collapseThree" aria-expanded="false"
                                     aria-controls="collapseThree">
-                                    @if ($registration->is_set == true)
+                                    @if ($registration->appendix_id != null)
                                         <i class="fa-solid fa-circle-check me-2 opacity-70"></i>
                                     @endif
                                     Pembayaran Administrasi
                                 </button>
                             </h2>
                             <div id="collapseThree"
-                                class="accordion-collapse collapse {{ $registration->is_verif == true && $registration->is_set == false ? 'show' : '' }}"
+                                class="accordion-collapse collapse {{ $registration->is_verif == true && $registration->appendix_id == null ? 'show' : '' }}"
                                 aria-labelledby="headingThree" data-mdb-parent="#accordionExample">
                                 <div class="accordion-body">
                                     Setelah kamu melakukan konfirmasi pendaftaran, maka kamu harus melakuan
@@ -96,7 +96,8 @@
                                     terima melalui alamat emal yang kamu daftarkan di awal pada web ini.
                                     <strong>Pastikan
                                         bukti pembayaranmu disimpan dengan baik.</strong> Dan silahkan upload bukti
-                                    pembayaran pada tombol yang tersedia pada kartu pendaftaranmu!
+                                    pembayaran serta dokumen persyaratan lainnya pada tombol yang tersedia pada kartu
+                                    pendaftaranmu!
                                 </div>
                             </div>
                         </div>
@@ -105,19 +106,18 @@
                                 <button data-mdb-collapse-init class="accordion-button collapsed" type="button"
                                     data-mdb-toggle="collapse" data-mdb-target="#collapseFour" aria-expanded="false"
                                     aria-controls="collapseFour">
-                                    Daftar Ulang
+                                    Menunggu Jadwal Test
                                 </button>
                             </h2>
                             <div id="collapseFour"
-                                class="accordion-collapse collapse {{ $registration->is_set == true ? 'show' : '' }}"
+                                class="accordion-collapse collapse {{ $registration->appendix_id != null ? 'show' : '' }}"
                                 aria-labelledby="headingFour" data-mdb-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    Setelah selesai melakukan pembayaran biaya administrasi awal, langkah selanjutnya adalah
-                                    melakukan pendaftaran ulang dengan mengunggah dokumen yang diperlukan, termasuk bukti
-                                    pembayaran administrasi. Setelah proses pendaftaran ulang selesai, Anda akan menerima
-                                    bukti registrasi dan informasi mengenai jadwal tes yang akan dilakukan. Pastikan untuk
-                                    memperhatikan dan mengikuti petunjuk yang diberikan untuk kelancaran seluruh proses
-                                    pendaftaran.
+                                    Pada tahap ini proses pendaftaranmu sedang direview oleh tim PMB, selanjutnya kamu
+                                    <u>menunggu jadwal test yang nantinya akan dikirimkan melalui whatsapp atau email resmi
+                                        PMB Rosma</u>. Jadi pastikan nomor hp yang kamu daftarkan terhubung dengan
+                                    applikasin
+                                    WhatsApp ya :)
                                 </div>
                             </div>
                         </div>
@@ -141,12 +141,12 @@
                                 <span>Status:
                                     @if ($registration->is_verif == false)
                                         <strong class="badge text-bg-danger">Belum Konfirmasi</strong>
-                                    @elseif($registration->is_verif == true && $registration->is_set == false)
+                                    @elseif($registration->is_verif == true && $registration->appendix_id == null)
                                         <strong class="badge text-bg-warning">Menunggu Pembayaran</strong>
                                 </span>
                                 <span class="list-group-item">Total pembayaran: <strong class="badge text-bg-success">Rp.
                                         {{ number_format($registration->reg_fee, 0, ',', '.') }}</strong>
-                                @elseif($registration->is_set == true)
+                                @elseif($registration->appendix_id != null)
                                     <strong class="badge text-bg-info">Menunggu Jadwal Test</strong>
                                     @endif
                                 </span>
@@ -158,14 +158,14 @@
                                     yang sesuai. Jika sudah, klik lanjutkan dengan
                                     mengklik
                                     <strong>"Konfirmasi Daftar"</strong> dan selesaikan biaya administrasi.
-                                @elseif($registration->is_verif == true && $registration->is_set == false)
+                                @elseif($registration->is_verif == true && $registration->appendix_id == null)
                                     Cek email yang kamu daftarkan pada akun ini untuk melihat besaran dan tata cara
                                     pembayaran... <strong>Pastikan
                                         bukti pembayaranmu disimpan dengan baik.</strong>
-                                @elseif($registration->is_set == true)
-                                    Lakukan pendaftaran ulang dengan mengunggah dokumen yang diperlukan, termasuk bukti
-                                    pembayaran administrasi. Setelah proses pendaftaran ulang selesai, Anda akan menerima
-                                    bukti registrasi dan informasi mengenai jadwal tes yang akan dilakukan.
+                                @elseif($registration->appendix_id != null)
+                                    Terimakasih sudah melakukan pembayaran dan unggah dokumen persyaratan. Pendaftaran kamu
+                                    sedang direview oleh Tim PMB, mohon cek email atau WhatsApp kamu secara berkala untuk
+                                    mendapatkan informasi selanjutnya.
                                 @endif
 
                             </p>
@@ -179,14 +179,14 @@
                                             Daftar</button>
                                     </form>
                                     <button class="btn btn-light px-1 mx-1" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop">Ubah
+                                        data-bs-target="#modalJurusan">Ubah
                                         Jurusan/Jalur</button>
-                                @elseif($registration->is_verif == true && $registration->is_set == false)
-                                    <a href="{{ route('registration') }}" class="btn btn-primary px-1 mx-1">Upload bukti
+                                @elseif($registration->is_verif == true && $registration->appendix_id == null)
+                                    <a href="" class="btn btn-primary px-1 mx-1" data-bs-toggle="modal"
+                                        data-bs-target="#modalBuktiPembayaran">Upload bukti
                                         pembayaran</a>
                                 @elseif($registration->is_set == true)
-                                    <a href="{{ route('registration') }}" class="btn btn-primary px-1 mx-1">Daftar
-                                        Ulang</a>
+                                    <a href="#" class="btn btn-primary px-1 mx-1">Grup WhatsApp</a>
                                 @endif
 
                             </div>
@@ -200,7 +200,8 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    {{-- modal jurusan --}}
+    <div class="modal fade" id="modalJurusan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content">
@@ -256,6 +257,65 @@
             </div>
         </div>
     </div>
+
+    {{-- modal daftar Ulang --}}
+    <div class="modal fade" id="modalBuktiPembayaran" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Upload Dokumen Persyaratan</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body mx-3">
+
+                    <p class="my-2 text-grey">
+                        Mohon untuk mengunggah file persyaratan yang diperlukan serta bukti pembayaran yang telah
+                        dilakukan.
+                        Silakan
+                        unggah file-file tersebut di bawah ini.
+                    </p>
+                    <form id="submitForm" action="{{ route('appendix.store', $registration->id) }}" method="post"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <input type="text" hidden name="registration_id" id="formFile"
+                            value="{{ $registration->id }}">
+                        <div class="mb-2">
+                            <label for="ktp" class="form-label">KTP</label>
+                            <input name="ktp" class="form-control" type="file" id="formFile"
+                                accept=".pdf,.jpeg,.jpg,.png">
+                        </div>
+                        <div class="mb-2">
+                            <label for="kk" class="form-label">Kartu KK*</label>
+                            <input name="kk" class="form-control" type="file" id="formFile"
+                                accept=".pdf,.jpeg,.jpg,.png" required>
+                        </div>
+                        <div class="mb-2">
+                            <label for="ijazah" class="form-label">Ijazah Terakhir*</label>
+                            <input name="ijazah" class="form-control" type="file" id="formFile"
+                                accept=".pdf,.jpeg,.jpg,.png" required>
+                        </div>
+                        <div class="mb-2">
+                            <label for="transkip" class="form-label">Transkip Nilai*</label>
+                            <input name="transkip" class="form-control" type="file" id="formFile"
+                                accept=".pdf,.jpeg,.jpg,.png" required>
+                        </div>
+                        <div class="mb-2">
+                            <label for="bukti_tf" class="form-label">Bukti Pembayaran*</label>
+                            <input name="bukti_tf" class="form-control" type="file" id="formFile"
+                                accept=".pdf,.jpeg,.jpg,.png" required>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{--  End Modal --}}
 @endsection
 
 @section('scripts')

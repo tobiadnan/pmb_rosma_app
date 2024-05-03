@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
             $table->string('kode_prodi');
             $table->foreign('kode_prodi')->references('kode_prodi')->on('prodies')->onDelete('cascade');
+            $table->unsignedBigInteger('appendix_id')->nullable();
+            $table->foreign('appendix_id')->references('id')->on('appendixes')->onDelete('cascade');
             $table->string('tahun_akademik');
             $table->string('jalur');
             $table->decimal('reg_fee', 10, 2);

@@ -1,3 +1,5 @@
+</html>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,8 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Info</title>
-    {{-- <link rel="stylesheet" href="http://127.0.0.1:8000/storage/style/payment.css"> --}}
-
+    <link rel="stylesheet" href="http://127.0.0.1:8000/storage/style/payment.css">
     <style>
         @charset "UTF-8";
 
@@ -581,7 +582,6 @@
             height: auto;
         }
     </style>
-
 </head>
 
 <body>
@@ -594,28 +594,31 @@
                             <div class="col-md-10 mb-4 mb-md-0">
                                 <div class="card p-3 bg-body-tertiary">
                                     <img src="http://127.0.0.1:8000/storage/logo.png" style="width: 46px"
-                                        alt="Logo STMIK Rosma" class="img-fluid logo mb-2 mx-auto d-block">
+                                        alt="Logo Perusahaan" class="img-fluid logo mb-2 mx-auto d-block">
                                     <h1 class="card-title mb-3">Informasi Pembayaran</h1>
 
-                                    <h4 class="mb-0">{{ $no_reg }}</h4>
-                                    <h5 class="mb-3 text-secondary">{{ $profile->nama_d }} {{ $profile->nama_b }}</h5>
+                                    <h4 class="mb-0">no_reg</h4>
+                                    <h5 class="mb-3 text-secondary">profile nama_d profile nama_b</h5>
 
                                     <span class="fw-bold">Detail Pendaftaran</span>
                                     <div class="d-flex justify-content-between mt-2 custom-border">
-                                        <span class="text-start mb-2">Program Studi</span> <span
-                                            class="text-end">{{ $prodi->prodi }}</span>
+                                        <span class="text-start mb-2">Program Studi</span> <span class="text-end">prodi
+                                            prodi</span>
                                     </div>
                                     <div class="d-flex justify-content-between custom-border">
                                         <span class="text-start my-2">Jalur</span> <span
-                                            class="text-end my-2">{{ $registration->jalur }}</span>
+                                            class="text-end my-2">registration
+                                            jalur</span>
                                     </div>
                                     <div class="d-flex justify-content-between custom-border">
                                         <span class="text-start my-2">Tahun Akademik</span> <span
-                                            class="text-end my-2">{{ $registration->tahun_akademik }}</span>
+                                            class="text-end my-2">registration
+                                            tahun_akademik</span>
                                     </div>
                                     <div class="d-flex justify-content-between custom-border">
                                         <span class="text-start my-2">Registration date</span> <span
-                                            class="text-end my-2">{{ $registration->created_at }}</span>
+                                            class="text-end my-2">registration
+                                            created_at</span>
                                     </div>
 
                                     <span class="fw-bold mt-3">Detail Pembayaran</span>
@@ -632,14 +635,13 @@
                                     </div>
                                     <div class="d-flex justify-content-between custom-border">
                                         <span class="text-start my-2">Biaya Registrasi</span> <span
-                                            class="text-end my-2">Rp
-                                            {{ number_format($registration->reg_fee, 0, ',', '.') }}</span>
+                                            class="text-end my-2">Rp.
+                                            1000000</span>
                                     </div>
 
                                     <div class="d-flex justify-content-between mt-2">
                                         <span class="text-start">Total Pembayaran</span>
-                                        <span class="text-success text-end">Rp.
-                                            {{ number_format($registration->reg_fee, 0, ',', '.') }}
+                                        <span class="text-success text-end">Rp. 1000000
                                         </span>
                                     </div>
                                     <hr>
