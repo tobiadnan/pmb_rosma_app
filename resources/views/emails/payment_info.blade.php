@@ -648,7 +648,7 @@
                                         dokumen
                                         pendukung lainnya.
                                     </span>
-                                    <a href="http://127.0.0.1:8000/registration" class="mt-3 btn btn-primary">Upload
+                                    <a href="http://127.0.0.1:8000/home" class="mt-3 btn btn-primary">Upload
                                         bukti pembayaran</a>.
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\NavController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,6 +59,8 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/registration/',  [RegistrationController::class, 'index'])->name('registration');
     Route::get('/profile/',  [ProfileController::class, 'edit'])->name('profile');
     Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::post('/home/', [TestController::class, '__invoke'])->name('test.card');
 });
 
 // Admin Access Only
