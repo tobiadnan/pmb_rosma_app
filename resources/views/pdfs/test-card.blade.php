@@ -6,98 +6,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Test-Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            padding: 0;
+            margin: 0;
+        }
+
+        .content {
+            padding: 20px;
+            /* Pastikan padding-bottom lebih besar dari tinggi footer */
+            padding-bottom: 60px;
+        }
+
+        table {
+            width: 100%;
+            /* Lebar tabel 100% dari kontainer */
+            table-layout: fixed;
+            /* Mengatur lebar kolom secara merata */
+        }
+
+        .card-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px dotted #989898;
+        }
+
+        .card-table th,
+        .card-table td {
+            padding: 7px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .title {
+            color: black;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1px
+        }
+
+        .subtitle {
+            color: #9e9b9b;
+            font-size: 1.5rem;
+            margin-top: 1px
+        }
+
+        .footer {
+            position: fixed;
+            color: grey;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #f0f0f000;
+            padding: 10px 20px;
+            text-align: center;
+            border-top: 1px solid #ccc;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-3 m-2" style="width: 135px; height: 135px; overflow: hidden;">
-                    <img id="previewImg" src="{{ asset('storage/profiles/' . $profile->profile_pict) }}"
-                        alt="Profile Pict" style="width: 135px; height: 135px; object-fit: cover;">
-                </div>
-                <div class="col-9">
-                    <h3 class="card-title">{{ $profile->nama_d }} {{ $profile->nama_b }}</h3>
-                    @if ($registration->is_set == true)
-                        <h6 class="card-subtitle mb-2 text-muted">No. Test: <strong>Test1235</strong>
-                        </h6>
-                    @else
-                        <h6 class="card-subtitle mb-2 text-muted">No. Reg: <strong>{{ $no_reg }}</strong>
-                        </h6>
-                    @endif
-                    <div class="d-flex align-items-start flex-column my-3">
-                        <div class="">
-                            <span>Prodi:
-                                <strong class="badge text-bg-secondary">{{ $prodi->prodi }}</strong>
-                            </span>
-                            <span>
-                                <strong class="badge text-bg-secondary mx-1">{{ $registration->jalur }}</strong>
-                            </span>
-                        </div>
-                        <span>Status:
-                            @if ($registration->is_verif == false)
-                                <strong class="badge text-bg-danger">Belum Konfirmasi</strong>
-                            @elseif($registration->is_verif == true && $registration->appendix_id == null)
-                                <strong class="badge text-bg-warning">Menunggu Pembayaran</strong>
-                        </span>
-                        <span class="list-group-item">Total pembayaran: <strong class="badge text-bg-success">Rp.
-                                {{ number_format($registration->reg_fee, 0, ',', '.') }}</strong>
-                        @elseif($registration->appendix_id != null && $registration->is_set == false)
-                            <strong class="badge text-bg-info">Menunggu Jadwal Test</strong>
-                        @elseif($registration->appendix_id != null && $registration->is_set == true)
-                            <strong class="badge text-bg-success">Pelaksanaan Test</strong>
-                            @endif
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <p class="card-text">
-                @if ($registration->is_verif == false)
-                    Pastikan kamu sudah melengkapi data diri, memilih jalur dan program
-                    studi
-                    yang sesuai. Jika sudah, klik lanjutkan dengan
-                    mengklik
-                    <strong>"Konfirmasi Daftar"</strong> dan selesaikan biaya administrasi.
-                @elseif($registration->is_verif == true && $registration->appendix_id == null)
-                    Cek email yang kamu daftarkan pada akun ini untuk melihat besaran dan tata cara
-                    pembayaran... <strong>Pastikan
-                        bukti pembayaranmu disimpan dengan baik.</strong>
-                @elseif($registration->appendix_id != null && $registration->is_set == false)
-                    Terimakasih sudah melakukan pembayaran dan unggah dokumen persyaratan. Pendaftaran kamu
-                    sedang direview oleh Tim PMB, mohon cek email atau WhatsApp kamu secara berkala untuk
-                    mendapatkan informasi selanjutnya.
-                @elseif($registration->appendix_id != null && $registration->is_set == true)
-                    Selamat! Pendaftaran kamu telah berhasil diverifikasi. Kamu telah terdaftar untuk
-                    mengikuti tes dengan nomor tes <strong>{ Nomor Test }</strong>. Kami harap kamu dapat
-                    mencetak kartu tes sebagai bukti pendaftaran kamu dan untuk akses ke tes yang akan
-                    datang. Terima kasih atas partisipasi kamu!<br><br>
-                    Seluruh informasi test akan diberikan pada grup WhatsApp yang telah kami kirimkan, atau
-                    jika kamu belum menerima undangan Grup, kamu bisa bergabung melalui tombol di bawah
-                @endif
+    <div class="content">
 
-            </p>
+        <div class="center">
+            <img src="{{ public_path('storage/logo.png') }}" alt="STMIK Logo" style="max-width: 100px;">
+            <p class="title">Kartu Test PMB {{ date('Y') }}/{{ date('Y') + 1 }}</p>
+            <p class="subtitle">{{ $no_reg }}</p>
 
-            <div class="card-body d-flex flex-row-reverse">
-                @if ($registration->is_verif == false)
-                    <form action="{{ route('home.verif', $registration->id) }}" method="post">
-                        @csrf
-                        <input type="text" name="is_verif" id="is_verif" value="1" hidden>
-                        <button type="submit" class="btn btn-primary px-1 mx-1">Konfirmasi
-                            Daftar</button>
-                    </form>
-                    <button class="btn btn-light px-1 mx-1" data-bs-toggle="modal" data-bs-target="#modalJurusan">Ubah
-                        Jurusan/Jalur</button>
-                @elseif($registration->is_verif == true && $registration->appendix_id == null)
-                    <a href="" class="btn btn-primary px-1 mx-1" data-bs-toggle="modal"
-                        data-bs-target="#modalBuktiPembayaran">Upload bukti
-                        pembayaran</a>
-                @elseif($registration->is_set == true)
-                    <a href="#" class="btn btn-success px-1 mx-1">Gabung Grup WhatsApp</a>
-                    <a href="#" class="btn btn-danger px-1 mx-1">Cetak Kartu Test</a>
-                @endif
-
-            </div>
         </div>
+        <table class="card-table" style="margin: 0 auto;">
+            <tr>
+                <td style="text-align: right;">Nama Lengkap</td>
+                <td><strong>{{ $profile->nama_d }} {{ $profile->nama_b }} </strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Program Studi</td>
+                <td><strong>{{ $prodi->prodi }} </strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">No. Test</td>
+                <td><strong>TEST123456 </strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Waktu Test</td>
+                <td><strong>09:00 WIB | 12 Desember 2024 </strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Tempat Pelaksanaan Test</td>
+                <td><strong>Aula Kampus Utama STMIK Rosma </strong></td>
+            </tr>
+            <!-- Sisipkan baris-baris data lainnya di sini -->
+        </table>
+
+        <p style="text-align: justify;">
+            Selamat! Pendaftaran kamu telah berhasil diverifikasi. Kamu telah terdaftar untuk mengikuti tes dengan
+            nomor tes <strong>{ Nomor Test }</strong>. Kami harap kamu dapat mencetak kartu tes sebagai bukti
+            pendaftaran kamu dan untuk akses ke tes yang akan datang. Terima kasih atas partisipasi kamu!
+
+            Seluruh informasi test akan diberikan pada grup WhatsApp yang telah kami kirimkan, atau jika kamu belum
+            menerima undangan Grup, kamu bisa menghubungi contact center panitia PMB.
+        </p>
+    </div>
+    <div class="footer">
+        PMB STMIK Rosma Karawang | 0857-7777-7777 | pmb@rosma.ac.id <span class="pagenum"></span>
     </div>
 
 </body>

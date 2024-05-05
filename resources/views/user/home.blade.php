@@ -111,10 +111,9 @@
                                     pembayaran</a>
                             @elseif($registration->is_set == true)
                                 <a href="#" class="btn btn-success px-1 mx-1">Gabung Grup WhatsApp</a>
-                                <form action="{{ route('test.card') }}" method="POST" target="_blank">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger px-1 mx-1">Cetak Kartu Test</button>
-                                </form>
+                                <a href="{{ route('test.card.download') }}" target="_blank" rel="noopener noreferrer"
+                                    class="btn btn-danger px-1 mx-1">Cetak Kartu
+                                    Test</a>
                             @endif
 
                         </div>

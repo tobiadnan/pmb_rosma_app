@@ -60,7 +60,8 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/profile/',  [ProfileController::class, 'edit'])->name('profile');
     Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
 
-    Route::post('/home/', [TestController::class, '__invoke'])->name('test.card');
+    Route::get('/test-card/', [TestController::class, 'index'])->name('test.card');
+    Route::get('/test-card/download', [TestController::class, 'download'])->name('test.card.download');
 });
 
 // Admin Access Only
