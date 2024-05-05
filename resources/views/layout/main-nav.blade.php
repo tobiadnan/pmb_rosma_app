@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse mx-2" id="navbarNavDropdown">
             {{-- brand --}}
             <a class="navbar-brand" href="/">
-                <img src="storage/logo.png" height="52" class="h-8" alt="STMIK Rosma logo" />
+                <img src="{{ asset('storage/logo.png') }}" height="52" class="h-8" alt="STMIK Rosma logo" />
             </a>
             {{-- left --}}
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
