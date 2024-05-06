@@ -8,13 +8,6 @@
     </style>
 @endsection
 @section('content')
-    {{-- <div class="position-fixed end-0 px-3" style="width: 50%; z-index: 1050;" id="custom-alert">
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Perhatian!!</strong> Hi {{ $profile->nama_d }}, Sepertinya kamu belum menyelesaikan registrasi. Pastikan
-            kamu sudah melengkapi dan memilih jalur dan program studi yang sesuai dan klik "Selesaikan Daftar" yah..
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div> --}}
     <div class="position-fixed end-0 px-3" style="width: 50%; z-index: 1050;display: none;" id="alertContainer">
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Success!</strong> {{ session('success') }}
@@ -56,7 +49,7 @@
                                         @elseif($registration->is_verif == true && $registration->appendix_id == null)
                                             <strong class="badge text-bg-warning">Menunggu Pembayaran</strong>
                                     </span>
-                                    <span class="list-group-item">Total pembayaran: <strong
+                                    <span class="list-group-item">Biaya administrasi: <strong
                                             class="badge text-bg-success">Rp.
                                             {{ number_format($registration->reg_fee, 0, ',', '.') }}</strong>
                                     @elseif($registration->appendix_id != null && $registration->is_set == false)
@@ -96,17 +89,15 @@
 
                         <div class="card-body d-flex flex-row-reverse">
                             @if ($registration->is_verif == false)
-                                <form action="{{ route('home.verif', $registration->id) }}" method="post">
-                                    @csrf
-                                    <input type="text" name="is_verif" id="is_verif" value="1" hidden>
-                                    <button type="submit" class="btn btn-primary px-1 mx-1">Konfirmasi
-                                        Daftar</button>
-                                </form>
+                                <button type="submit" class="btn btn-danger px-1 mx-1" data-bs-toggle="modal"
+                                    data-bs-target="#modalKonfirmasidaftar">Konfirmasi
+                                    Daftar</button>
+
                                 <button class="btn btn-light px-1 mx-1" data-bs-toggle="modal"
                                     data-bs-target="#modalJurusan">Ubah
                                     Jurusan/Jalur</button>
                             @elseif($registration->is_verif == true && $registration->appendix_id == null)
-                                <a href="" class="btn btn-primary px-1 mx-1" data-bs-toggle="modal"
+                                <a href="" class="btn btn-warning px-1 mx-1" data-bs-toggle="modal"
                                     data-bs-target="#modalBuktiPembayaran">Upload bukti
                                     pembayaran</a>
                             @elseif($registration->is_set == true)
@@ -358,6 +349,36 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal konfirmasi daftar-->
+    <div class="modal fade" id="modalKonfirmasidaftar" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Konfirmasi Pendaftaran??
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('home.verif', $registration->id) }}" method="post">
+                        @csrf
+                        <input type="text" name="is_verif" id="is_verif" value="1" hidden>
+                        Pastikan kamu sudah yakin dengan pilihan jurusan dan jalur pendaftaran. <strong>Setelah ini data
+                            diri dan pilihan program studi tidak bisa diubah kembali</strong>. Jika setelah ini ada
+                        perubahan, harap hubungi
+                        kontak
+                        center PMB.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">Iya, Konfirmasi!!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     {{--  End Modal --}}
 @endsection

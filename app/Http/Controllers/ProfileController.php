@@ -46,10 +46,12 @@ class ProfileController extends Controller
     public function edit(Request $request)
     {
         // Ambil data user dari database
-        $profile = Profile::where('id', $request->user()->id)->first();
+        $profile = $request->user()->profile;
+        $registration = $profile->registrations()->first();
 
         return view('user.profile', [
             'profile' => $profile,
+            'registration' => $registration,
         ]);
     }
 
@@ -101,13 +103,5 @@ class ProfileController extends Controller
 
         // Redirect atau tampilkan respons sesuai kebutuhan
         return redirect()->route('profile')->with('success', 'Profil berhasil diperbarui.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

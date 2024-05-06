@@ -307,7 +307,11 @@
                                 <button type="submit" id="btnSubmit" class="btn btn-primary btn-lg"
                                     style="display: none;">Simpan</button>
                                 <!-- Tombol Edit -->
-                                <button type="button" id="btnEdit" class="btn btn-warning btn-lg">Edit</button>
+
+                                @if ($registration->is_verif == false)
+                                    <button type="button" id="btnEdit" class="btn btn-warning btn-lg">Edit</button>
+                                @endif
+
 
                             </div>
                         </div>

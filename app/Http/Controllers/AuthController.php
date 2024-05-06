@@ -61,7 +61,6 @@ class AuthController extends Controller
             'is_admin' => "0"
         ]);
 
-        dd($user->id);
 
         // Mendapatkan file gambar dari request
         if ($request->hasFile('profile_pict')) {

@@ -60,7 +60,6 @@
                         <li><a class="dropdown-item" href="/kip">KIP</a></li>
                         <li><a class="dropdown-item" href="/kacer">Karawang Cerdas</a></li>
                     </ul>
-
                 </div>
             </div>
         </div>
@@ -71,22 +70,21 @@
                     <!-- Avatar -->
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false" id="navbarDropdownMenuLink">
-                            @if (auth()->user() && auth()->user()->is_admin == 1)
-                                <span class="mx-2 ml-4 text-sm hidden md:inline-block">Admin PMB</span>
-                            @else
-                                <img src="{{ asset('storage/profiles/' . $profile->profile_pict) }}" class="rounded-circle"
-                                    height="32" alt="Profile pict" loading="lazy" />
+                            aria-expanded="false">
+                            @if (auth()->user()->is_admin == 1)
+                                Admin PMB
                         </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="{{ route('admin.home') }}">Home</a>
+                        @else
+                            <img src="{{ asset('storage/profiles/' . $profile->profile_pict) }}" class="rounded-circle"
+                                height="32" alt="Profile pict" loading="lazy" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="{{ route('home') }}">Home</a>
                 @endif
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                    @if (auth()->user()->is_admin == 1)
-                        <a class="dropdown-item" href="{{ route('admin.home') }}">Home</a>
-                    @else
-                        <a class="dropdown-item" href="{{ route('home') }}">Home</a>
-                    @endif
-                    <a class="dropdown-item" href="{{ route('logout') }}">Keluar</a>
-                </div>
+                <a class="dropdown-item" href="{{ route('logout') }}">Keluar</a>
+                </ul>
             </div>
         @else
             <a class="nav-link mr-0" href="{{ route('login') }}">Masuk</a>
@@ -95,7 +93,6 @@
             @endif
         @endauth
         @endif
-
     </div>
     </div>
 </nav>

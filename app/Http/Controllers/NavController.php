@@ -10,7 +10,7 @@ class NavController extends Controller
     public function index(Request $request)
     {
         if (auth()->check()) {
-            $profile = Profile::where('id', $request->user()->id)->first();
+            $profile = $request->user()->profile;
             return view('main-page', [
                 'profile' => $profile,
             ]);
