@@ -15,6 +15,6 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         // Ambil data user dari database
-        return view('admin/dashboard');
+        return view('admin.home');
     }
 }

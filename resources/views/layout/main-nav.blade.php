@@ -69,24 +69,33 @@
             @if (Route::has('login'))
                 @auth
                     <!-- Avatar -->
-                    <div class="dropdown">
+                    <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <img src="{{ asset('storage/profiles/' . $profile->profile_pict) }}" class="rounded-circle"
-                                height="32" alt="" loading="lazy" /></a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ route('home') }}">Home</a></li>
-                            <li><a class="dropdown-item" href="{{ route('logout') }}">Keluar</a></li>
-                        </ul>
-                    </div>
-                @else
-                    <a class="nav-link mr-0" href="{{ route('login') }}">Masuk</a>
-                    @if (Route::has('register'))
-                        <a class="nav-link btn btn-info p-2" style="color: white" href="{{ route('register') }}">Daftar</a>
+                            aria-expanded="false" id="navbarDropdownMenuLink">
+                            @if (auth()->user() && auth()->user()->is_admin == 1)
+                                <span class="mx-2 ml-4 text-sm hidden md:inline-block">Admin PMB</span>
+                            @else
+                                <img src="{{ asset('storage/profiles/' . $profile->profile_pict) }}" class="rounded-circle"
+                                    height="32" alt="Profile pict" loading="lazy" />
+                        </a>
+                @endif
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                    @if (auth()->user()->is_admin == 1)
+                        <a class="dropdown-item" href="{{ route('admin.home') }}">Home</a>
+                    @else
+                        <a class="dropdown-item" href="{{ route('home') }}">Home</a>
                     @endif
-                @endauth
+                    <a class="dropdown-item" href="{{ route('logout') }}">Keluar</a>
+                </div>
+            </div>
+        @else
+            <a class="nav-link mr-0" href="{{ route('login') }}">Masuk</a>
+            @if (Route::has('register'))
+                <a class="nav-link btn btn-info p-2" style="color: white" href="{{ route('register') }}">Daftar</a>
             @endif
+        @endauth
+        @endif
 
-        </div>
+    </div>
     </div>
 </nav>

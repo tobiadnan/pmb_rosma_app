@@ -61,6 +61,8 @@ class AuthController extends Controller
             'is_admin' => "0"
         ]);
 
+        dd($user->id);
+
         // Mendapatkan file gambar dari request
         if ($request->hasFile('profile_pict')) {
             $image = $request->file('profile_pict');
@@ -151,7 +153,7 @@ class AuthController extends Controller
 
         // dd(auth()->user()->is_admin);
         if (auth()->user()->is_admin) {
-            return redirect()->route('admin/home');
+            return redirect()->route('admin.home');
         } else {
             $profile = Profile::where('user_id', auth()->id())->first();
             // dd($profile->nama_d);

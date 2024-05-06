@@ -66,5 +66,5 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 
 // Admin Access Only
 Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(function () {
-    Route::get('/home',  [AdminController::class, 'index'])->name('admin/home');
+    Route::get('/home',  [AdminController::class, 'index'])->name('admin.home');
 });
