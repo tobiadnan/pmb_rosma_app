@@ -596,51 +596,45 @@
                                     <img src="http://127.0.0.1:8000/storage/logo.png" style="width: 46px"
                                         alt="Logo STMIK Rosma" class="img-fluid logo mb-2 mx-auto d-block">
                                     <h1 class="card-title mb-3">Informasi Pembayaran</h1>
-
+                                    <hr>
+                                    <h2 class="mb-3 text-secondary">{{ $profile->nama_d }} {{ $profile->nama_b }}</h2>
                                     <h4 class="mb-0">{{ $no_reg }}</h4>
-                                    <h5 class="mb-3 text-secondary">{{ $profile->nama_d }} {{ $profile->nama_b }}</h5>
 
-                                    <span class="fw-bold">Detail Pendaftaran</span>
                                     <div class="d-flex justify-content-between mt-2 custom-border">
-                                        <span class="text-start mb-2">Program Studi</span> <span
-                                            class="text-end">{{ $prodi->prodi }}</span>
+                                        <h4 class="fw-bold">Detail Pendaftaran</h4>
+                                        <span class="text-start mb-2">Program Studi: </span> <span
+                                            class="text-end"><strong>{{ $prodi->prodi }}</strong> |
+                                            <strong>{{ $registration->jalur }}</strong></span>
                                     </div>
                                     <div class="d-flex justify-content-between custom-border">
-                                        <span class="text-start my-2">Jalur</span> <span
-                                            class="text-end my-2">{{ $registration->jalur }}</span>
+                                        <span class="text-start my-2">Tahun Akademik: </span> <span
+                                            class="text-end my-2"><strong>{{ $registration->tahun_akademik }}</strong></span>
                                     </div>
                                     <div class="d-flex justify-content-between custom-border">
-                                        <span class="text-start my-2">Tahun Akademik</span> <span
-                                            class="text-end my-2">{{ $registration->tahun_akademik }}</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between custom-border">
-                                        <span class="text-start my-2">Registration date</span> <span
-                                            class="text-end my-2">{{ $registration->created_at }}</span>
+                                        <span class="text-start my-2">Registration date: </span> <span
+                                            class="text-end my-2"><strong>{{ $registration->created_at }}</strong></span>
                                     </div>
 
-                                    <span class="fw-bold mt-3">Detail Pembayaran</span>
                                     <div class="d-flex justify-content-between mt-2 custom-border">
-                                        <span class="text-start mb-2">Bank</span> <span class="text-end">BNI</span>
+                                        <h4 class="fw-bold mt-3">Detail Pembayaran</h4>
+                                        <span class="text-start mb-2">Bank: <strong><u>BNI</u></strong></span>
                                     </div>
                                     <div class="d-flex justify-content-between custom-border">
-                                        <span class="text-start my-2">No. Rekening</span> <span
-                                            class="text-end my-2">121211212</span>
+                                        <span class="text-start my-2">No. Rekening:
+                                            <strong><u>123456789</u></strong></span>
                                     </div>
                                     <div class="d-flex justify-content-between custom-border">
-                                        <span class="text-start my-2">Atas Nama</span> <span class="text-end my-2">STMIK
-                                            Rosma</span>
+                                        <span class="text-start my-2">Atas Nama: <strong><u>PMB STMIK
+                                                    Rosma</u></strong></span>
                                     </div>
                                     <div class="d-flex justify-content-between custom-border">
-                                        <span class="text-start my-2">Biaya Registrasi</span> <span
-                                            class="text-end my-2">Rp
-                                            {{ number_format($registration->reg_fee, 0, ',', '.') }}</span>
+                                        <span class="text-start my-2">Biaya Registrasi: Rp
+                                            <strong><u>{{ number_format($registration->reg_fee, 0, ',', '.') }}</u></strong></span>
                                     </div>
 
                                     <div class="d-flex justify-content-between mt-2">
-                                        <span class="text-start">Total Pembayaran</span>
-                                        <span class="text-success text-end">Rp.
-                                            {{ number_format($registration->reg_fee, 0, ',', '.') }}
-                                        </span>
+                                        <span class="text-start my-2">Total Pembayaran: Rp
+                                            <strong><u>{{ number_format($registration->reg_fee, 0, ',', '.') }}</u></strong></span>
                                     </div>
                                     <hr>
                                     <span class="text-grey">Terima kasih atas pembayaran Anda.</span>

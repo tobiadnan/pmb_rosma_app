@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="author" content="" />
     <title>@yield('title')PMB Rosma</title>
-    <link rel="icon" type="image/x-icon" href="../img/logo.png" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('storage/logo.png') }}" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->

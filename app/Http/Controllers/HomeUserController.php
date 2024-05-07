@@ -67,6 +67,12 @@ class HomeUserController extends Controller
         $registration = Registration::find($id);
         $profile = $request->user()->profile;
 
+
+        if ($registration) {
+            $prodi = $registration->prodie;
+        }
+
+        // update is_verif
         $registration->update([
             'is_verif' => $request->is_verif,
         ]);
@@ -77,9 +83,6 @@ class HomeUserController extends Controller
             $no_reg = '-';
         }
 
-        if ($registration) {
-            $prodi = $registration->prodie;
-        }
         // Dispatch job dengan melewatkan data
         SendPaymentInfoMail::dispatch($profile, $prodi, $registration, $no_reg);
 
