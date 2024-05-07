@@ -118,7 +118,7 @@
                         <div class="col-md-3">
                             <div class="bg-secondary-soft pt-5 pb-2 rounded">
                                 <div class="row g-3">
-                                    <h4 class="mb-4 mt-0 text-center">Pilih Foto Profile</h4>
+                                    <h4 class="mb-4 mt-0 text-center">Foto Profile</h4>
                                     <div class="text-center">
                                         <div id="imageContainer" class="square position-relative display-2 mb-3">
                                             <img disabled id="previewImg"

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppendixController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeAdminController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\NavController;
 use App\Http\Controllers\ProfileController;
@@ -66,5 +66,5 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 
 // Admin Access Only
 Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(function () {
-    Route::get('/home',  [AdminController::class, 'index'])->name('admin.home');
+    Route::get('/home',  [HomeAdminController::class, 'index'])->name('admin.home');
 });

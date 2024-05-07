@@ -114,9 +114,6 @@ class AuthController extends Controller
             $reg_fee = 250000; // Default jika program studi tidak terdefinisi
         }
 
-
-
-
         // save to registrations
         $registration = Registration::create([
             'kode_prodi' => $prodi,
