@@ -43,10 +43,14 @@
                         Program Studi
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('content.ti') }}">Teknik Informatika</a></li>
-                        <li><a class="dropdown-item" href="{{ route('content.si') }}">Sistem Informasi</a></li>
-                        <li><a class="dropdown-item" href="{{ route('content.mi') }}">Manajemen Informatika</a></li>
-                        <li><a class="dropdown-item" href="{{ route('content.ka') }}">Komputerisasi Akuntansi</a></li>
+                        <li><a class="dropdown-item" href="{{ route('content.show', ['content' => 'ti']) }}">Teknik
+                                Informatika</a></li>
+                        <li><a class="dropdown-item" href="{{ route('content.show', ['content' => 'si']) }}">Sistem
+                                Informasi</a></li>
+                        <li><a class="dropdown-item" href="{{ route('content.show', ['content' => 'mi']) }}">Manajemen
+                                Informatika</a></li>
+                        <li><a class="dropdown-item"
+                                href="{{ route('content.show', ['content' => 'ka']) }}">Komputerisasi Akuntansi</a></li>
                     </ul>
                 </div>
                 <div class="nav-item dropdown">

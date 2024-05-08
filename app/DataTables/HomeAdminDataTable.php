@@ -22,6 +22,12 @@ class HomeAdminDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'homeadmin.action')
+            ->addColumn('nama', function ($row) {
+                return $row->nama_d . ' ' . $row->nama_b;
+            })
+            ->addColumn('regDate', function ($row) {
+                return $row->profile->created_at->format('d M Y');
+            })
             ->setRowId('id');
     }
 
@@ -30,7 +36,11 @@ class HomeAdminDataTable extends DataTable
      */
     public function query(Registration $model): QueryBuilder
     {
-        return $model->newQuery()->with('profile');
+        // return $model->newQuery()->with(['profile', 'prodie']);
+        return $model->newQuery()
+            ->join('profiles', 'registrations.profile_id', '=', 'profiles.id')
+            ->join('prodies', 'registrations.kode_prodi', '=', 'prodies.kode_prodi')
+            ->select('*');
     }
     /**
      * Optional method if you want to use the html builder.
@@ -42,17 +52,14 @@ class HomeAdminDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(3, 'desc')
+            ->orderBy(4, 'desc')
             ->parameters([
                 'columnDefs' => [
                     [
                         'targets' => 1, // Kolom 'id' (urutan angka)
                         'render' => 'function (data, type, row, meta) { return meta.row + 1; }', // Render urutan angka
                     ],
-                    [
-                        'targets' => 3, // Index kolom 'profile.created_at'
-                        'render' => 'function (data) { return moment(data).format("DD MMMM YYYY"); }',
-                    ],
+
                 ],
                 'buttons' => [
                     'excel',
@@ -87,13 +94,16 @@ class HomeAdminDataTable extends DataTable
             Column::make('id')->title('No')
                 ->searchable(false)
                 ->orderable(false),
-            Column::make('profile.nama_d'),
-            Column::make('profile.created_at')
+            Column::computed('nama')
+                ->searchable(true)
+                ->orderable(true),
+            Column::make('kota')->title('Alamat'),
+            Column::computed('regDate')
+                ->searchable(true)
+                ->orderable(true)
                 ->title('Registration Date'),
-            Column::make('kode_prodi')
-                ->title('Program Studi'),
-            Column::make('jalur')
-                ->title('Jalur'),
+            Column::make('prodi')->title('Program Studi'),
+            Column::make('jalur')->title('Jalur'),
         ];
     }
 

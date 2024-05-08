@@ -23,7 +23,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',  [NavController::class, 'index'])->name('main_page');
 
-Route::prefix('prodi')->group(function () {
+Route::prefix('content')->group(function () {
+    Route::get('/prodi/{content}',  [NavController::class, 'showContentProdi'])->name('content.show');
+
     Route::get('ti', [NavController::class, 'ti'])->name('content.ti');
     Route::get('si', [NavController::class, 'si'])->name('content.si');
     Route::get('mi', [NavController::class, 'mi'])->name('content.mi');
