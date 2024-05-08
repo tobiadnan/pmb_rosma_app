@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeAdminController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\NavController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterAdminController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -69,4 +70,5 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 // Admin Access Only
 Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(function () {
     Route::get('/home',  [HomeAdminController::class, 'index'])->name('admin.home');
+    Route::get('/register',  [RegisterAdminController::class, 'index'])->name('admin.register-table');
 });

@@ -37,6 +37,11 @@
                             data-mdb-ripple-init>
                             <i class="fa-solid fa-table-columns fa-fw me-3"></i><span>Dashboard</span>
                         </a>
+                        <a href="{{ route('admin.register-table') }}"
+                            class="list-group-item list-group-item-action py-2 {{ request()->routeIs('admin.register-table') ? 'active' : '' }}"
+                            data-mdb-ripple-init>
+                            <i class="fa-solid fa-table-columns fa-fw me-3"></i><span>Register</span>
+                        </a>
                     @else
                         <a href="{{ route('home') }}"
                             class="list-group-item list-group-item-action py-2 {{ request()->routeIs('home') ? 'active' : '' }}"
