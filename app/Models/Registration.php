@@ -12,25 +12,31 @@ class Registration extends Model
     protected $fillable = [
         'profile_id',
         'kode_prodi',
+        'appendix_id',
         'tahun_akademik',
         'jalur',
-        'kk',
-        'ktp',
-        'ijazah',
-        'transkip',
-        'bukti_tf',
-        'tgl_verif',
+        'tgl_registration',
+        'reg_fee',
+        'is_verif',
+        'is_set',
     ];
 
     // Relasi dengan model Profile
     public function profile()
     {
-        return $this->belongsTo(Profile::class, 'profile_id');
+        return $this->belongsTo(Profile::class);
     }
 
     // Relasi dengan model Prody
     public function prodie()
     {
-        return $this->hasMany(Prodie::class, 'kode_prodi');
+        return $this->belongsTo(Prodie::class, 'kode_prodi');
+    }
+
+
+    // Relasi dengan model Appendix
+    public function appendix()
+    {
+        return $this->hasOne(Appendix::class);
     }
 }

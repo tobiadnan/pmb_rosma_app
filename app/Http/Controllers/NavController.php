@@ -10,62 +10,23 @@ class NavController extends Controller
     public function index(Request $request)
     {
         if (auth()->check()) {
-            $profile = Profile::where('id', $request->user()->id)->first();
-            return view('main-page', [
-                'profile' => $profile,
-            ]);
+            $profile = $request->user()->profile;
+            return view('main-page', compact('profile'));
         } else {
-            # code...
             return view('main-page');
         }
     }
 
-    public function ti(Request $request)
+
+    public function showContentProdi(Request $request, $content)
     {
+        $viewName = 'content.' . $content;
+
         if (auth()->check()) {
-            $profile = Profile::where('id', $request->user()->id)->first();
-            return view('content.ti', [
-                'profile' => $profile,
-            ]);
+            $profile = $request->user()->profile;
+            return view($viewName, compact('profile'));
         } else {
-            # code...
-            return view('content.ti');
-        }
-    }
-    public function si(Request $request)
-    {
-        if (auth()->check()) {
-            $profile = Profile::where('id', $request->user()->id)->first();
-            return view('content.si', [
-                'profile' => $profile,
-            ]);
-        } else {
-            # code...
-            return view('content.si');
-        }
-    }
-    public function mi(Request $request)
-    {
-        if (auth()->check()) {
-            $profile = Profile::where('id', $request->user()->id)->first();
-            return view('content.mi', [
-                'profile' => $profile,
-            ]);
-        } else {
-            # code...
-            return view('content.mi');
-        }
-    }
-    public function ka(Request $request)
-    {
-        if (auth()->check()) {
-            $profile = Profile::where('id', $request->user()->id)->first();
-            return view('content.ka', [
-                'profile' => $profile,
-            ]);
-        } else {
-            # code...
-            return view('content.ka');
+            return view($viewName);
         }
     }
 }

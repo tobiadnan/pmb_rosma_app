@@ -14,58 +14,25 @@ class RegistrationController extends Controller
      */
     public function index(Request $request)
     {
-        $profile = Registration::where('id', $request->user()->id)->first();
+        $profile = $request->user()->profile;
+        $registration = $profile->registrations()->first();
 
+        if ($registration) {
+            $prodi = $registration->prodie()->first();
+        }
+
+        if ($registration->is_verif) {
+            $no_reg = 'PMBRSM/' . date('Y') . '/' . $registration->id;
+        } else {
+            $no_reg = '-';
+        }
+
+        // dd($no_reg);
         return view('user.registration', [
             'profile' => $profile,
+            'prodi' => $prodi,
+            'registration' => $registration,
+            'no_reg' => $no_reg,
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreRegistrationRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Registration $registration)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Registration $registration)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateRegistrationRequest $request, Registration $registration)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Registration $registration)
-    {
-        //
     }
 }

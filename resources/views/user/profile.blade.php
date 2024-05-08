@@ -118,7 +118,7 @@
                         <div class="col-md-3">
                             <div class="bg-secondary-soft pt-5 pb-2 rounded">
                                 <div class="row g-3">
-                                    <h4 class="mb-4 mt-0 text-center">Pilih Foto Profile</h4>
+                                    <h4 class="mb-4 mt-0 text-center">Foto Profile</h4>
                                     <div class="text-center">
                                         <div id="imageContainer" class="square position-relative display-2 mb-3">
                                             <img disabled id="previewImg"
@@ -126,12 +126,13 @@
                                                 alt="Profile Pict">
                                         </div>
                                         <input disabled type="file" id="customFile" name="profile_pict" accept="image/*"
+                                            value="/storage/profiles/{{ $profile->profile_pict }}"
                                             onchange="validateAndPreview(event)" hidden>
                                         <label disabled id="pilihBtn" class="mx-1 btn btn-success-soft"
                                             for="customFile">Pilih</label>
                                         <button disabled type="button" id="removeBtn"
                                             class="mx-1 btn btn-danger-soft">Hapus</button>
-                                        <p class="text-muted mt-3 mb-0"><span class="me-1">Note:</span>.jpg/jpeg/png
+                                        <p class="text-muted mt-3 mb-0" id="textPict" hidden>.jpg/jpeg/png
                                             dengan maksimal 500KB</p>
                                     </div>
                                 </div>
@@ -214,7 +215,7 @@
                                     </div>
                                     {{-- No. Telepon --}}
                                     <div class="col-md-6">
-                                        <label class="form-label">No. Telepon</label>
+                                        <label class="form-label">No. Telepon/WhatsApp</label>
                                         <input disabled type="tel" class="form-control" name="no_hp"
                                             placeholder="085xxxxxxxx" aria-label="No. Telepon"
                                             value="{{ $profile->no_hp }}" required>
@@ -306,7 +307,11 @@
                                 <button type="submit" id="btnSubmit" class="btn btn-primary btn-lg"
                                     style="display: none;">Simpan</button>
                                 <!-- Tombol Edit -->
-                                <button type="button" id="btnEdit" class="btn btn-warning btn-lg">Edit</button>
+
+                                @if ($registration->is_verif == false)
+                                    <button type="button" id="btnEdit" class="btn btn-warning btn-lg">Edit</button>
+                                @endif
+
 
                             </div>
                         </div>
@@ -331,6 +336,7 @@
         function validateAndPreview(event) {
             var selectedFile = event.target.files[0];
             var previewImg = document.getElementById('previewImg');
+            // Reset input file
 
             if (selectedFile) {
                 // Validasi ukuran file
@@ -386,6 +392,8 @@
             var btnSubmit = document.getElementById("btnSubmit");
             var removeBtn = document.getElementById("removeBtn");
             var pilihBtn = document.getElementById("pilihBtn");
+            var previewImg = document.getElementById('previewImg');
+            var textPict = document.getElementById('textPict');
 
             // Fungsi untuk mengaktifkan mode Edit
             function enableEditMode() {
@@ -394,12 +402,18 @@
                 btnSubmit.style.display = "block";
                 removeBtn.removeAttribute("disabled")
                 pilihBtn.removeAttribute("disabled")
+                textPict.removeAttribute("hidden")
+
+                // var customFileInput = document.getElementById('customFile');
+                // console.log(customFileInput.files[0]);
+                // customFileInput.value = customFileInput.files[0].name;
 
                 // Aktifkan semua input
                 var inputs = document.querySelectorAll("input, select, textarea");
                 inputs.forEach(function(input) {
                     input.removeAttribute("disabled");
                 });
+
             }
 
             // Fungsi untuk menonaktifkan mode Edit
@@ -409,6 +423,7 @@
                 btnSubmit.style.display = "none";
                 removeBtn.setAttribute("disabled", true);
                 pilihBtn.setAttribute("disabled", true);
+                textPict.setAttribute("hidden", true);
 
                 // Nonaktifkan semua input
                 var inputs = document.querySelectorAll("input, select, textarea");
@@ -417,8 +432,7 @@
                 });
 
                 // Reset validasi gambar dan hapus gambar jika ada
-                document.getElementById('customFile').value = ''; // Reset input file
-                var previewImg = document.getElementById('previewImg');
+                // document.getElementById('customFile').value = ''; // Reset input file
                 previewImg.src =
                     '/storage/profiles/{{ $profile->profile_pict }}'; // Tampilkan gambar default
             }

@@ -61,6 +61,7 @@ class AuthController extends Controller
             'is_admin' => "0"
         ]);
 
+
         // Mendapatkan file gambar dari request
         if ($request->hasFile('profile_pict')) {
             $image = $request->file('profile_pict');
@@ -99,11 +100,26 @@ class AuthController extends Controller
             'user_id' => $user->id,
         ]);
 
+        // set reg_fee
+        $prodi = $request->prodi;
+        $jalur = $request->jalur;
+
+        $prodiCode = substr($prodi, -2);
+
+        if (in_array($prodiCode, ['S1'])) {
+            $reg_fee = ($jalur == 'Prestaka') ? 500000 : 1000000;
+        } elseif (in_array($prodiCode, ['D3'])) {
+            $reg_fee = ($jalur == 'Reguler') ? 750000 : 250000;
+        } else {
+            $reg_fee = 250000; // Default jika program studi tidak terdefinisi
+        }
+
         // save to registrations
         $registration = Registration::create([
-            'kode_prodi' => $request->prodi,
-            'jalur' => $request->jalur,
+            'kode_prodi' => $prodi,
+            'jalur' => $jalur,
             'tahun_akademik' => $request->tahun_akademik,
+            'reg_fee' => $reg_fee,
             'profile_id' => $profile->id,
 
         ]);
@@ -133,7 +149,7 @@ class AuthController extends Controller
 
         // dd(auth()->user()->is_admin);
         if (auth()->user()->is_admin) {
-            return redirect()->route('admin/home');
+            return redirect()->route('admin.home');
         } else {
             $profile = Profile::where('user_id', auth()->id())->first();
             // dd($profile->nama_d);

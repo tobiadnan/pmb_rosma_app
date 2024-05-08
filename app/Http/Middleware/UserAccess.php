@@ -15,17 +15,6 @@ class UserAccess
      */
     public function handle(Request $request, Closure $next, $typeCheck)
     {
-        // dd($typeCheck);
-        // if (auth()->user()->is_admin == 0) {
-        //     $is_admin = "user";
-        // } else {
-        //     $is_admin = "admin";
-        // }
-
-        // if ($is_admin  == $typeCheck) {
-        //     # code...
-        //     return $next($request);
-        // }
         if (auth()->user()->is_admin == 0 && $typeCheck == "user") {
             return $next($request);
         } elseif (auth()->user()->is_admin == 1 && $typeCheck == "admin") {

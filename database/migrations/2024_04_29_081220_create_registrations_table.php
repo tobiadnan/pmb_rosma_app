@@ -17,14 +17,14 @@ return new class extends Migration
             $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
             $table->string('kode_prodi');
             $table->foreign('kode_prodi')->references('kode_prodi')->on('prodies')->onDelete('cascade');
+            $table->unsignedBigInteger('appendix_id')->nullable();
+            $table->foreign('appendix_id')->references('id')->on('appendixes')->onDelete('cascade');
             $table->string('tahun_akademik');
             $table->string('jalur');
-            $table->string('ktp')->nullable();
-            $table->string('kk')->nullable();
-            $table->string('ijazah')->nullable();
-            $table->string('transkip')->nullable();
-            $table->string('bukti_tf')->nullable();
-            $table->dateTime('tgl_verif')->nullable();
+            $table->decimal('reg_fee', 10, 2);
+            $table->dateTime('tgl_registration')->nullable();
+            $table->boolean('is_verif')->default(false);
+            $table->boolean('is_set')->default(false);
             $table->timestamps();
         });
     }

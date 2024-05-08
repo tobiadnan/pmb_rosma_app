@@ -135,7 +135,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <input type="text" name="no_hp" placeholder="No. Hp*"
+                                                <input type="text" name="no_hp" placeholder="No. Hp/WhatsApp*"
                                                     required />
                                             </div>
                                             <div class="col-6">
