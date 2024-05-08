@@ -23,10 +23,24 @@ class HomeAdminDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', 'homeadmin.action')
             ->addColumn('nama', function ($row) {
-                return $row->nama_d . ' ' . $row->nama_b;
+                return $row->profile->nama_d . ' ' . $row->profile->nama_b;
             })
-            ->addColumn('regDate', function ($row) {
-                return $row->profile->created_at->format('d M Y');
+            ->addColumn('nik', function ($row) {
+                return $row->profile->nik;
+            })
+            ->addColumn('prodi', function ($row) {
+                switch ($row->kode_prodi) {
+                    case 'RSMTIS1':
+                        return 'Teknik Informatika';
+                    case 'RSMSIS1':
+                        return 'Sistem Informasi';
+                    case 'RSMMID3':
+                        return 'Manajemen Informatika';
+                    case 'RSMKAD3':
+                        return 'Komputerisasi Akuntansi';
+                    default:
+                        return 'Tidak Diketahui';
+                }
             })
             ->setRowId('id');
     }
@@ -36,11 +50,7 @@ class HomeAdminDataTable extends DataTable
      */
     public function query(Registration $model): QueryBuilder
     {
-        // return $model->newQuery()->with(['profile', 'prodie']);
-        return $model->newQuery()
-            ->join('profiles', 'registrations.profile_id', '=', 'profiles.id')
-            ->join('prodies', 'registrations.kode_prodi', '=', 'prodies.kode_prodi')
-            ->select('*');
+        return $model->newQuery()->with(['profile', 'prodie']);
     }
     /**
      * Optional method if you want to use the html builder.
@@ -52,14 +62,17 @@ class HomeAdminDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(4, 'desc')
+            ->orderBy(5, 'desc')
             ->parameters([
                 'columnDefs' => [
                     [
-                        'targets' => 1, // Kolom 'id' (urutan angka)
-                        'render' => 'function (data, type, row, meta) { return meta.row + 1; }', // Render urutan angka
+                        'targets' => 0, // Kolom 'id' (urutan angka)
+                        'render' => 'function (data, type, row, meta) { return meta.row + 1; }',
                     ],
-
+                    [
+                        'targets' => 5, // Index kolom 'profile.created_at'
+                        'render' => 'function (data) { return moment(data).format("DD MMM YYYY");}',
+                    ],
                 ],
                 'buttons' => [
                     'excel',
@@ -86,23 +99,29 @@ class HomeAdminDataTable extends DataTable
     {
 
         return [
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+            // Column::computed('action')
+            //     ->exportable(true)
+            //     ->printable(true)
+            //     ->addClass('text-center'),
             Column::make('id')->title('No')
                 ->searchable(false)
                 ->orderable(false),
+            Column::computed('nik')
+                ->searchable(true)
+                ->orderable(true)
+                ->title('NIK')
+                ->addClass('text-center'),
             Column::computed('nama')
                 ->searchable(true)
                 ->orderable(true),
-            Column::make('kota')->title('Alamat'),
-            Column::computed('regDate')
+            Column::make('profile.kota')->title('Alamat'),
+            Column::make('profile.pend_terakhir')->title('Pend. Terakhir'),
+            Column::make('profile.created_at')->title('Tgl. Registrasi'),
+            Column::computed('prodi')
                 ->searchable(true)
                 ->orderable(true)
-                ->title('Registration Date'),
-            Column::make('prodi')->title('Program Studi'),
+                ->title('Program Studi'),
+            // Column::make('prodi')->title('Program Studi'),
             Column::make('jalur')->title('Jalur'),
         ];
     }
