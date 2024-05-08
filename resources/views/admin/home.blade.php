@@ -79,46 +79,4 @@
 
 @section('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
-    <script></script>
-    {{-- <script>
-        $(document).ready(function() {
-            $('#profiles-table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ route('admin.home') }}',
-                columns: [{
-                        render: function(data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
-                        },
-                    }, // Kolom Nomor (No)
-                    {
-                        data: 'nama_d',
-                        name: 'nama'
-                    }, // Kolom Nama Mahasiswa
-                    {
-                        data: 'profiles.created_at',
-                        name: 'created_at'
-                    }, // Kolom Tanggal Registrasi
-                    {
-                        data: 'prodi',
-                        name: 'prodi'
-                    }, // Kolom Prodi
-                    {
-                        data: 'jalur',
-                        name: 'jalur'
-                    }, // Kolom Jalur
-                    {
-                        data: 'status',
-                        name: 'status'
-                    } // Kolom Status
-                ],
-                rowCallback: function(row, data, index) {
-                    var table = $('#profiles-table').DataTable();
-                    var currentPage = table.page();
-                    var number = index + 1 + (currentPage * table.page.len());
-                    $('td:eq(0)', row).html(number);
-                }
-            });
-        });
-    </script> --}}
 @endsection
