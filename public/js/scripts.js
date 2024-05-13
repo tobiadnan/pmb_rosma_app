@@ -62,7 +62,10 @@ window.addEventListener("scroll", () => {
     }
 });
 
-// Prevent dropdown menu from closing when click inside the form
-// $(document).on("click", ".action-buttons .dropdown-menu", function (e) {
-//     e.stopPropagation();
-// });
+const dropdownMenuList = document.querySelectorAll(".dropdown-menu");
+
+dropdownMenuList.forEach(function (dropdownMenu) {
+    dropdownMenu.addEventListener("click", function (e) {
+        e.stopPropagation(); // Mencegah dropdown parent tertutup saat dropdown submenu diklik
+    });
+});

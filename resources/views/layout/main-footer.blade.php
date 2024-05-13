@@ -7,7 +7,7 @@
             <span>Get connected with us on social networks:</span>
         </div>
         <!-- Left -->
-        
+
         <!-- Right -->
         <div>
             <a class="mx-2" href="https://wa.me/6281211445529"><i class="fab fa-whatsapp"></i></a>
@@ -18,7 +18,7 @@
         <!-- Right -->
     </section>
     <!-- Section: Social media -->
-    
+
     <!-- Section: Links  -->
     <section class="">
         <div class="container text-center text-md-start mt-5">
@@ -28,10 +28,11 @@
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <!-- Content -->
                     <h3 class="text-uppercase fw-bold mb-4">PMB STMIK Rosma</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed facere, velit ipsam in repellendus eos ad placeat temporibus beatae pariatur nemo recusandae cumque voluptatem accusantium.</p>
+                    <p>STMIK Rosma menerima pendaftaran mahasiswa baru maupun pindahan pada setiap tahun ajaran baru..
+                    </p>
                 </div>
                 <!-- Grid column -->
-                
+
                 <!-- Grid column -->
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
@@ -39,20 +40,24 @@
                         Program Studi
                     </h6>
                     <p>
-                        <a href="/ti" class="text-reset">Teknik Informatika</a>
+                        <a href="{{ route('content.show', ['content' => 'ti']) }}" class="text-reset">Teknik
+                            Informatika</a>
                     </p>
                     <p>
-                        <a href="/si" class="text-reset">Sistem Informasi</a>
+                        <a href="{{ route('content.show', ['content' => 'si']) }}" class="text-reset">Sistem
+                            Informasi</a>
                     </p>
                     <p>
-                        <a href="/mi" class="text-reset">Manajemen Informatrika</a>
+                        <a href="{{ route('content.show', ['content' => 'mi']) }}" class="text-reset">Manajemen
+                            Informatrika</a>
                     </p>
                     <p>
-                        <a href="/ka" class="text-reset">Komputerisasi Akuntansi</a>
+                        <a href="{{ route('content.show', ['content' => 'ki']) }}" class="text-reset">Komputerisasi
+                            Akuntansi</a>
                     </p>
                 </div>
                 <!-- Grid column -->
-                
+
                 <!-- Grid column -->
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
@@ -61,32 +66,37 @@
                         <a href="#!" class="text-reset">Brosur</a>
                     </p>
                     <p>
-                        <a href="#!" class="text-reset">Biaya Kuliah</a>
+                        <a href="/files/content/biaya-perkuliahan-reguler.pdf" class="text-reset">Biaya Kuliah
+                            Reguler</a>
+                    </p>
+                    <p>
+                        <a href="/files/content/biaya-perkuliahan-prestaka.pdf" class="text-reset">Biaya Kuliah
+                            Prestaka</a>
                     </p>
                 </div>
                 <!-- Grid column -->
-                
+
                 <!-- Grid column -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
                     <p>
-                        <p><i class="fas fa-home me-3"></i>Karawang, Jawa Barat 41311</p>
-                        <p><i class="fas fa-envelope me-3"></i>stmik@rosma.ac.id</p>
-                        <p><i class="fas fa-phone me-3"></i>+62812-1144-5529</p>
-                    </div>
-                    <!-- Grid column -->
+                    <p><i class="fas fa-home me-3"></i>Karawang, Jawa Barat 41311</p>
+                    <p><i class="fas fa-envelope me-3"></i>stmik@rosma.ac.id</p>
+                    <p><i class="fas fa-phone me-3"></i>+62812-1144-5529</p>
                 </div>
-                <!-- Grid row -->
+                <!-- Grid column -->
             </div>
-        </section>
-        <!-- Section: Links  -->
-        
-        <!-- Copyright -->
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-            © 2024 Copyright:
-            <a class="text-reset fw-bold" href="https://rosma.ac.id/">STMIK Rosma</a>
+            <!-- Grid row -->
         </div>
-        <!-- Copyright -->
-    </footer>
-    <!-- Footer -->
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2024 Copyright:
+        <a class="text-reset fw-bold" href="https://rosma.ac.id/">STMIK Rosma</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+<!-- Footer -->
