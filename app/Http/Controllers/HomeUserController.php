@@ -42,14 +42,44 @@ class HomeUserController extends Controller
         $kode_prodi = $request->kode_prodi;
         $jalur = $request->jalur;
 
+        $ranking = ($jalur != 'Prestaka') ? null : $request->ranking;
+
         $prodiCode = substr($kode_prodi, -2);
         $reg_fee_s1reg = 2000000;
         $reg_fee_d3reg = 1500000;
 
         if ($prodiCode == 'S1') {
-            $reg_fee = ($jalur == 'Reguler') ? $reg_fee_s1reg : (($jalur == 'Prestaka') ? 1000000 : (($jalur == 'Yaperos') ? $reg_fee_s1reg * 0.75 : 0));
+            if ($jalur == 'Reguler') {
+                $reg_fee = $reg_fee_s1reg;
+            } elseif ($jalur == 'Yaperos') {
+                $reg_fee = $reg_fee_s1reg * 0.75;
+            } elseif ($jalur == 'Prestaka') {
+                if ($ranking == 'A') {
+                    $reg_fee = 0;
+                } elseif ($ranking == 'B') {
+                    $reg_fee = $reg_fee_s1reg * 0.75;
+                } else {
+                    $reg_fee = $reg_fee_s1reg * 0.5;
+                }
+            } else {
+                $reg_fee = 0;
+            }
         } elseif ($prodiCode == 'D3') {
-            $reg_fee = ($jalur == 'Reguler') ? $reg_fee_d3reg : (($jalur == 'Prestaka') ? 1000000 : (($jalur == 'Yaperos') ? $reg_fee_d3reg * 0.75 : 0));
+            if ($jalur == 'Reguler') {
+                $reg_fee = $reg_fee_d3reg;
+            } elseif ($jalur == 'Yaperos') {
+                $reg_fee = $reg_fee_d3reg * 0.75;
+            } elseif ($jalur == 'Prestaka') {
+                if ($ranking == 'A') {
+                    $reg_fee = 0;
+                } elseif ($ranking == 'B') {
+                    $reg_fee = $reg_fee_d3reg * 0.75;
+                } else {
+                    $reg_fee = $reg_fee_d3reg * 0.5;
+                }
+            } else {
+                $reg_fee = 0;
+            }
         }
 
         // dd($reg_fee);
@@ -57,6 +87,7 @@ class HomeUserController extends Controller
         $registration->update([
             'kode_prodi' => $kode_prodi,
             'jalur' => $jalur,
+            'ranking' => $ranking,
             'reg_fee' => $reg_fee,
         ]);
 

@@ -40,8 +40,14 @@
                                             <strong class="badge text-bg-secondary">{{ $prodi->prodi }}</strong>
                                         </span>
                                         <span>
-                                            <strong class="badge text-bg-secondary mx-1">{{ $registration->jalur }}</strong>
+                                            <strong class="badge text-bg-secondary mr-1">{{ $registration->jalur }}</strong>
                                         </span>
+                                        @if ($registration->ranking != null)
+                                            <span>
+                                                <strong class="badge text-bg-secondary">Rangking:
+                                                    {{ $registration->ranking }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                     <span>Status:
                                         @if ($registration->is_verif == false)
@@ -285,6 +291,20 @@
                                     KIP</option>
                             </select>
                         </div>
+
+                        <div class="mb-3" id="rankingInput" style="display: none;">
+                            <label for="ranking" class="form-label">Pilih Ranking Terakhir Sekolah*</label>
+                            <select class="form-select" id="ranking" name="ranking">
+                                <option disabled value="" {{ $registration->ranking == '' ? 'selected' : '' }}>Pilih
+                                    Ranking</option>
+                                <option value="A" {{ $registration->ranking == 'A' ? 'selected' : '' }}>1 s/d 5
+                                </option>
+                                <option value="B" {{ $registration->ranking == 'B' ? 'selected' : '' }}>6 s/d 10
+                                </option>
+                                <option value="C" {{ $registration->ranking == 'C' ? 'selected' : '' }}>11 s/d 20
+                                </option>
+                            </select>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -337,6 +357,25 @@
                             <input name="transkip" class="form-control" type="file" id="formFile"
                                 accept=".pdf,.jpeg,.jpg,.png" required>
                         </div>
+                        @if ($registration->jalur == 'Prestaka')
+                            <div class="mb-2">
+                                <label for="raport" class="form-label">Raport*</label>
+                                <input name="raport" class="form-control" type="file" id="formFile"
+                                    accept=".pdf,.jpeg,.jpg,.png" required>
+                            </div>
+                        @elseif($registration->jalur == 'KIP')
+                            <div class="mb-2">
+                                <label for="kip" class="form-label">Kartu KIP*</label>
+                                <input name="kip" class="form-control" type="file" id="formFile"
+                                    accept=".pdf,.jpeg,.jpg,.png" required>
+                            </div>
+                        @elseif($registration->jalur == 'Yaperos')
+                            <div class="mb-2">
+                                <label for="yaperos_letter" class="form-label">Yaperos Letter*</label>
+                                <input name="yaperos_letter" class="form-control" type="file" id="formFile"
+                                    accept=".pdf,.jpeg,.jpg,.png" required>
+                            </div>
+                        @endif
                         <div class="mb-2">
                             <label for="bukti_tf" class="form-label">Bukti Pembayaran*</label>
                             <input name="bukti_tf" class="form-control" type="file" id="formFile"
@@ -388,21 +427,42 @@
 @section('scripts')
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            var jalurSelect = document.getElementById('jalur');
+            var rankingInput = document.getElementById('rankingInput');
+
+            if ("{{ $registration->jalur }}" === 'Prestaka') {
+                rankingInput.style.display = 'block';
+            } else {
+                rankingInput.style.display = 'none';
+            }
+
+            jalurSelect.addEventListener('change', function() {
+                var jalur = this.value;
+
+                // Cek jika jalur adalah 'Prestaka' dan $registration->ranking tidak null
+                if ((jalur === 'Prestaka')) {
+                    rankingInput.style.display = 'block';
+                } else {
+                    rankingInput.style.display = 'none';
+                }
+            });
+
+            // alert 
+            var alertContainer = document.getElementById('alertContainer');
+            var successMessage = "{{ session('success') }}";
+
+            if (successMessage) {
+                alertContainer.style.display = 'block';
+                setTimeout(function() {
+                    alertContainer.style.display = 'none';
+                }, 5000); // Menghilangkan alert setelah 3 detik (3000 milidetik)
+            }
+
             setTimeout(function() {
                 var alertElement = document.getElementById('custom-alert');
                 alertElement.remove();
             }, 5000); // 5000 milliseconds = 5 detik
+
         });
-
-        // alert 
-        var alertContainer = document.getElementById('alertContainer');
-        var successMessage = "{{ session('success') }}";
-
-        if (successMessage) {
-            alertContainer.style.display = 'block';
-            setTimeout(function() {
-                alertContainer.style.display = 'none';
-            }, 5000); // Menghilangkan alert setelah 3 detik (3000 milidetik)
-        }
     </script>
 @endsection

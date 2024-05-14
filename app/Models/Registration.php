@@ -15,6 +15,7 @@ class Registration extends Model
         'appendix_id',
         'tahun_akademik',
         'jalur',
+        'ranking',
         'tgl_registration',
         'reg_fee',
         'is_verif',
