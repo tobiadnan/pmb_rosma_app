@@ -33,6 +33,12 @@ class Registration extends Model
         return $this->belongsTo(Prodie::class, 'kode_prodi');
     }
 
+    // Relasi dengan model tests
+    public function test()
+    {
+        return $this->belongsTo(Test::class, 'no_test');
+    }
+
 
     // Relasi dengan model Appendix
     public function appendix()

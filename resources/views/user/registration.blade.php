@@ -237,6 +237,8 @@
                                     Reguler</option>
                                 <option value="Prestaka" {{ $registration->jalur == 'Prestaka' ? 'selected' : '' }}>
                                     Prestaka</option>
+                                <option value="Yaperos" {{ $registration->jalur == 'Yaperos' ? 'selected' : '' }}>
+                                    Yaperos</option>
                                 <option value="KIP" {{ $registration->jalur == 'KIP' ? 'selected' : '' }}>
                                     KIP</option>
                             </select>

@@ -238,6 +238,7 @@
                                                                 jalur</option>
                                                             <option value="Reguler">Reguler</option>
                                                             <option value="Prestaka">Prestaka</option>
+                                                            <option value="Yaperos">Yaperos</option>
                                                             <option value="KIP">KIP</option>
                                                         </select>
                                                     </div>

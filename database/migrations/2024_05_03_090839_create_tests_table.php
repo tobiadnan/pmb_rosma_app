@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tests', function (Blueprint $table) {
-            $table->id();
+            $table->string('no_test', 10)->primary();
+            $table->integer('nilai')->nullable();
+            $table->boolean('status')->default(false);
+            $table->unsignedBigInteger('registration_id')->unique();
+            $table->foreign('registration_id')->references('id')->on('registrations')->onDelete('cascade');
             $table->timestamps();
         });
     }

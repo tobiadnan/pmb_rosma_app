@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('tahun_akademik');
             $table->string('jalur');
             $table->decimal('reg_fee', 10, 2);
-            $table->dateTime('tgl_registration')->nullable();
             $table->boolean('is_verif')->default(false);
             $table->boolean('is_set')->default(false);
             $table->timestamps();

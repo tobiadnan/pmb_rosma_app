@@ -15,6 +15,9 @@ class Appendix extends Model
         'ijazah',
         'transkip',
         'bukti_tf',
+        'raport',
+        'kip',
+        'yaperos_letter',
     ];
 
     // Relasi dengan model Registration

@@ -43,14 +43,16 @@ class HomeUserController extends Controller
         $jalur = $request->jalur;
 
         $prodiCode = substr($kode_prodi, -2);
+        $reg_fee_s1reg = 2000000;
+        $reg_fee_d3reg = 1500000;
 
-        if (in_array($prodiCode, ['S1'])) {
-            $reg_fee = ($jalur == 'Prestaka') ? 500000 : 1000000;
-        } elseif (in_array($prodiCode, ['D3'])) {
-            $reg_fee = ($jalur == 'Reguler') ? 750000 : 250000;
-        } else {
-            $reg_fee = 250000; // Default jika program studi tidak terdefinisi
+        if ($prodiCode == 'S1') {
+            $reg_fee = ($jalur == 'Reguler') ? $reg_fee_s1reg : (($jalur == 'Prestaka') ? 1000000 : (($jalur == 'Yaperos') ? $reg_fee_s1reg * 0.75 : 0));
+        } elseif ($prodiCode == 'D3') {
+            $reg_fee = ($jalur == 'Reguler') ? $reg_fee_d3reg : (($jalur == 'Prestaka') ? 1000000 : (($jalur == 'Yaperos') ? $reg_fee_d3reg * 0.75 : 0));
         }
+
+        // dd($reg_fee);
         // Lakukan update data
         $registration->update([
             'kode_prodi' => $kode_prodi,
