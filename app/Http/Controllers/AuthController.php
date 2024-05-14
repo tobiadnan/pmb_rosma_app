@@ -102,14 +102,15 @@ class AuthController extends Controller
 
         // set reg_fee
         $prodi = $request->prodi;
+        $kode_prodi = $request->kode_prodi;
         $jalur = $request->jalur;
-        $ranking = $request->ranking;
+        $ranking = ($jalur != 'Prestaka') ? null : $request->ranking;
 
-        $prodiCode = substr($prodi, -2);
-
+        $prodiCode = substr($kode_prodi, -2);
         $reg_fee_s1reg = 2000000;
         $reg_fee_d3reg = 1500000;
 
+        dd($prodi);
         if ($prodiCode == 'S1') {
             if ($jalur == 'Reguler') {
                 $reg_fee = $reg_fee_s1reg;
@@ -123,6 +124,8 @@ class AuthController extends Controller
                 } else {
                     $reg_fee = $reg_fee_s1reg * 0.5;
                 }
+            } else {
+                $reg_fee = 0;
             }
         } elseif ($prodiCode == 'D3') {
             if ($jalur == 'Reguler') {
@@ -137,6 +140,8 @@ class AuthController extends Controller
                 } else {
                     $reg_fee = $reg_fee_d3reg * 0.5;
                 }
+            } else {
+                $reg_fee = 0;
             }
         }
 
@@ -144,6 +149,7 @@ class AuthController extends Controller
         $registration = Registration::create([
             'kode_prodi' => $prodi,
             'jalur' => $jalur,
+            'ranking' => $ranking,
             'tahun_akademik' => $request->tahun_akademik,
             'reg_fee' => $reg_fee,
             'profile_id' => $profile->id,

@@ -242,14 +242,23 @@
                                                             <option value="KIP">KIP</option>
                                                         </select>
                                                     </div>
-                                                    <div class="row justify-content-end">
-
-                                                        <select class="list-dt form-select" id="tahun_akademik"
-                                                            name="tahun_akademik" required>
-                                                            <option value="" selected disabled>Pilih
-                                                                tahun akademik
+                                                    <div class="row justify-content-end" id="rankingInput"
+                                                        style="display: none;">
+                                                        <select class="list-dt form-select" id="ranking"
+                                                            name="ranking">
+                                                            <option disabled selected value="">Pilih Ranking
                                                             </option>
-                                                            <option value="{{ date('Y') }}/{{ date('Y') + 1 }}">
+                                                            <option value="A">1 s/d 5</option>
+                                                            <option value="B">6 s/d 10</option>
+                                                            <option value="C">11 s/d 20</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="row justify-content-end">
+                                                        <select class="list-dt form-select" id="tahun_akademik"
+                                                            name="tahun_akademik" disabled>
+                                                            <option selected
+                                                                value="{{ date('Y') }}/{{ date('Y') + 1 }}">Tahun
+                                                                Akademik
                                                                 {{ date('Y') }}/{{ date('Y') + 1 }}
                                                             </option>
                                                         </select>
@@ -359,6 +368,19 @@
         // Event listener untuk tombol Remove
         var removeBtn = document.getElementById('removeBtn');
         removeBtn.addEventListener('click', removeImage);
+
+
+        var jalurSelect = document.getElementById('jalur');
+        var rankingInput = document.getElementById('rankingInput');
+        jalurSelect.addEventListener('change', function() {
+            var jalur = this.value;
+
+            if ((jalur === 'Prestaka')) {
+                rankingInput.style.display = 'block';
+            } else {
+                rankingInput.style.display = 'none';
+            }
+        });
     </script>
 </body>
 
