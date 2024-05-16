@@ -81,14 +81,26 @@ $(document).ready(function () {
         $(this).css("color", selectedValue ? "white" : ""); // Ubah warna teks berdasarkan nilai terpilih
     });
 
+    var jalurSelect = document.getElementById("jalur");
+    var rankingInput = document.getElementById("rankingInput");
+    jalurSelect.addEventListener("change", function () {
+        var jalur = this.value;
+
+        if (jalur === "Prestaka") {
+            rankingInput.style.display = "block";
+        } else {
+            rankingInput.style.display = "none";
+        }
+    });
+
     document
         .getElementById("submitButton")
         .addEventListener("click", function () {
             var form = document.getElementById("msform");
             var isValid = form.checkValidity();
+            var errorDiv = document.getElementById("divCheckInput");
 
             if (!isValid) {
-                var errorDiv = document.getElementById("divCheckInput");
                 errorDiv.innerHTML =
                     "Sepertinya ada data yang belum kamu isi. Pastikan kamu mengisi semua data yang diperlukan :)";
             } else {

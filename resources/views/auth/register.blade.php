@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('storage/logo.png') }}" />
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,7 +18,6 @@
 </head>
 
 <body>
-
     @include('layout.auth-nav')
     <div class="my-5">
         <div class="row justify-content-center mt-0">
@@ -45,11 +45,11 @@
                                     <div class="form-card">
                                         <h4 class="fs-title">Informasi Akun</h4>
                                         <input class="form-control" type="email" name="email" placeholder="Email*"
-                                            required />
+                                            required value="user@gmail.com" />
                                         <input type="password" name="password" id="pwd" placeholder="Password"
-                                            required />
+                                            required value="password" />
                                         <input type="password" name="cpwd" id="cpwd"
-                                            placeholder="Confirm Password" required />
+                                            placeholder="Confirm Password" required value="password" />
                                     </div>
                                     <div id="divCheckPasswordMatch" class="text-danger"></div>
                                     <input type="button" name="next" class="next action-button" value="Next"
@@ -83,26 +83,28 @@
                                         {{-- data --}}
                                         <div class="row">
                                             <div class="col-6">
-                                                <input type="text" name="nama_d" placeholder="Nama Depan*"
-                                                    required />
+                                                <input type="text" name="nama_d" placeholder="Nama Depan*" required
+                                                    value="Nama D" />
                                             </div>
                                             <div class="col-6">
-                                                <input type="text" name="nama_b" placeholder="Nama Belakang" />
+                                                <input type="text" name="nama_b" placeholder="Nama Belakang"
+                                                    value="Nama B" />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="nik" placeholder="No. Induk KTP"
-                                                    required />
+                                                    required value="123456" />
                                             </div>
                                             <div class="col-6">
-                                                <input type="text" name="nkk" placeholder="No. KK*" required />
+                                                <input type="text" name="nkk" placeholder="No. KK*" required
+                                                    value="123456" />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="tempat_lahir" placeholder="Tempat Lahir*"
-                                                    required />
+                                                    required value="Data Sample" />
                                             </div>
                                             <div class="col-2 text-end">
                                                 <p style="color: grey">Tanggal Lahir:*</p>
@@ -136,7 +138,7 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="no_hp" placeholder="No. Hp/WhatsApp*"
-                                                    required />
+                                                    required value="088888888888" />
                                             </div>
                                             <div class="col-6">
                                                 <input type="text" name="no_hp2"
@@ -154,25 +156,25 @@
                                     <div class="form-card">
                                         <h4 class="fs-title">Alamat Domisili</h4>
                                         <textarea style="background-color: transparent" rows="1" id="alamat" name="alamat"
-                                            placeholder="Jl. XYZ No. X RT XX/RW YY" required></textarea>
+                                            placeholder="Jl. XYZ No. X RT XX/RW YY" required>Jl. Sample</textarea>
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="desa" placeholder="Desa / Kelurahan*"
-                                                    required />
+                                                    required value="Data Sample" />
                                             </div>
                                             <div class="col-6">
                                                 <input type="text" name="kecamatan" placeholder="Kecamatan*"
-                                                    required />
+                                                    required value="Data Sample" />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="kota" placeholder="Kab. / Kota*"
-                                                    required />
+                                                    required value="Data Sample" />
                                             </div>
                                             <div class="col-6">
                                                 <input type="text" name="provinsi" placeholder="Provinsi*"
-                                                    required />
+                                                    required value="Data Sample" />
                                             </div>
                                         </div>
                                     </div>
@@ -186,11 +188,11 @@
                                     <div class="form-card">
                                         <h4 class="fs-title">Pendidikan Terakhir</h4>
                                         <input type="text" name="pend_terakhir" placeholder="Pendidikan Terakhir*"
-                                            required />
+                                            required value="SMK Sample" />
                                         <div class="row">
                                             <div class="col-6 mt-1">
                                                 <input type="text" name="no_ijazah" placeholder="No. Ijazah*"
-                                                    required />
+                                                    required value="12345" />
                                             </div>
                                             <div class="col-6">
                                                 <select class="list-dt form-select" id="tahun" name="tahun_lulus"
@@ -255,9 +257,10 @@
                                                     </div>
                                                     <div class="row justify-content-end">
                                                         <select class="list-dt form-select" id="tahun_akademik"
-                                                            name="tahun_akademik" disabled>
+                                                            name="tahun_akademik">
                                                             <option selected
-                                                                value="{{ date('Y') }}/{{ date('Y') + 1 }}">Tahun
+                                                                value="{{ date('Y') }}/{{ date('Y') + 1 }}">
+                                                                Tahun
                                                                 Akademik
                                                                 {{ date('Y') }}/{{ date('Y') + 1 }}
                                                             </option>
@@ -288,7 +291,6 @@
                                                         rel="noopener noreferrer">Klik di sini!</a>
                                                 </p>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div id="divCheckInput" class="text-danger"></div>
@@ -368,19 +370,6 @@
         // Event listener untuk tombol Remove
         var removeBtn = document.getElementById('removeBtn');
         removeBtn.addEventListener('click', removeImage);
-
-
-        var jalurSelect = document.getElementById('jalur');
-        var rankingInput = document.getElementById('rankingInput');
-        jalurSelect.addEventListener('change', function() {
-            var jalur = this.value;
-
-            if ((jalur === 'Prestaka')) {
-                rankingInput.style.display = 'block';
-            } else {
-                rankingInput.style.display = 'none';
-            }
-        });
     </script>
 </body>
 

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('storage/logo.png') }}" />
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -18,7 +19,7 @@
     <div class="body"></div>
     <div class="container">
         <div class="header">
-            <span class="login-text">Masuk</span> PMB Rosma
+            Masuk PMB Rosma
         </div>
         <form action="{{ route('login.action') }}" method="post" class="login">
             @csrf

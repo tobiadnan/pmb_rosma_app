@@ -29,38 +29,6 @@ class AuthController extends Controller
 
     public function registerSave(Request $request)
     {
-        // Validate the request...
-        Validator::make(request()->all(), [
-            'nama_d' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-            'tempat_lahir' => 'required',
-            'tgl_lahir' => 'required',
-            'jk' => 'required',
-            'agama' => 'required',
-            'no_hp' => 'required|digits_between:11,15', // Ubah menjadi 'required' jika no_hp wajib diisi
-            'no_hp2' => 'nullable|digits_between:11,15', // Ubah menjadi 'required' jika no_hp2 wajib diisi
-            'alamat' => 'required',
-            'desa' => 'required',
-            'kecamatan' => 'required',
-            'kota' => 'required',
-            'provinsi' => 'required',
-            'pend_terakhir' => 'required',
-            'no_ijazah' => 'required',
-            'prodi' => 'required',
-            'jalur' => 'required',
-            'tahun_akademik' => 'required',
-            'tahun_lulus' => 'required|digits:4',
-            'profile_pict' => 'image|mimes:jpeg,png,jpg,gif|max:500'
-        ])->validate();
-
-        // save to users
-        $user = User::create([
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'is_admin' => "0"
-        ]);
-
 
         // Mendapatkan file gambar dari request
         if ($request->hasFile('profile_pict')) {
@@ -76,6 +44,53 @@ class AuthController extends Controller
             $imageName = "default-profile-icon.png";
         }
 
+        // set reg_fee
+        $prodi = $request->prodi;
+        $jalur = $request->jalur;
+        $ranking = $jalur == 'Prestaka' ? $request->ranking : "";
+
+        $prodiCode = substr($prodi, -2);
+
+        if ($prodiCode == 'S1') {
+            if ($jalur == 'Reguler') {
+                $reg_fee = 2000000;
+            } elseif ($jalur == 'Yaperos') {
+                $reg_fee = 2000000 * 0.75;
+            } elseif ($jalur == 'Prestaka') {
+                if ($ranking == 'A') {
+                    $reg_fee = 0;
+                } elseif ($ranking == 'B') {
+                    $reg_fee = 2000000 * 0.75;
+                } else {
+                    $reg_fee = 2000000 * 0.5;
+                }
+            } else {
+                $reg_fee = 0;
+            }
+        } elseif ($prodiCode == 'D3') {
+            if ($jalur == 'Reguler') {
+                $reg_fee = 1500000;
+            } elseif ($jalur == 'Yaperos') {
+                $reg_fee = 1500000 * 0.75;
+            } elseif ($jalur == 'Prestaka') {
+                if ($ranking == 'A') {
+                    $reg_fee = 0;
+                } elseif ($ranking == 'B') {
+                    $reg_fee = 1500000 * 0.75;
+                } else {
+                    $reg_fee = 1500000 * 0.5;
+                }
+            } else {
+                $reg_fee = 0;
+            }
+        }
+
+        // save to users
+        $user = User::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'is_admin' => "0"
+        ]);
         // save to profiles
         $profile = Profile::create([
             'nama_d' => $request->nama_d,
@@ -99,52 +114,6 @@ class AuthController extends Controller
             'profile_pict' => $imageName,
             'user_id' => $user->id,
         ]);
-
-        // set reg_fee
-        $prodi = $request->prodi;
-        $kode_prodi = $request->kode_prodi;
-        $jalur = $request->jalur;
-        $ranking = ($jalur != 'Prestaka') ? null : $request->ranking;
-
-        $prodiCode = substr($kode_prodi, -2);
-        $reg_fee_s1reg = 2000000;
-        $reg_fee_d3reg = 1500000;
-
-        dd($prodi);
-        if ($prodiCode == 'S1') {
-            if ($jalur == 'Reguler') {
-                $reg_fee = $reg_fee_s1reg;
-            } elseif ($jalur == 'Yaperos') {
-                $reg_fee = $reg_fee_s1reg * 0.75;
-            } elseif ($jalur == 'Prestaka') {
-                if ($ranking == 'A') {
-                    $reg_fee = 0;
-                } elseif ($ranking == 'B') {
-                    $reg_fee = $reg_fee_s1reg * 0.75;
-                } else {
-                    $reg_fee = $reg_fee_s1reg * 0.5;
-                }
-            } else {
-                $reg_fee = 0;
-            }
-        } elseif ($prodiCode == 'D3') {
-            if ($jalur == 'Reguler') {
-                $reg_fee = $reg_fee_d3reg;
-            } elseif ($jalur == 'Yaperos') {
-                $reg_fee = $reg_fee_d3reg * 0.75;
-            } elseif ($jalur == 'Prestaka') {
-                if ($ranking == 'A') {
-                    $reg_fee = 0;
-                } elseif ($ranking == 'B') {
-                    $reg_fee = $reg_fee_d3reg * 0.75;
-                } else {
-                    $reg_fee = $reg_fee_d3reg * 0.5;
-                }
-            } else {
-                $reg_fee = 0;
-            }
-        }
-
         // save to registrations
         $registration = Registration::create([
             'kode_prodi' => $prodi,
