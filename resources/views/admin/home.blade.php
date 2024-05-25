@@ -16,7 +16,7 @@
     <section>
         <div class="row">
             <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                <a href="{{ route('admin.register-table') }}" class="card-link text-decoration-none">
+                <a href="{{ route('admin.all_register') }}" class="card-link text-decoration-none">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between px-md-1">

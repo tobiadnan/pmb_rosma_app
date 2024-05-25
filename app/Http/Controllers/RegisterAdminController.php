@@ -14,7 +14,7 @@ class RegisterAdminController extends Controller
         $profiles = Profile::with(['registrations', 'registrations.prodie'])->get();
 
 
-        return $registerDataTable->render('admin.register-table', [
+        return $registerDataTable->render('admin.all-register', [
             'profiles' => $profiles,
         ]);
     }

@@ -13,9 +13,9 @@
     <!-- Google Fonts Roboto -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
     <!-- MDB -->
-    <link rel="stylesheet" href="../css/dashboard/mdb.min.css" />
+    <link rel="stylesheet" href="../../css/dashboard/mdb.min.css" />
     <!-- Custom styles -->
-    <link rel="stylesheet" href="../css/dashboard/admin.css" />
+    <link rel="stylesheet" href="../../css/dashboard/admin.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     {{-- datatables --}}
@@ -32,25 +32,45 @@
             <div class="position-sticky">
                 <div class="list-group list-group-flush mx-3 mt-4">
                     @if (auth()->user() && auth()->user()->is_admin == 1)
-                        <a href="{{ route('admin.home') }}"
-                            class="list-group-item list-group-item-action py-2 {{ request()->routeIs('admin.home') ? 'active' : '' }}"
-                            data-mdb-ripple-init>
-                            <i class="fa-solid fa-table-columns fa-fw me-3"></i><span>Dashboard</span>
-                        </a>
-                        <div class="btn-group dropend">
+                        <div class="btn-group">
+                            <a href="{{ route('admin.home') }}" type="button"
+                                class="list-group-item list-group-item-action py-2 {{ request()->routeIs('admin.home') ? 'active' : '' }}"
+                                data-mdb-ripple-init>
+                                <i class="fa-solid fa-table-columns fa-fw me-3"></i><span>Dashboard</span>
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a href="{{ route('admin.home') }}" type="button"
+                                class="list-group-item list-group-item-action py-2" data-mdb-ripple-init>
+                                <i class="fa-solid fa-pen-to-square fa-fw me-3"></i><span>Portal</span>
+                            </a>
+                        </div>
+                        <div class="btn-group">
                             <a type="button" href="#"
-                                class="dropdown-toggle list-group-item list-group-item-action py-2 {{ request()->routeIs('admin.register-table') ? 'active' : '' }}"
+                                class="dropdown-toggle list-group-item list-group-item-action py-2 {{ request()->routeIs('admin.all_register') ? 'active' : '' }}"
                                 data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuLink">
-                                <i class="fa-solid fa-table-columns fa-fw me-3"></i><span>Data Pendaftar</span>
+                                <i class="fa-solid fa-users fa-fw me-3"></i><span>Data Pendaftar</span>
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a href="{{ route('admin.register-table') }}" class="dropdown-item py-2">
-                                    <span>Belum Verif</span>
+                                <a href="{{ route('admin.waiting_verif') }}"
+                                    class="dropdown-item py-2 {{ request()->routeIs('admin.waiting_verif') ? 'active' : '' }}">
+                                    <i class="far fa-user text-danger"></i>
+                                    <span>Menunggu Verifikasi</span>
                                 </a>
-                                <a href="{{ route('admin.register-table') }}"
-                                    class="dropdown-item py-2 {{ request()->routeIs('admin.register-table') ? 'active' : '' }}">
-                                    <span>Semua</span>
+                                <a href="{{ route('admin.unconfirmed') }}"
+                                    class="dropdown-item py-2 {{ request()->routeIs('admin.unconfirmed') ? 'active' : '' }}">
+                                    <i class="far fa-user text-primary"></i>
+                                    <span>Belum Konfirmasi</span>
+                                </a>
+                                <a href="{{ route('admin.unuploaded') }}"
+                                    class="dropdown-item py-2 {{ request()->routeIs('admin.unuploaded') ? 'active' : '' }}">
+                                    <i class="far fa-user text-warning"></i>
+                                    <span>Belum Unggah Berkas</span>
+                                </a>
+                                <a href="{{ route('admin.all_register') }}"
+                                    class="dropdown-item py-2 {{ request()->routeIs('admin.all_register') ? 'active' : '' }}">
+                                    <span>Semua...</span>
                                 </a>
                             </div>
                         </div>
@@ -130,8 +150,8 @@
 
 
     <!-- Custom scripts -->
-    <script type="text/javascript" src="../js/dashboard/mdb.umd.min.js"></script>
-    {{-- <script type="text/javascript" src="../js/dashboard/additionals.js"></script> --}}
+    <script type="text/javascript" src="../../js/dashboard/mdb.umd.min.js"></script>
+    {{-- <script type="text/javascript" src="../../js/dashboard/additionals.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>

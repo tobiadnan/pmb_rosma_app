@@ -60,5 +60,10 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 // Admin Access Only
 Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(function () {
     Route::get('/home',  [HomeAdminController::class, 'index'])->name('admin.home');
-    Route::get('/register',  [RegisterAdminController::class, 'index'])->name('admin.register-table');
+    Route::prefix('/register')->group(function () {
+        Route::get('/waiting-verif', [RegisterAdminController::class, 'waitingVerif'])->name('admin.waiting_verif');
+        Route::get('/unconfirmed', [RegisterAdminController::class, 'unconfirmed'])->name('admin.unconfirmed');
+        Route::get('/unuploaded', [RegisterAdminController::class, 'unuploaded'])->name('admin.unuploaded');
+        Route::get('/all', [RegisterAdminController::class, 'index'])->name('admin.all_register');
+    });
 });
