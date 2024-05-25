@@ -3,26 +3,45 @@
 @section('title')
     Dashboard - PMB
 @endsection
+@section('style')
+    <style>
+        .card-link:hover .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+@endsection
 <!--Main layout-->
 @section('content')
     <!--Section: card total registewr-->
     <section>
         <div class="row">
-            <div class="col-xl-6 col-md-12 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between p-md-1">
-                            <div class="d-flex flex-row">
+            <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                <a href="{{ route('admin.register-table') }}" class="card-link text-decoration-none">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
                                 <div class="align-self-center">
-                                    <i class="far fa-user text-info fa-3x me-4"></i>
+                                    <i class="far fa-user text-success fa-3x"></i>
                                 </div>
-                                <div>
-                                    <h4>Total Pendaftar</h4>
-                                    <p class="mb-0">Calon mahasiswa yang sudah melakukan pendaftaran</p>
+                                <div class="text-end">
+                                    <h2>{{ $totalPendaftar }}</h2>
+                                    <p class="mb-0">Total Pendaftar</p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between px-md-1">
                             <div class="align-self-center">
-                                <h1 class="h1 mb-0">{{ $totalPendaftar }}</h1>
+                                <i class="far fa-user text-danger fa-3x"></i>
+                            </div>
+                            <div class="text-end">
+                                <h2>{{ $totalBelumApprove }}</h2>
+                                <p class="mb-0">Menunggu Verifikasi</p>
                             </div>
                         </div>
                     </div>
@@ -33,7 +52,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between px-md-1">
                             <div class="align-self-center">
-                                <i class="far fa-user text-warning fa-3x"></i>
+                                <i class="far fa-user text-primary fa-3x"></i>
                             </div>
                             <div class="text-end">
                                 <h2>{{ $totalBelumVerifikasi }}</h2>
@@ -48,11 +67,11 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between px-md-1">
                             <div class="align-self-center">
-                                <i class="far fa-user text-danger fa-3x"></i>
+                                <i class="far fa-user text-warning fa-3x"></i>
                             </div>
                             <div class="text-end">
-                                <h2>{{ $totalBelumApprove }}</h2>
-                                <p class="mb-0">Menunggu Verifikasi</p>
+                                <h2>{{ $totalBelumUnggahBerkas }}</h2>
+                                <p class="mb-0">Belum Unggah Berkas</p>
                             </div>
                         </div>
                     </div>

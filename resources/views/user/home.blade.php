@@ -338,8 +338,8 @@
                         <input type="text" hidden name="registration_id" id="formFile"
                             value="{{ $registration->id }}">
                         <div class="mb-2">
-                            <label for="ktp" class="form-label">KTP</label>
-                            <input name="ktp" class="form-control" type="file" id="formFile"
+                            <label for="ktp" class="form-label">KTP*</label>
+                            <input name="ktp" class="form-control" type="file" id="formFile" required
                                 accept=".pdf,.jpeg,.jpg,.png">
                         </div>
                         <div class="mb-2">
