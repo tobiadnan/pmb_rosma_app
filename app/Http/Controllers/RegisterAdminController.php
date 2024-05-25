@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 
 class RegisterAdminController extends Controller
 {
-    public function index(RegisterDataTable  $dataTable)
+    public function index(RegisterDataTable  $registerDataTable)
     {
         $profiles = Profile::with(['registrations', 'registrations.prodie'])->get();
 
 
-        return $dataTable->render('admin.register-table', [
+        return $registerDataTable->render('admin.register-table', [
             'profiles' => $profiles,
         ]);
     }

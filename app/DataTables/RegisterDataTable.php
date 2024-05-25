@@ -98,8 +98,6 @@ class RegisterDataTable extends DataTable
                 Button::make('csv'),
                 Button::make('pdf'),
                 Button::make('print'),
-                // Button::make('reset'),
-                // Button::make('reload')
             ]);
     }
 
@@ -110,10 +108,6 @@ class RegisterDataTable extends DataTable
     {
 
         return [
-            // Column::computed('action')
-            //     ->exportable(true)
-            //     ->printable(true)
-            //     ->addClass('text-center'),
             Column::make('id')->title('No')
                 ->searchable(false)
                 ->orderable(false),
@@ -141,9 +135,6 @@ class RegisterDataTable extends DataTable
         ];
     }
 
-    /**
-     * Get the filename for export.
-     */
     protected function filename(): string
     {
         return 'HomeAdmin_' . date('YmdHis');

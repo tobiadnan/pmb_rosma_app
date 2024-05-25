@@ -37,11 +37,25 @@
                             data-mdb-ripple-init>
                             <i class="fa-solid fa-table-columns fa-fw me-3"></i><span>Dashboard</span>
                         </a>
-                        <a href="{{ route('admin.register-table') }}"
+                        {{-- <a id="register-link" href="#"
                             class="list-group-item list-group-item-action py-2 {{ request()->routeIs('admin.register-table') ? 'active' : '' }}"
                             data-mdb-ripple-init>
                             <i class="fa-solid fa-table-columns fa-fw me-3"></i><span>Register</span>
-                        </a>
+                        </a> --}}
+                        <div class="btn-group dropend">
+                            <a type="button" href="#"
+                                class="dropdown-toggle list-group-item list-group-item-action py-2 {{ request()->routeIs('admin.register-table') ? 'active' : '' }}"
+                                data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuLink">
+                                <i class="fa-solid fa-table-columns fa-fw me-3"></i><span>Data Pendaftar</span>
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a href="{{ route('admin.register-table') }}" class="dropdown-item py-2"><span>Belum
+                                        Verif</span></a>
+                                <a href="{{ route('admin.register-table') }}"
+                                    class="dropdown-item py-2 {{ request()->routeIs('admin.register-table') ? 'active' : '' }}"><span>Semua</span></a>
+                            </div>
+                        </div>
                     @else
                         <a href="{{ route('home') }}"
                             class="list-group-item list-group-item-action py-2 {{ request()->routeIs('home') ? 'active' : '' }}"
@@ -119,7 +133,7 @@
 
     <!-- Custom scripts -->
     <script type="text/javascript" src="../js/dashboard/mdb.umd.min.js"></script>
-
+    {{-- <script type="text/javascript" src="../js/dashboard/additionals.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
@@ -127,9 +141,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
-
-
 
     @yield('scripts')
 </body>
