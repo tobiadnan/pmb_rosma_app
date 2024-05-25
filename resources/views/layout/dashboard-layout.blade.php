@@ -37,11 +37,6 @@
                             data-mdb-ripple-init>
                             <i class="fa-solid fa-table-columns fa-fw me-3"></i><span>Dashboard</span>
                         </a>
-                        {{-- <a id="register-link" href="#"
-                            class="list-group-item list-group-item-action py-2 {{ request()->routeIs('admin.register-table') ? 'active' : '' }}"
-                            data-mdb-ripple-init>
-                            <i class="fa-solid fa-table-columns fa-fw me-3"></i><span>Register</span>
-                        </a> --}}
                         <div class="btn-group dropend">
                             <a type="button" href="#"
                                 class="dropdown-toggle list-group-item list-group-item-action py-2 {{ request()->routeIs('admin.register-table') ? 'active' : '' }}"
@@ -50,10 +45,13 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a href="{{ route('admin.register-table') }}" class="dropdown-item py-2"><span>Belum
-                                        Verif</span></a>
+                                <a href="{{ route('admin.register-table') }}" class="dropdown-item py-2">
+                                    <span>Belum Verif</span>
+                                </a>
                                 <a href="{{ route('admin.register-table') }}"
-                                    class="dropdown-item py-2 {{ request()->routeIs('admin.register-table') ? 'active' : '' }}"><span>Semua</span></a>
+                                    class="dropdown-item py-2 {{ request()->routeIs('admin.register-table') ? 'active' : '' }}">
+                                    <span>Semua</span>
+                                </a>
                             </div>
                         </div>
                     @else
