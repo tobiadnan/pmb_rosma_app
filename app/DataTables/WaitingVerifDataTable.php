@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class RegisterDataTable extends DataTable
+class WaitingVerifDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -61,7 +61,13 @@ class RegisterDataTable extends DataTable
      */
     public function query(Registration $model): QueryBuilder
     {
-        return $model->newQuery()->with(['profile', 'prodie']);
+        $query = $model->newQuery();
+        $query->with(['profile', 'prodie']);
+        $query->where('is_verif', true)
+            ->where('is_set', false)
+            ->whereNotNull('appendix_id');
+
+        return $query;
     }
     /**
      * Optional method if you want to use the html builder.
