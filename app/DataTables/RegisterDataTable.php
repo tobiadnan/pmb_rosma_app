@@ -61,7 +61,7 @@ class RegisterDataTable extends DataTable
      */
     public function query(Registration $model): QueryBuilder
     {
-        return $model->newQuery()->with(['profile', 'prodie']);
+        return $model->newQuery()->with(['profile', 'prodie'])->where('is_set', true);
     }
     /**
      * Optional method if you want to use the html builder.

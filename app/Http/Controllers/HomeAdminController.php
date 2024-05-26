@@ -18,7 +18,7 @@ class HomeAdminController extends Controller
     public function index(HomeAdminDataTable  $dataTable)
     {
         // Ambil data user dari database
-        $totalPendaftar = Profile::count();
+        $totalPendaftar = Registration::where('is_set', true)->count();
         $totalBelumVerifikasi = Registration::where('is_verif', false)->count();
         $totalBelumUnggahBerkas = Registration::where('is_verif', true)
             ->whereNull('appendix_id')

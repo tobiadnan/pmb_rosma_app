@@ -12,12 +12,12 @@ use Illuminate\Http\Request;
 
 class RegisterAdminController extends Controller
 {
-    public function index(RegisterDataTable  $registerDataTable)
+    public function verified(RegisterDataTable  $registerDataTable)
     {
         $profiles = Profile::with(['registrations', 'registrations.prodie'])->get();
 
 
-        return $registerDataTable->render('admin.all-register', [
+        return $registerDataTable->render('admin.verified', [
             'profiles' => $profiles,
         ]);
     }

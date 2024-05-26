@@ -47,7 +47,8 @@
                         </div>
                         <div class="btn-group">
                             <a type="button" href="#"
-                                class="dropdown-toggle list-group-item list-group-item-action py-2 {{ request()->routeIs('admin.all_register') ? 'active' : '' }}"
+                                class="dropdown-toggle list-group-item list-group-item-action py-2 
+                                @if (request()->routeIs('admin.waiting_verif', 'admin.unconfirmed', 'admin.unuploaded', 'admin.all_register')) active @endif "
                                 data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuLink">
                                 <i class="fa-solid fa-users fa-fw me-3"></i><span>Data Pendaftar</span>
                             </a>
@@ -70,7 +71,8 @@
                                 </a>
                                 <a href="{{ route('admin.all_register') }}"
                                     class="dropdown-item py-2 {{ request()->routeIs('admin.all_register') ? 'active' : '' }}">
-                                    <span>Semua...</span>
+                                    <i class="far fa-user text-success"></i>
+                                    <span>Sudah Terverifikasi</span>
                                 </a>
                             </div>
                         </div>

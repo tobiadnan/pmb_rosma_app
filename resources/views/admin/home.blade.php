@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="text-end">
                                     <h2>{{ $totalPendaftar }}</h2>
-                                    <p class="mb-0">Total Pendaftar</p>
+                                    <p class="mb-0">Sudah Terverifikasi</p>
                                 </div>
                             </div>
                         </div>
@@ -33,49 +33,55 @@
                 </a>
             </div>
             <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between px-md-1">
-                            <div class="align-self-center">
-                                <i class="far fa-user text-danger fa-3x"></i>
-                            </div>
-                            <div class="text-end">
-                                <h2>{{ $totalBelumApprove }}</h2>
-                                <p class="mb-0">Menunggu Verifikasi</p>
+                <a href="{{ route('admin.waiting_verif') }}" class="card-link text-decoration-none">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div class="align-self-center">
+                                    <i class="far fa-user text-danger fa-3x"></i>
+                                </div>
+                                <div class="text-end">
+                                    <h2>{{ $totalBelumApprove }}</h2>
+                                    <p class="mb-0">Menunggu Verifikasi</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between px-md-1">
-                            <div class="align-self-center">
-                                <i class="far fa-user text-primary fa-3x"></i>
-                            </div>
-                            <div class="text-end">
-                                <h2>{{ $totalBelumVerifikasi }}</h2>
-                                <p class="mb-0">Belum Konfirmasi</p>
+                <a href="{{ route('admin.unconfirmed') }}" class="card-link text-decoration-none">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div class="align-self-center">
+                                    <i class="far fa-user text-primary fa-3x"></i>
+                                </div>
+                                <div class="text-end">
+                                    <h2>{{ $totalBelumVerifikasi }}</h2>
+                                    <p class="mb-0">Belum Konfirmasi</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between px-md-1">
-                            <div class="align-self-center">
-                                <i class="far fa-user text-warning fa-3x"></i>
-                            </div>
-                            <div class="text-end">
-                                <h2>{{ $totalBelumUnggahBerkas }}</h2>
-                                <p class="mb-0">Belum Unggah Berkas</p>
+                <a href="{{ route('admin.unuploaded') }}" class="card-link text-decoration-none">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between px-md-1">
+                                <div class="align-self-center">
+                                    <i class="far fa-user text-warning fa-3x"></i>
+                                </div>
+                                <div class="text-end">
+                                    <h2>{{ $totalBelumUnggahBerkas }}</h2>
+                                    <p class="mb-0">Belum Unggah Berkas</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
