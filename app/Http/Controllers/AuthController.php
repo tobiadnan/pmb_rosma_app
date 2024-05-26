@@ -51,39 +51,67 @@ class AuthController extends Controller
 
         $prodiCode = substr($prodi, -2);
 
+        $reg_fee_s1 = 2450000;
+        $reg_fee_d3 = 2000000;
+
+        if ($jalur != 'KIP') {
+            $pendaftaran_fee = 200000;
+        } else {
+            $pendaftaran_fee = 0;
+            # code...
+        }
+
         if ($prodiCode == 'S1') {
-            if ($jalur == 'Reguler') {
-                $reg_fee = 2000000;
+            if ($jalur == 'Reguler' || $jalur == 'Prestaka') {
+                $reg_fee = $reg_fee_s1;
             } elseif ($jalur == 'Yaperos') {
-                $reg_fee = 2000000 * 0.75;
-            } elseif ($jalur == 'Prestaka') {
-                if ($ranking == 'A') {
-                    $reg_fee = 0;
-                } elseif ($ranking == 'B') {
-                    $reg_fee = 2000000 * 0.75;
-                } else {
-                    $reg_fee = 2000000 * 0.5;
-                }
+                $reg_fee = $reg_fee_s1 * 0.5;
             } else {
                 $reg_fee = 0;
             }
         } elseif ($prodiCode == 'D3') {
-            if ($jalur == 'Reguler') {
-                $reg_fee = 1500000;
+            if ($jalur == 'Reguler' || $jalur == 'Prestaka') {
+                $reg_fee = $reg_fee_d3;
             } elseif ($jalur == 'Yaperos') {
-                $reg_fee = 1500000 * 0.75;
-            } elseif ($jalur == 'Prestaka') {
-                if ($ranking == 'A') {
-                    $reg_fee = 0;
-                } elseif ($ranking == 'B') {
-                    $reg_fee = 1500000 * 0.75;
-                } else {
-                    $reg_fee = 1500000 * 0.5;
-                }
+                $reg_fee = $reg_fee_d3 * 0.5;
             } else {
                 $reg_fee = 0;
             }
         }
+
+        // if ($prodiCode == 'S1') {
+        //     if ($jalur == 'Reguler') {
+        //         $reg_fee = 2450000;
+        //     } elseif ($jalur == 'Yaperos') {
+        //         $reg_fee = 2000000 * 0.75;
+        //     } elseif ($jalur == 'Prestaka') {
+        //         if ($ranking == 'A') {
+        //             $reg_fee = 0;
+        //         } elseif ($ranking == 'B') {
+        //             $reg_fee = 2000000 * 0.75;
+        //         } else {
+        //             $reg_fee = 2000000 * 0.5;
+        //         }
+        //     } else {
+        //         $reg_fee = 0;
+        //     }
+        // } elseif ($prodiCode == 'D3') {
+        //     if ($jalur == 'Reguler') {
+        //         $reg_fee = 1500000;
+        //     } elseif ($jalur == 'Yaperos') {
+        //         $reg_fee = 1500000 * 0.75;
+        //     } elseif ($jalur == 'Prestaka') {
+        //         if ($ranking == 'A') {
+        //             $reg_fee = 0;
+        //         } elseif ($ranking == 'B') {
+        //             $reg_fee = 1500000 * 0.75;
+        //         } else {
+        //             $reg_fee = 1500000 * 0.5;
+        //         }
+        //     } else {
+        //         $reg_fee = 0;
+        //     }
+        // }
 
         // save to users
         $user = User::create([
@@ -121,6 +149,7 @@ class AuthController extends Controller
             'ranking' => $ranking,
             'tahun_akademik' => $request->tahun_akademik,
             'reg_fee' => $reg_fee,
+            'pendaftaran_fee' => $pendaftaran_fee,
             'profile_id' => $profile->id,
 
         ]);

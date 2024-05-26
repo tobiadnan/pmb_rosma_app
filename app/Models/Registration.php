@@ -18,6 +18,7 @@ class Registration extends Model
         'ranking',
         'tgl_registration',
         'reg_fee',
+        'pendaftaran_fee',
         'is_verif',
         'is_set',
     ];

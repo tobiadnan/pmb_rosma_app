@@ -45,50 +45,79 @@ class HomeUserController extends Controller
         $ranking = ($jalur != 'Prestaka') ? null : $request->ranking;
 
         $prodiCode = substr($kode_prodi, -2);
-        $reg_fee_s1reg = 2000000;
-        $reg_fee_d3reg = 1500000;
+        $reg_fee_s1 = 2000000;
+        $reg_fee_d3 = 1500000;
+
+        // if ($prodiCode == 'S1') {
+        //     if ($jalur == 'Reguler') {
+        //         $reg_fee = $reg_fee_s1reg;
+        //     } elseif ($jalur == 'Yaperos') {
+        //         $reg_fee = $reg_fee_s1reg * 0.75;
+        //     } elseif ($jalur == 'Prestaka') {
+        //         if ($ranking == 'A') {
+        //             $reg_fee = 0;
+        //         } elseif ($ranking == 'B') {
+        //             $reg_fee = $reg_fee_s1reg * 0.75;
+        //         } else {
+        //             $reg_fee = $reg_fee_s1reg * 0.5;
+        //         }
+        //     } else {
+        //         $reg_fee = 0;
+        //     }
+        // } elseif ($prodiCode == 'D3') {
+        //     if ($jalur == 'Reguler') {
+        //         $reg_fee = $reg_fee_d3reg;
+        //     } elseif ($jalur == 'Yaperos') {
+        //         $reg_fee = $reg_fee_d3reg * 0.75;
+        //     } elseif ($jalur == 'Prestaka') {
+        //         if ($ranking == 'A') {
+        //             $reg_fee = 0;
+        //         } elseif ($ranking == 'B') {
+        //             $reg_fee = $reg_fee_d3reg * 0.75;
+        //         } else {
+        //             $reg_fee = $reg_fee_d3reg * 0.5;
+        //         }
+        //     } else {
+        //         $reg_fee = 0;
+        //     }
+        // }
+
+        if ($jalur != 'KIP') {
+            $pendaftaran_fee = 200000;
+        } else {
+            $pendaftaran_fee = 0;
+            # code...
+        }
 
         if ($prodiCode == 'S1') {
-            if ($jalur == 'Reguler') {
-                $reg_fee = $reg_fee_s1reg;
+            if ($jalur == 'Reguler' || $jalur == 'Prestaka') {
+                $reg_fee = $reg_fee_s1;
             } elseif ($jalur == 'Yaperos') {
-                $reg_fee = $reg_fee_s1reg * 0.75;
-            } elseif ($jalur == 'Prestaka') {
-                if ($ranking == 'A') {
-                    $reg_fee = 0;
-                } elseif ($ranking == 'B') {
-                    $reg_fee = $reg_fee_s1reg * 0.75;
-                } else {
-                    $reg_fee = $reg_fee_s1reg * 0.5;
-                }
+                $reg_fee = $reg_fee_s1 * 0.5;
             } else {
                 $reg_fee = 0;
             }
         } elseif ($prodiCode == 'D3') {
-            if ($jalur == 'Reguler') {
-                $reg_fee = $reg_fee_d3reg;
+            if (
+                $jalur == 'Reguler' || $jalur == 'Prestaka'
+            ) {
+                $reg_fee = $reg_fee_d3;
             } elseif ($jalur == 'Yaperos') {
-                $reg_fee = $reg_fee_d3reg * 0.75;
-            } elseif ($jalur == 'Prestaka') {
-                if ($ranking == 'A') {
-                    $reg_fee = 0;
-                } elseif ($ranking == 'B') {
-                    $reg_fee = $reg_fee_d3reg * 0.75;
-                } else {
-                    $reg_fee = $reg_fee_d3reg * 0.5;
-                }
+                $reg_fee = $reg_fee_d3 * 0.5;
             } else {
                 $reg_fee = 0;
             }
         }
 
-        // dd($reg_fee);
+        $total_fee = $reg_fee + $pendaftaran_fee;
         // Lakukan update data
         $registration->update([
             'kode_prodi' => $kode_prodi,
             'jalur' => $jalur,
             'ranking' => $ranking,
             'reg_fee' => $reg_fee,
+            'pendaftaran_fee' => $pendaftaran_fee,
+            'total_fee' => $total_fee,
         ]);
 
         // Redirect atau tampilkan respons sesuai kebutuhan

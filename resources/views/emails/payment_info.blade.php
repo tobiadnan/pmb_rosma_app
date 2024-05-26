@@ -628,13 +628,17 @@
                                                     Rosma</u></strong></span>
                                     </div>
                                     <div class="d-flex justify-content-between custom-border">
+                                        <span class="text-start my-2">Biaya Pendaftaran: Rp
+                                            <strong><u>{{ number_format($registration->pendaftaran_fee, 0, ',', '.') }}</u></strong></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between custom-border">
                                         <span class="text-start my-2">Biaya Registrasi: Rp
                                             <strong><u>{{ number_format($registration->reg_fee, 0, ',', '.') }}</u></strong></span>
                                     </div>
 
                                     <div class="d-flex justify-content-between mt-2">
                                         <span class="text-start my-2">Total Pembayaran: Rp
-                                            <strong><u>{{ number_format($registration->reg_fee, 0, ',', '.') }}</u></strong></span>
+                                            <strong><u>{{ number_format($registration->reg_fee + $registration->pendaftaran_fee, 0, ',', '.') }}</u></strong></span>
                                     </div>
                                     <hr>
                                     <span class="text-grey">Terima kasih atas pembayaran Anda.</span>

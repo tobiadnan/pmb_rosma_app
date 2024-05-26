@@ -37,14 +37,14 @@
                                 <div class="d-flex align-items-start flex-column my-3">
                                     <div class="">
                                         <span>Prodi:
-                                            <strong class="badge text-bg-secondary">{{ $prodi->prodi }}</strong>
+                                            <strong class="badge text-bg-success">{{ $prodi->prodi }}</strong>
                                         </span>
                                         <span>
-                                            <strong class="badge text-bg-secondary mr-1">{{ $registration->jalur }}</strong>
+                                            <strong class="badge text-bg-success mr-1">{{ $registration->jalur }}</strong>
                                         </span>
                                         @if ($registration->ranking != null)
                                             <span>
-                                                <strong class="badge text-bg-secondary">Rangking:
+                                                <strong class="badge text-bg-success">Rangking:
                                                     {{ $registration->ranking }}</strong>
                                             </span>
                                         @endif
@@ -55,9 +55,22 @@
                                         @elseif($registration->is_verif == true && $registration->appendix_id == null)
                                             <strong class="badge text-bg-warning">Menunggu Pembayaran</strong>
                                     </span>
-                                    <span class="list-group-item">Biaya administrasi: <strong
-                                            class="badge text-bg-success">Rp.
-                                            {{ number_format($registration->reg_fee, 0, ',', '.') }}</strong>
+
+                                    <div class="">
+                                        <span>Biaya: <strong class="badge text-bg-secondary">pendaftaran
+                                                (Rp.
+                                                {{ number_format($registration->pendaftaran_fee, 0, ',', '.') }})</strong>
+                                            +
+                                        </span>
+                                        <span><strong class="badge text-bg-secondary">registrasi
+                                                (Rp.
+                                                {{ number_format($registration->reg_fee, 0, ',', '.') }})</strong>
+                                        </span>
+                                    </div>
+                                    <span class="list-group-item">Total Pembayaran: <strong class="badge text-bg-danger">Rp.
+                                            {{ number_format($registration->reg_fee + $registration->pendaftaran_fee, 0, ',', '.') }}</strong>
+                                    </span>
+                                    <span>
                                     @elseif($registration->appendix_id != null && $registration->is_set == false)
                                         <strong class="badge text-bg-info">Menunggu Jadwal Test</strong>
                                     @elseif($registration->appendix_id != null && $registration->is_set == true)
