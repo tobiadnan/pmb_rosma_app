@@ -9,7 +9,7 @@
     <section class="mb-4">
         <div class="card">
             <div class="card-header py-3">
-                <h5 class="mb-0 text-center"><strong>Menunggu Verifikasi Admin</strong></h5>
+                <h5 class="mb-0 text-center"><strong>Belum Upload Berkas</strong></h5>
             </div>
             <div class="card-body">
                 {{ $dataTable->table() }}

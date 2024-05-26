@@ -47,7 +47,7 @@ class HomeAdminDataTable extends DataTable
                     return 'Belum Konfirmasi';
                 } elseif ($row->is_verif == true && $row->appendix_id == null) {
                     return 'Belum Unggah Berkas';
-                } elseif ($row->is_verif == true && $row->appendix_id == null && $row->is_set == false) {
+                } elseif ($row->is_verif == true && $row->appendix_id != null && $row->is_set == false) {
                     return 'Menunggu Verifikasi';
                 } else {
                     return 'Sudah Verifikasi';
