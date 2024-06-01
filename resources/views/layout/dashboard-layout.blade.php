@@ -77,19 +77,26 @@
                             </div>
                         </div>
                     @else
-                        <a href="{{ route('home') }}"
-                            class="list-group-item list-group-item-action py-2 {{ request()->routeIs('home') ? 'active' : '' }}"
-                            data-mdb-ripple-init>
-                            <i class="fa-solid fa-table-columns fa-fw me-3"></i><span>Home</span>
-                        </a>
-                        <a href="{{ route('profile') }}"
-                            class="list-group-item list-group-item-action py-2 {{ request()->routeIs('profile') ? 'active' : '' }}"
-                            data-mdb-ripple-init aria-current="true">
-                            <i class="fa-solid fa-address-card fa-fw me-3"></i><span>Data Diri</span>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action py-2" data-mdb-ripple-init><i
-                                class="fa-solid fa-puzzle-piece fa-fw me-3"></i><span>Test</span>
-                        </a>
+                        <div class="btn-group">
+                            <a href="{{ route('home') }}"
+                                class="list-group-item list-group-item-action py-2 {{ request()->routeIs('home') ? 'active' : '' }}"
+                                data-mdb-ripple-init>
+                                <i class="fa-solid fa-table-columns fa-fw me-3"></i><span>Home</span>
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a href="{{ route('profile') }}"
+                                class="list-group-item list-group-item-action py-2 {{ request()->routeIs('profile') ? 'active' : '' }}"
+                                data-mdb-ripple-init aria-current="true">
+                                <i class="fa-solid fa-address-card fa-fw me-3"></i><span>Data Diri</span>
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a href="#" class="list-group-item list-group-item-action py-2"
+                                data-mdb-ripple-init><i
+                                    class="fa-solid fa-puzzle-piece fa-fw me-3"></i><span>Test</span>
+                            </a>
+                        </div>
                     @endif
                 </div>
             </div>

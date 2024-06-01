@@ -25,22 +25,10 @@ class UnuploadedDataTable extends DataTable
             ->addColumn('nama', function ($row) {
                 return $row->profile->nama_d . ' ' . $row->profile->nama_b;
             })
-            ->addColumn('nik', function ($row) {
-                return $row->profile->nik;
-            })
-            ->addColumn('prodi', function ($row) {
-                switch ($row->kode_prodi) {
-                    case 'RSMTIS1':
-                        return 'Teknik Informatika';
-                    case 'RSMSIS1':
-                        return 'Sistem Informasi';
-                    case 'RSMMID3':
-                        return 'Manajemen Informatika';
-                    case 'RSMKAD3':
-                        return 'Komputerisasi Akuntansi';
-                    default:
-                        return 'Tidak Diketahui';
-                }
+            ->addColumn('noReg', function ($row) {
+                return $row->noReg();
+            })->addColumn('prodi', function ($row) {
+                return $row->getProdiName();
             })
             ->addColumn('status', function ($row) {
                 if ($row->is_verif == false) {
@@ -116,10 +104,10 @@ class UnuploadedDataTable extends DataTable
             Column::make('id')->title('No')
                 ->searchable(false)
                 ->orderable(false),
-            Column::computed('nik')
+            Column::computed('noReg')
                 ->searchable(true)
                 ->orderable(true)
-                ->title('NIK')
+                ->title('No. Reg')
                 ->addClass('text-center'),
             Column::computed('nama')
                 ->searchable(true)

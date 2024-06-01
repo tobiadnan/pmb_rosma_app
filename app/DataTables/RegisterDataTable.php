@@ -29,18 +29,7 @@ class RegisterDataTable extends DataTable
                 return $row->profile->nik;
             })
             ->addColumn('prodi', function ($row) {
-                switch ($row->kode_prodi) {
-                    case 'RSMTIS1':
-                        return 'Teknik Informatika';
-                    case 'RSMSIS1':
-                        return 'Sistem Informasi';
-                    case 'RSMMID3':
-                        return 'Manajemen Informatika';
-                    case 'RSMKAD3':
-                        return 'Komputerisasi Akuntansi';
-                    default:
-                        return 'Tidak Diketahui';
-                }
+                return $row->getProdiName();
             })
             ->addColumn('status', function ($row) {
                 if ($row->is_verif == false) {

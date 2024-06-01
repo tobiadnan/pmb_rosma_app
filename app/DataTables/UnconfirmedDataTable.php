@@ -25,22 +25,11 @@ class UnconfirmedDataTable extends DataTable
             ->addColumn('nama', function ($row) {
                 return $row->profile->nama_d . ' ' . $row->profile->nama_b;
             })
-            ->addColumn('nik', function ($row) {
-                return $row->profile->nik;
+            ->addColumn('noReg', function ($row) {
+                return $row->noReg();
             })
             ->addColumn('prodi', function ($row) {
-                switch ($row->kode_prodi) {
-                    case 'RSMTIS1':
-                        return 'Teknik Informatika';
-                    case 'RSMSIS1':
-                        return 'Sistem Informasi';
-                    case 'RSMMID3':
-                        return 'Manajemen Informatika';
-                    case 'RSMKAD3':
-                        return 'Komputerisasi Akuntansi';
-                    default:
-                        return 'Tidak Diketahui';
-                }
+                return $row->getProdiName();
             })
             ->addColumn('status', function ($row) {
                 if ($row->is_verif == false) {
@@ -76,7 +65,7 @@ class UnconfirmedDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(5, 'desc')
+            ->orderBy(4, 'desc')
             ->parameters([
                 'columnDefs' => [
                     [
@@ -84,7 +73,7 @@ class UnconfirmedDataTable extends DataTable
                         'render' => 'function (data, type, row, meta) { return meta.row + 1; }',
                     ],
                     [
-                        'targets' => 5, // Index kolom 'profile.created_at'
+                        'targets' => 4, // Index kolom 'profile.created_at'
                         'render' => 'function (data) { return moment(data).format("DD MMM YYYY");}',
                     ],
                 ],
@@ -114,11 +103,11 @@ class UnconfirmedDataTable extends DataTable
             Column::make('id')->title('No')
                 ->searchable(false)
                 ->orderable(false),
-            Column::computed('nik')
-                ->searchable(true)
-                ->orderable(true)
-                ->title('NIK')
-                ->addClass('text-center'),
+            // Column::computed('noReg')
+            //     ->searchable(true)
+            //     ->orderable(true)
+            //     ->title('No. Reg')
+            //     ->addClass('text-center'),
             Column::computed('nama')
                 ->searchable(true)
                 ->orderable(true),

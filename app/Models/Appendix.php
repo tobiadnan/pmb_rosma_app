@@ -23,6 +23,6 @@ class Appendix extends Model
     // Relasi dengan model Registration
     public function registration()
     {
-        return $this->belongsTo(Registration::class);
+        return $this->hasOne(Registration::class);
     }
 }

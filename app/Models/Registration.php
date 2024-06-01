@@ -23,6 +23,31 @@ class Registration extends Model
         'is_set',
     ];
 
+    public function getProdiName()
+    {
+        switch ($this->kode_prodi) {
+            case 'RSMTIS1':
+                return 'Teknik Informatika';
+            case 'RSMSIS1':
+                return 'Sistem Informasi';
+            case 'RSMMID3':
+                return 'Manajemen Informatika';
+            case 'RSMKAD3':
+                return 'Komputerisasi Akuntansi';
+            default:
+                return 'Tidak Diketahui';
+        }
+    }
+
+    public function noReg()
+    {
+        if ($this->is_verif) {
+            return 'PMBRSM/' . date('Y') . '/' . $this->id;
+        } else {
+            return '-';
+        }
+    }
+
     // Relasi dengan model Profile
     public function profile()
     {
@@ -45,6 +70,6 @@ class Registration extends Model
     // Relasi dengan model Appendix
     public function appendix()
     {
-        return $this->hasOne(Appendix::class);
+        return $this->belongsTo(Appendix::class);
     }
 }

@@ -21,26 +21,14 @@ class WaitingVerifDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'homeadmin.action')
             ->addColumn('nama', function ($row) {
                 return $row->profile->nama_d . ' ' . $row->profile->nama_b;
             })
-            ->addColumn('nik', function ($row) {
-                return $row->profile->nik;
+            ->addColumn('noReg', function ($row) {
+                return $row->noReg();
             })
             ->addColumn('prodi', function ($row) {
-                switch ($row->kode_prodi) {
-                    case 'RSMTIS1':
-                        return 'Teknik Informatika';
-                    case 'RSMSIS1':
-                        return 'Sistem Informasi';
-                    case 'RSMMID3':
-                        return 'Manajemen Informatika';
-                    case 'RSMKAD3':
-                        return 'Komputerisasi Akuntansi';
-                    default:
-                        return 'Tidak Diketahui';
-                }
+                return $row->getProdiName();
             })
             ->addColumn('status', function ($row) {
                 if ($row->is_verif == false) {
@@ -53,6 +41,20 @@ class WaitingVerifDataTable extends DataTable
                     return 'Sudah Verifikasi';
                 }
             })
+            ->addColumn(
+                'action',
+                function ($row) {
+                    $id = $row->appendix_id;
+                    $nama = $row->profile->nama_d . ' ' . $row->profile->nama_b;
+                    $prodi = $row->getProdiName();
+                    $jalur = $row->jalur;
+                    $ktp = $row->appendix->ktp;
+                    $totalBiaya = $row->reg_fee + $row->pendaftaran_fee;
+
+                    return '<button class="btn btn-sm btn-primary" onclick="openModal(\'' . $totalBiaya . '\', \'' . $nama . '\', \'' . $prodi . '\', \'' . $jalur . '\' , \'' . $id . '\', \'' . $ktp . '\')">Show</button>';
+                }
+            )
+
             ->setRowId('id');
     }
 
@@ -62,7 +64,7 @@ class WaitingVerifDataTable extends DataTable
     public function query(Registration $model): QueryBuilder
     {
         $query = $model->newQuery();
-        $query->with(['profile', 'prodie']);
+        $query->with(['profile', 'prodie', 'appendix']);
         $query->where('is_verif', true)
             ->where('is_set', false)
             ->whereNotNull('appendix_id');
@@ -117,10 +119,10 @@ class WaitingVerifDataTable extends DataTable
             Column::make('id')->title('No')
                 ->searchable(false)
                 ->orderable(false),
-            Column::computed('nik')
+            Column::computed('noReg')
                 ->searchable(true)
                 ->orderable(true)
-                ->title('NIK')
+                ->title('No. Reg')
                 ->addClass('text-center'),
             Column::computed('nama')
                 ->searchable(true)
@@ -134,10 +136,10 @@ class WaitingVerifDataTable extends DataTable
                 ->title('Program Studi'),
             // Column::make('prodi')->title('Program Studi'),
             Column::make('jalur')->title('Jalur'),
-            Column::computed('status')
-                ->searchable(true)
-                ->orderable(true)
-                ->title('Status'),
+            Column::computed('action')
+                ->title('show')
+                ->addClass('text-center')
+                ->width(60),
         ];
     }
 
