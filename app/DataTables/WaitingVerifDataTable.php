@@ -44,14 +44,48 @@ class WaitingVerifDataTable extends DataTable
             ->addColumn(
                 'action',
                 function ($row) {
-                    $id = $row->appendix_id;
+                    $id = $row->id;
+                    $noReg = $row->noReg();
+                    // data mahasiswa
+                    $ktp = $row->appendix->ktp;
+                    $nkk = $row->profile->nkk;
                     $nama = $row->profile->nama_d . ' ' . $row->profile->nama_b;
+                    $ttl = $row->tempat_lahir . ', ' . $row->tgl_lahir;
+                    $jk = $row->profile->jk;
+
+                    // data sekolah
+                    $ijazah = $row->appendix->ijazah;
+                    $pend_terakhir = $row->profile->pend_terakhir;
+                    $no_ijazah = $row->profile->no_ijazah;
+                    $tahun_lulus = $row->profile->tahun_lulus;
+
+                    // bukti tf
+                    $bukti_tf = $row->appendix->bukti_tf;
                     $prodi = $row->getProdiName();
                     $jalur = $row->jalur;
-                    $ktp = $row->appendix->ktp;
+                    $reg_fee = $row->reg_fee;
+                    $pendaftaran_fee = $row->pendaftaran_fee;
                     $totalBiaya = $row->reg_fee + $row->pendaftaran_fee;
 
-                    return '<button class="btn btn-sm btn-primary" onclick="openModal(\'' . $totalBiaya . '\', \'' . $nama . '\', \'' . $prodi . '\', \'' . $jalur . '\' , \'' . $id . '\', \'' . $ktp . '\')">Show</button>';
+                    return '<button class="btn btn-sm btn-primary" onclick="openModal(
+                        \'' . $ktp . '\',
+                        \'' . $nkk . '\',
+                        \'' . $nama . '\',
+                        \'' . $ttl . '\',
+                        \'' . $jk . '\',
+                        \'' . $ijazah . '\',
+                        \'' . $pend_terakhir . '\',
+                        \'' . $no_ijazah . '\',
+                        \'' . $tahun_lulus . '\',
+                        \'' . $bukti_tf . '\',
+                        \'' . $prodi . '\',
+                        \'' . $jalur . '\' ,
+                        \'' . $reg_fee . '\',
+                        \'' . $pendaftaran_fee . '\',
+                        \'' . $totalBiaya . '\',
+                        \'' . $id . '\',
+                        \'' . $noReg . '\',
+                    )">Show</button>';
                 }
             )
 
