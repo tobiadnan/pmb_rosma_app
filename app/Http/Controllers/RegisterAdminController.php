@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\HomeAdminDataTable;
+
 use App\DataTables\RegisterDataTable;
 use App\DataTables\UnconfirmedDataTable;
 use App\DataTables\UnuploadedDataTable;
 use App\DataTables\WaitingVerifDataTable;
+use App\Jobs\SendKonfirmasiMail;
 use App\Jobs\SendTestInfoMail;
-use App\Mail\TestInfoMail;
+use App\Models\Prodie;
 use App\Models\Profile;
 use App\Models\Registration;
 use App\Models\Test;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RegisterAdminController extends Controller
@@ -40,6 +42,7 @@ class RegisterAdminController extends Controller
     {
         $registration = Registration::find($request->idReg);
         $profile = Profile::find($request->idReg);
+        $user = User::find($profile->user_id);
 
         if ($registration) {
             $prodi = $registration->prodie;
@@ -63,11 +66,11 @@ class RegisterAdminController extends Controller
         ]);
 
         // Dispatch job dengan melewatkan data
-        SendTestInfoMail::dispatch($profile, $prodi, $registration, $no_test);
+        SendTestInfoMail::dispatch($profile, $prodi, $registration, $no_test, $user);
 
         // Redirect atau tampilkan respons sesuai kebutuhan
         return redirect()->route('admin.waiting_verif')->with([
-            'success' => 'Anda telah menyelesaikan pendaftaran. Sekarang ikuti arahan selanjutnya..',
+            'success' => 'Data Telah Terkonfirmasi..',
         ]);
     }
 
@@ -77,6 +80,25 @@ class RegisterAdminController extends Controller
 
         return $unconfirmedDataTable->render('admin.unconfirmed', [
             'profiles' => $profiles,
+        ]);
+    }
+
+    public function unconfirmed_confirm(Request $request)
+    {
+        $registration = Registration::find($request->idReg);
+        $profile = Profile::find($request->idReg);
+        $user = User::find($profile->user_id);
+
+        if ($registration) {
+            $prodi = $registration->prodie;
+        }
+
+        // Dispatch job dengan melewatkan data
+        SendKonfirmasiMail::dispatch($profile, $prodi, $registration, $user);
+
+        // Redirect atau tampilkan respons sesuai kebutuhan
+        return redirect()->route('admin.unconfirmed')->with([
+            'success' => 'Email Konfirmasi Terkirim',
         ]);
     }
 

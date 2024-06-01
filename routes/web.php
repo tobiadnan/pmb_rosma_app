@@ -64,6 +64,7 @@ Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(functio
         Route::get('/waiting-verif', [RegisterAdminController::class, 'waitingVerif'])->name('admin.waiting_verif');
         Route::post('/waiting-verif/verif', [RegisterAdminController::class, 'waitingVerif_verif'])->name('admin.waiting_verif.verif');
         Route::get('/unconfirmed', [RegisterAdminController::class, 'unconfirmed'])->name('admin.unconfirmed');
+        Route::post('/unconfirmed/confirm', [RegisterAdminController::class, 'unconfirmed_confirm'])->name('admin.unconfirmed.confirm');
         Route::get('/unuploaded', [RegisterAdminController::class, 'unuploaded'])->name('admin.unuploaded');
         Route::get('/verified', [RegisterAdminController::class, 'verified'])->name('admin.all_register');
     });

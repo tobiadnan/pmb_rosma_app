@@ -42,6 +42,18 @@ class UnconfirmedDataTable extends DataTable
                     return 'Sudah Verifikasi';
                 }
             })
+            ->addColumn(
+                'action',
+                function ($row) {
+                    return '<form action="' . route("admin.unconfirmed.confirm") . '" method="POST">
+            ' . csrf_field() . '
+            <input type="hidden" name="idReg" value="' . $row->id . '" />
+            <button type="submit" class="btn btn-warning">Inform</button>
+        </form>';
+                }
+            )
+
+
             ->setRowId('id');
     }
 
@@ -124,6 +136,9 @@ class UnconfirmedDataTable extends DataTable
                 ->searchable(true)
                 ->orderable(true)
                 ->title('Status'),
+            Column::computed('action')
+                ->title('inform')
+                ->addClass('text-center'),
         ];
     }
 

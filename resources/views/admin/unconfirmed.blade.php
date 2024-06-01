@@ -5,6 +5,12 @@
 @endsection
 <!--Main layout-->
 @section('content')
+    <div class="position-fixed end-0 px-3" style="width: 50%; z-index: 1050;display: none;" id="alertContainer">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
     <!-- Section: Tabel list camaba -->
     <section class="mb-4">
         <div class="card">
