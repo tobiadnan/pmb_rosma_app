@@ -15,11 +15,14 @@ class Appendix extends Model
         'ijazah',
         'transkip',
         'bukti_tf',
+        'raport',
+        'kip',
+        'yaperos_letter',
     ];
 
     // Relasi dengan model Registration
     public function registration()
     {
-        return $this->belongsTo(Registration::class);
+        return $this->hasOne(Registration::class);
     }
 }

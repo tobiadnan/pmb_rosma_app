@@ -29,38 +29,6 @@ class AuthController extends Controller
 
     public function registerSave(Request $request)
     {
-        // Validate the request...
-        Validator::make(request()->all(), [
-            'nama_d' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-            'tempat_lahir' => 'required',
-            'tgl_lahir' => 'required',
-            'jk' => 'required',
-            'agama' => 'required',
-            'no_hp' => 'required|digits_between:11,15', // Ubah menjadi 'required' jika no_hp wajib diisi
-            'no_hp2' => 'nullable|digits_between:11,15', // Ubah menjadi 'required' jika no_hp2 wajib diisi
-            'alamat' => 'required',
-            'desa' => 'required',
-            'kecamatan' => 'required',
-            'kota' => 'required',
-            'provinsi' => 'required',
-            'pend_terakhir' => 'required',
-            'no_ijazah' => 'required',
-            'prodi' => 'required',
-            'jalur' => 'required',
-            'tahun_akademik' => 'required',
-            'tahun_lulus' => 'required|digits:4',
-            'profile_pict' => 'image|mimes:jpeg,png,jpg,gif|max:500'
-        ])->validate();
-
-        // save to users
-        $user = User::create([
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'is_admin' => "0"
-        ]);
-
 
         // Mendapatkan file gambar dari request
         if ($request->hasFile('profile_pict')) {
@@ -76,6 +44,81 @@ class AuthController extends Controller
             $imageName = "default-profile-icon.png";
         }
 
+        // set reg_fee
+        $prodi = $request->prodi;
+        $jalur = $request->jalur;
+        $ranking = $jalur == 'Prestaka' ? $request->ranking : "";
+
+        $prodiCode = substr($prodi, -2);
+
+        $reg_fee_s1 = 2450000;
+        $reg_fee_d3 = 2000000;
+
+        if ($jalur != 'KIP') {
+            $pendaftaran_fee = 200000;
+        } else {
+            $pendaftaran_fee = 0;
+            # code...
+        }
+
+        if ($prodiCode == 'S1') {
+            if ($jalur == 'Reguler' || $jalur == 'Prestaka') {
+                $reg_fee = $reg_fee_s1;
+            } elseif ($jalur == 'Yaperos') {
+                $reg_fee = $reg_fee_s1 * 0.5;
+            } else {
+                $reg_fee = 0;
+            }
+        } elseif ($prodiCode == 'D3') {
+            if ($jalur == 'Reguler' || $jalur == 'Prestaka') {
+                $reg_fee = $reg_fee_d3;
+            } elseif ($jalur == 'Yaperos') {
+                $reg_fee = $reg_fee_d3 * 0.5;
+            } else {
+                $reg_fee = 0;
+            }
+        }
+
+        // if ($prodiCode == 'S1') {
+        //     if ($jalur == 'Reguler') {
+        //         $reg_fee = 2450000;
+        //     } elseif ($jalur == 'Yaperos') {
+        //         $reg_fee = 2000000 * 0.75;
+        //     } elseif ($jalur == 'Prestaka') {
+        //         if ($ranking == 'A') {
+        //             $reg_fee = 0;
+        //         } elseif ($ranking == 'B') {
+        //             $reg_fee = 2000000 * 0.75;
+        //         } else {
+        //             $reg_fee = 2000000 * 0.5;
+        //         }
+        //     } else {
+        //         $reg_fee = 0;
+        //     }
+        // } elseif ($prodiCode == 'D3') {
+        //     if ($jalur == 'Reguler') {
+        //         $reg_fee = 1500000;
+        //     } elseif ($jalur == 'Yaperos') {
+        //         $reg_fee = 1500000 * 0.75;
+        //     } elseif ($jalur == 'Prestaka') {
+        //         if ($ranking == 'A') {
+        //             $reg_fee = 0;
+        //         } elseif ($ranking == 'B') {
+        //             $reg_fee = 1500000 * 0.75;
+        //         } else {
+        //             $reg_fee = 1500000 * 0.5;
+        //         }
+        //     } else {
+        //         $reg_fee = 0;
+        //     }
+        // }
+
+        // save to users
+        $user = User::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'is_admin' => "0"
+        ]);
         // save to profiles
         $profile = Profile::create([
             'nama_d' => $request->nama_d,
@@ -99,27 +142,14 @@ class AuthController extends Controller
             'profile_pict' => $imageName,
             'user_id' => $user->id,
         ]);
-
-        // set reg_fee
-        $prodi = $request->prodi;
-        $jalur = $request->jalur;
-
-        $prodiCode = substr($prodi, -2);
-
-        if (in_array($prodiCode, ['S1'])) {
-            $reg_fee = ($jalur == 'Prestaka') ? 500000 : 1000000;
-        } elseif (in_array($prodiCode, ['D3'])) {
-            $reg_fee = ($jalur == 'Reguler') ? 750000 : 250000;
-        } else {
-            $reg_fee = 250000; // Default jika program studi tidak terdefinisi
-        }
-
         // save to registrations
         $registration = Registration::create([
             'kode_prodi' => $prodi,
             'jalur' => $jalur,
+            'ranking' => $ranking,
             'tahun_akademik' => $request->tahun_akademik,
             'reg_fee' => $reg_fee,
+            'pendaftaran_fee' => $pendaftaran_fee,
             'profile_id' => $profile->id,
 
         ]);

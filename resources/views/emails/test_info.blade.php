@@ -595,13 +595,13 @@
                                 <div class="card p-3 bg-body-tertiary">
                                     <img src="http://127.0.0.1:8000/storage/logo.png" style="width: 46px"
                                         alt="Logo STMIK Rosma" class="img-fluid logo mb-2 mx-auto d-block">
-                                    <h1 class="card-title mb-3">Informasi Pembayaran</h1>
+                                    <h1 class="card-title mb-3">Informasi TEST</h1>
                                     <hr>
                                     <h2 class="mb-3 text-secondary">{{ $profile->nama_d }} {{ $profile->nama_b }}</h2>
-                                    <h4 class="mb-0">{{ $no_reg }}</h4>
+                                    <h4 class="mb-0">{{ $no_test }}</h4>
 
                                     <div class="d-flex justify-content-between mt-2 custom-border">
-                                        <h4 class="fw-bold">Detail Pendaftaran</h4>
+                                        <h4 class="fw-bold">Detail Calon Mahasiswa</h4>
                                         <span class="text-start mb-2">Program Studi: </span> <span
                                             class="text-end"><strong>{{ $prodi->prodi }}</strong> |
                                             <strong>{{ $registration->jalur }}</strong></span>
@@ -616,38 +616,20 @@
                                     </div>
 
                                     <div class="d-flex justify-content-between mt-2 custom-border">
-                                        <h4 class="fw-bold mt-3">Detail Pembayaran</h4>
-                                        <span class="text-start mb-2">Bank: <strong><u>BNI</u></strong></span>
-                                    </div>
-                                    <div class="d-flex justify-content-between custom-border">
-                                        <span class="text-start my-2">No. Rekening:
-                                            <strong><u>123456789</u></strong></span>
-                                    </div>
-                                    <div class="d-flex justify-content-between custom-border">
-                                        <span class="text-start my-2">Atas Nama: <strong><u>PMB STMIK
+                                        <h4 class="fw-bold mt-3">Detail Test</h4>
+                                        <span class="text-start mb-2">Tempat: <strong><u>Kampus Utama STMIK
                                                     Rosma</u></strong></span>
                                     </div>
                                     <div class="d-flex justify-content-between custom-border">
-                                        <span class="text-start my-2">Biaya Pendaftaran: Rp
-                                            <strong><u>{{ number_format($registration->pendaftaran_fee, 0, ',', '.') }}</u></strong></span>
-                                    </div>
-                                    <div class="d-flex justify-content-between custom-border">
-                                        <span class="text-start my-2">Biaya Registrasi: Rp
-                                            <strong><u>{{ number_format($registration->reg_fee, 0, ',', '.') }}</u></strong></span>
-                                    </div>
-
-                                    <div class="d-flex justify-content-between mt-2">
-                                        <span class="text-start my-2">Total Pembayaran: Rp
-                                            <strong><u>{{ number_format($registration->reg_fee + $registration->pendaftaran_fee, 0, ',', '.') }}</u></strong></span>
+                                        <span class="text-start my-2">Waktu:
+                                            <strong><u>12 Desember 2024</u></strong></span>
                                     </div>
                                     <hr>
-                                    <span class="text-grey">Terima kasih atas pembayaran Anda.</span>
-                                    <span>Silakan lakukan pendaftaran ulang dengan mengunggah bukti pembayaran Anda dan
-                                        dokumen
-                                        pendukung lainnya.
+                                    <span class="text-grey"><strong>MOHON DIPERHATIKAN!!!</strong></span>
+                                    <span>Silakan join grup whatsapp peserta test di bawah ini. Karena semua informasi
+                                        terkait test dan seterusnya akan disampaikan melalui grup tersebut. !!
                                     </span>
-                                    <a href="http://127.0.0.1:8000/home" class="mt-3 btn btn-primary">Upload
-                                        bukti pembayaran</a>.
+                                    <a href="" class="mt-3 btn btn-primary">Join Grup WhatsApp</a>.
                                 </div>
                             </div>
                         </div>

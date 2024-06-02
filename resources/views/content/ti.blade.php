@@ -71,25 +71,25 @@
                 {{-- Visi dan Misi --}}
                 <h4>Visi Program Studi Teknik Informatika</h4>
                 <p class="mb-3 blockquote">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore illum animi nemo necessitatibus odit
-                    sequi nostrum optio earum incidunt nobis!
+                    Menjadi program studi yang unggul dan dapat menghasilkan lulusan yang mampu membangun sistem yang
+                    berguna bagi masyarakat serta berdaya saing tinggi untuk memenuhi kebutuhan tenaga kerja dalam bidang
+                    Informatika.
                 </p>
 
                 <h4>Misi</h4>
                 <ol>
-                    <li><b>Menghasilkan lulusan yang kompeten</b></li>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quibusdam, ut ea esse sint fugit odit!
-                        Vitae, iusto. Consequuntur ipsa velit, ducimus cupiditate enim quod, eos beatae deleniti, aliquid
-                        assumenda hic.</p>
-                    <li><b>Mendorong inovasi dan riset</b></li>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae voluptate temporibus asperiores.
-                        Facere voluptatibus sed voluptate soluta culpa totam eius? Quisquam mollitia autem ut exercitationem
-                        dolorem earum enim, amet qui!</p>
-                    <li><b>Menjalin kemitraan yang berkelanjutan</b></li>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis tempora obcaecati, eaque quidem a
-                        ea sit nesciunt officiis rerum temporibus molestias consequatur quibusdam odio quia commodi
-                        perferendis fugit. Culpa, doloribus.</p>
-
+                    <li><b>Optimalisasi Kemampuan Sistem Terintegrasi dalam Penyelesaian Masalah dan Solusi</b></li>
+                    <p>Meningkatkan kemampuan untuk membangun dan menggunakan sistem terintegrasi dalam rangka menyelesaikan
+                        masalah dan solusinya.</p>
+                    <li><b>Inovasi dalam Implementasi Sistem Terintegrasi dan Fasilitas Pembelajaran</b></li>
+                    <p>Meningkatkan kemampuan dan mengimplementasikan sistem terintegrasi dan menyediakan fasilitas
+                        penunjang proses pembelajarannya.</p>
+                    <li><b>Pembangunan Ilmuwan Bermoral, Terampil, dan Kreatif melalui Penelitian dan Praktek</b></li>
+                    <p>Meningkatkan kemampuan untuk membangun dan melakukan penelitian dalam rangka menerapkan teori dan
+                        praktek serta mendidik mahasiswa menjadi ilmuwan yang bermoral, terampil dan kreatif.</p>
+                    <li><b>Mendorong Kreativitas melalui Pelatihan, Seminar, dan Penelitian Ilmiah</b></li>
+                    <p>Meningkatkan kemampuan untuk membangun kreativitas melalui aktivitas Pelatihan, Seminar dan
+                        Penelitian Ilmiah.</p>
                 </ol>
                 {{-- end visi dan misi --}}
 

@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class HomeAdminDataTable extends DataTable
+class RegisterDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -33,33 +33,35 @@ class HomeAdminDataTable extends DataTable
             })
             ->addColumn('status', function ($row) {
                 if ($row->is_verif == false) {
-                    return '<span class="badge text-bg-primary">Belum Konfirmasi</span>';
+                    return 'Belum Konfirmasi';
                 } elseif ($row->is_verif == true && $row->appendix_id == null) {
-                    return
-                        '<span class="badge text-bg-warning">Belum Unggah Berkas</span>';
+                    return 'Belum Unggah Berkas';
                 } elseif ($row->is_verif == true && $row->appendix_id != null && $row->is_set == false) {
-                    return
-                        '<span class="badge text-bg-danger">Menunggu Verifikasi</span>';
-                } else {
-                    return
-                        '<span class="badge text-bg-success">Terverifikasi</span>';
+                    return 'Menunggu Verifikasi';
+                } elseif ($row->is_set == true) {
+                    return 'Sudah Verifikasi';
                 }
             })
-            ->rawColumns(['status'])
             ->setRowId('id');
     }
 
+    /**
+     * Get the query source of dataTable.
+     */
     public function query(Registration $model): QueryBuilder
     {
-        return $model->newQuery()->with(['profile', 'prodie']);
+        return $model->newQuery()->with(['profile', 'prodie'])->where('is_set', true);
     }
-
+    /**
+     * Optional method if you want to use the html builder.
+     */
     public function html(): HtmlBuilder
     {
         return $this->builder()
             ->setTableId('homeadmin-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
+            //->dom('Bfrtip')
             ->orderBy(5, 'desc')
             ->parameters([
                 'columnDefs' => [
@@ -78,9 +80,6 @@ class HomeAdminDataTable extends DataTable
                     'pdf',
                     'print', // Menambahkan tombol print
                 ],
-                'language' => [
-                    'searchPlaceholder' => 'Cari Data', // Placeholder untuk kotak pencarian
-                ],
             ])
             ->selectStyleSingle()
             ->buttons([
@@ -88,8 +87,6 @@ class HomeAdminDataTable extends DataTable
                 Button::make('csv'),
                 Button::make('pdf'),
                 Button::make('print'),
-                // Button::make('reset'),
-                // Button::make('reload')
             ]);
     }
 
@@ -100,10 +97,6 @@ class HomeAdminDataTable extends DataTable
     {
 
         return [
-            // Column::computed('action')
-            //     ->exportable(true)
-            //     ->printable(true)
-            //     ->addClass('text-center'),
             Column::make('id')->title('No')
                 ->searchable(false)
                 ->orderable(false),
@@ -125,15 +118,12 @@ class HomeAdminDataTable extends DataTable
             // Column::make('prodi')->title('Program Studi'),
             Column::make('jalur')->title('Jalur'),
             Column::computed('status')
-                ->addClass('text-center')
-                ->title('Status')
-                ->width(60),
+                ->searchable(true)
+                ->orderable(true)
+                ->title('Status'),
         ];
     }
 
-    /**
-     * Get the filename for export.
-     */
     protected function filename(): string
     {
         return 'HomeAdmin_' . date('YmdHis');

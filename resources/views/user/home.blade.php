@@ -37,11 +37,17 @@
                                 <div class="d-flex align-items-start flex-column my-3">
                                     <div class="">
                                         <span>Prodi:
-                                            <strong class="badge text-bg-secondary">{{ $prodi->prodi }}</strong>
+                                            <strong class="badge text-bg-success">{{ $prodi->prodi }}</strong>
                                         </span>
                                         <span>
-                                            <strong class="badge text-bg-secondary mx-1">{{ $registration->jalur }}</strong>
+                                            <strong class="badge text-bg-success mr-1">{{ $registration->jalur }}</strong>
                                         </span>
+                                        @if ($registration->ranking != null)
+                                            <span>
+                                                <strong class="badge text-bg-success">Rangking:
+                                                    {{ $registration->ranking }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                     <span>Status:
                                         @if ($registration->is_verif == false)
@@ -49,9 +55,22 @@
                                         @elseif($registration->is_verif == true && $registration->appendix_id == null)
                                             <strong class="badge text-bg-warning">Menunggu Pembayaran</strong>
                                     </span>
-                                    <span class="list-group-item">Biaya administrasi: <strong
-                                            class="badge text-bg-success">Rp.
-                                            {{ number_format($registration->reg_fee, 0, ',', '.') }}</strong>
+
+                                    <div class="">
+                                        <span>Biaya: <strong class="badge text-bg-secondary">pendaftaran
+                                                (Rp.
+                                                {{ number_format($registration->pendaftaran_fee, 0, ',', '.') }})</strong>
+                                            +
+                                        </span>
+                                        <span><strong class="badge text-bg-secondary">registrasi
+                                                (Rp.
+                                                {{ number_format($registration->reg_fee, 0, ',', '.') }})</strong>
+                                        </span>
+                                    </div>
+                                    <span class="list-group-item">Total Pembayaran: <strong class="badge text-bg-danger">Rp.
+                                            {{ number_format($registration->reg_fee + $registration->pendaftaran_fee, 0, ',', '.') }}</strong>
+                                    </span>
+                                    <span>
                                     @elseif($registration->appendix_id != null && $registration->is_set == false)
                                         <strong class="badge text-bg-info">Menunggu Jadwal Test</strong>
                                     @elseif($registration->appendix_id != null && $registration->is_set == true)
@@ -279,8 +298,24 @@
                                     Reguler</option>
                                 <option value="Prestaka" {{ $registration->jalur == 'Prestaka' ? 'selected' : '' }}>
                                     Prestaka</option>
+                                <option value="Yaperos" {{ $registration->jalur == 'Yaperos' ? 'selected' : '' }}>
+                                    Yaperos</option>
                                 <option value="KIP" {{ $registration->jalur == 'KIP' ? 'selected' : '' }}>
                                     KIP</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3" id="rankingInput" style="display: none;">
+                            <label for="ranking" class="form-label">Pilih Ranking Terakhir Sekolah*</label>
+                            <select class="form-select" id="ranking" name="ranking">
+                                <option disabled value="" {{ $registration->ranking == '' ? 'selected' : '' }}>Pilih
+                                    Ranking</option>
+                                <option value="A" {{ $registration->ranking == 'A' ? 'selected' : '' }}>1 s/d 5
+                                </option>
+                                <option value="B" {{ $registration->ranking == 'B' ? 'selected' : '' }}>6 s/d 10
+                                </option>
+                                <option value="C" {{ $registration->ranking == 'C' ? 'selected' : '' }}>11 s/d 20
+                                </option>
                             </select>
                         </div>
                 </div>
@@ -316,8 +351,8 @@
                         <input type="text" hidden name="registration_id" id="formFile"
                             value="{{ $registration->id }}">
                         <div class="mb-2">
-                            <label for="ktp" class="form-label">KTP</label>
-                            <input name="ktp" class="form-control" type="file" id="formFile"
+                            <label for="ktp" class="form-label">KTP*</label>
+                            <input name="ktp" class="form-control" type="file" id="formFile" required
                                 accept=".pdf,.jpeg,.jpg,.png">
                         </div>
                         <div class="mb-2">
@@ -335,6 +370,25 @@
                             <input name="transkip" class="form-control" type="file" id="formFile"
                                 accept=".pdf,.jpeg,.jpg,.png" required>
                         </div>
+                        @if ($registration->jalur == 'Prestaka')
+                            <div class="mb-2">
+                                <label for="raport" class="form-label">Raport*</label>
+                                <input name="raport" class="form-control" type="file" id="formFile"
+                                    accept=".pdf,.jpeg,.jpg,.png" required>
+                            </div>
+                        @elseif($registration->jalur == 'KIP')
+                            <div class="mb-2">
+                                <label for="kip" class="form-label">Kartu KIP*</label>
+                                <input name="kip" class="form-control" type="file" id="formFile"
+                                    accept=".pdf,.jpeg,.jpg,.png" required>
+                            </div>
+                        @elseif($registration->jalur == 'Yaperos')
+                            <div class="mb-2">
+                                <label for="yaperos_letter" class="form-label">Yaperos Letter*</label>
+                                <input name="yaperos_letter" class="form-control" type="file" id="formFile"
+                                    accept=".pdf,.jpeg,.jpg,.png" required>
+                            </div>
+                        @endif
                         <div class="mb-2">
                             <label for="bukti_tf" class="form-label">Bukti Pembayaran*</label>
                             <input name="bukti_tf" class="form-control" type="file" id="formFile"
@@ -386,21 +440,42 @@
 @section('scripts')
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            var jalurSelect = document.getElementById('jalur');
+            var rankingInput = document.getElementById('rankingInput');
+
+            if ("{{ $registration->jalur }}" === 'Prestaka') {
+                rankingInput.style.display = 'block';
+            } else {
+                rankingInput.style.display = 'none';
+            }
+
+            jalurSelect.addEventListener('change', function() {
+                var jalur = this.value;
+
+                // Cek jika jalur adalah 'Prestaka' dan $registration->ranking tidak null
+                if ((jalur === 'Prestaka')) {
+                    rankingInput.style.display = 'block';
+                } else {
+                    rankingInput.style.display = 'none';
+                }
+            });
+
+            // alert 
+            var alertContainer = document.getElementById('alertContainer');
+            var successMessage = "{{ session('success') }}";
+
+            if (successMessage) {
+                alertContainer.style.display = 'block';
+                setTimeout(function() {
+                    alertContainer.style.display = 'none';
+                }, 5000); // Menghilangkan alert setelah 3 detik (3000 milidetik)
+            }
+
             setTimeout(function() {
                 var alertElement = document.getElementById('custom-alert');
                 alertElement.remove();
             }, 5000); // 5000 milliseconds = 5 detik
+
         });
-
-        // alert 
-        var alertContainer = document.getElementById('alertContainer');
-        var successMessage = "{{ session('success') }}";
-
-        if (successMessage) {
-            alertContainer.style.display = 'block';
-            setTimeout(function() {
-                alertContainer.style.display = 'none';
-            }, 5000); // Menghilangkan alert setelah 3 detik (3000 milidetik)
-        }
     </script>
 @endsection

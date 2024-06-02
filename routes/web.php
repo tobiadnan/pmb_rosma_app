@@ -11,16 +11,6 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/',  [NavController::class, 'index'])->name('main_page');
 
@@ -70,5 +60,12 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 // Admin Access Only
 Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(function () {
     Route::get('/home',  [HomeAdminController::class, 'index'])->name('admin.home');
-    Route::get('/register',  [RegisterAdminController::class, 'index'])->name('admin.register-table');
+    Route::prefix('/register')->group(function () {
+        Route::get('/waiting-verif', [RegisterAdminController::class, 'waitingVerif'])->name('admin.waiting_verif');
+        Route::post('/waiting-verif/verif', [RegisterAdminController::class, 'waitingVerif_verif'])->name('admin.waiting_verif.verif');
+        Route::get('/unconfirmed', [RegisterAdminController::class, 'unconfirmed'])->name('admin.unconfirmed');
+        Route::post('/unconfirmed/confirm', [RegisterAdminController::class, 'unconfirmed_confirm'])->name('admin.unconfirmed.confirm');
+        Route::get('/unuploaded', [RegisterAdminController::class, 'unuploaded'])->name('admin.unuploaded');
+        Route::get('/verified', [RegisterAdminController::class, 'verified'])->name('admin.all_register');
+    });
 });

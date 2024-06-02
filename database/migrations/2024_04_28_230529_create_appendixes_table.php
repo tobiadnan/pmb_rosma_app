@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('appendixes', function (Blueprint $table) {
             $table->id();
-            $table->string('ktp')->nullable();
+            $table->string('ktp');
             $table->string('kk');
             $table->string('ijazah');
             $table->string('transkip');
             $table->string('bukti_tf');
+            $table->string('raport')->nullable();
+            $table->string('kip')->nullable();
+            $table->string('yaperos_letter')->nullable();
             $table->timestamps();
         });
     }

@@ -12,7 +12,9 @@
                 <img src="{{ asset('storage/logo.png') }}" height="52" class="h-8" alt="STMIK Rosma logo" />
             </a>
             {{-- left --}}
+
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
+                {{-- tentang pmb --}}
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -25,18 +27,22 @@
 
                         <li class="dropdown dropend">
                             <a class="dropdown-item dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                                data-bs-toggle="dropdown">
                                 Biaya Kuliah
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Reguler</a></li>
-                                <li><a class="dropdown-item" href="#">Prestaka</a></li>
-                                <li><a class="dropdown-item" href="#">KIP</a></li>
+                                <li><a class="dropdown-item" target="_blank"
+                                        href="/files/content/biaya-perkuliahan-reguler.pdf">Reguler</a></li>
+                                <li><a class="dropdown-item" target="_blank"
+                                        href="/files/content/biaya-perkuliahan-prestaka.pdf">Prestaka</a></li>
+                                <li><a class="dropdown-item" target="_blank" href="#">KIP</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
+                {{-- end tentang pmb --}}
 
+                {{--  Program Studi --}}
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -53,6 +59,9 @@
                                 href="{{ route('content.show', ['content' => 'ka']) }}">Komputerisasi Akuntansi</a></li>
                     </ul>
                 </div>
+                {{-- end  Program Studi --}}
+
+                {{-- beasiswa --}}
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -65,6 +74,7 @@
                         <li><a class="dropdown-item" href="/kacer">Karawang Cerdas</a></li>
                     </ul>
                 </div>
+                {{-- end beasiswa --}}
             </div>
         </div>
         {{-- right --}}

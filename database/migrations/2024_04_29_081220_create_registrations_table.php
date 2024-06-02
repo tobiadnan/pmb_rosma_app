@@ -21,8 +21,9 @@ return new class extends Migration
             $table->foreign('appendix_id')->references('id')->on('appendixes')->onDelete('cascade');
             $table->string('tahun_akademik');
             $table->string('jalur');
+            $table->char('ranking', 1)->nullable();
             $table->decimal('reg_fee', 10, 2);
-            $table->dateTime('tgl_registration')->nullable();
+            $table->decimal('pendaftaran_fee', 10, 2);
             $table->boolean('is_verif')->default(false);
             $table->boolean('is_set')->default(false);
             $table->timestamps();
