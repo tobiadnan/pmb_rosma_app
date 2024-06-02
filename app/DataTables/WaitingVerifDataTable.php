@@ -171,7 +171,7 @@ class WaitingVerifDataTable extends DataTable
             // Column::make('prodi')->title('Program Studi'),
             Column::make('jalur')->title('Jalur'),
             Column::computed('action')
-                ->title('show')
+                ->title('Action')
                 ->addClass('text-center')
                 ->width(60),
         ];

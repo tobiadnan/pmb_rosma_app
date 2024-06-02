@@ -45,15 +45,14 @@ class UnconfirmedDataTable extends DataTable
             ->addColumn(
                 'action',
                 function ($row) {
-                    return '<form action="' . route("admin.unconfirmed.confirm") . '" method="POST">
-            ' . csrf_field() . '
-            <input type="hidden" name="idReg" value="' . $row->id . '" />
-            <button type="submit" class="btn btn-warning">Inform</button>
-        </form>';
+                    return
+                        '<form action="' . route("admin.unconfirmed.confirm") . '" method="POST">
+                            ' . csrf_field() . '
+                            <input type="hidden" name="idReg" value="' . $row->id . '" />
+                            <button type="submit" class="btn btn-warning">Inform</button>
+                        </form>';
                 }
             )
-
-
             ->setRowId('id');
     }
 
@@ -137,7 +136,7 @@ class UnconfirmedDataTable extends DataTable
                 ->orderable(true)
                 ->title('Status'),
             Column::computed('action')
-                ->title('inform')
+                ->title('Action')
                 ->addClass('text-center'),
         ];
     }
