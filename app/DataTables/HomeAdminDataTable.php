@@ -33,15 +33,19 @@ class HomeAdminDataTable extends DataTable
             })
             ->addColumn('status', function ($row) {
                 if ($row->is_verif == false) {
-                    return 'Belum Konfirmasi';
+                    return '<span class="badge text-bg-primary">Belum Konfirmasi</span>';
                 } elseif ($row->is_verif == true && $row->appendix_id == null) {
-                    return 'Belum Unggah Berkas';
+                    return
+                        '<span class="badge text-bg-warning">Belum Unggah Berkas</span>';
                 } elseif ($row->is_verif == true && $row->appendix_id != null && $row->is_set == false) {
-                    return 'Menunggu Verifikasi';
+                    return
+                        '<span class="badge text-bg-danger">Menunggu Verifikasi</span>';
                 } else {
-                    return 'Sudah Verifikasi';
+                    return
+                        '<span class="badge text-bg-success">Terverifikasi</span>';
                 }
             })
+            ->rawColumns(['status'])
             ->setRowId('id');
     }
 
@@ -121,9 +125,9 @@ class HomeAdminDataTable extends DataTable
             // Column::make('prodi')->title('Program Studi'),
             Column::make('jalur')->title('Jalur'),
             Column::computed('status')
-                ->searchable(true)
-                ->orderable(true)
-                ->title('Status'),
+                ->addClass('text-center')
+                ->title('Status')
+                ->width(60),
         ];
     }
 
