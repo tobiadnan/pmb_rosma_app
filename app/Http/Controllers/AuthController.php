@@ -65,7 +65,7 @@ class AuthController extends Controller
             if ($jalur == 'Reguler' || $jalur == 'Prestaka') {
                 $reg_fee = $reg_fee_s1;
             } elseif ($jalur == 'Yaperos') {
-                $reg_fee = $reg_fee_s1 * 0.5;
+                $reg_fee = $reg_fee_s1;
             } else {
                 $reg_fee = 0;
             }
@@ -73,7 +73,7 @@ class AuthController extends Controller
             if ($jalur == 'Reguler' || $jalur == 'Prestaka') {
                 $reg_fee = $reg_fee_d3;
             } elseif ($jalur == 'Yaperos') {
-                $reg_fee = $reg_fee_d3 * 0.5;
+                $reg_fee = $reg_fee_d3;
             } else {
                 $reg_fee = 0;
             }
@@ -90,7 +90,7 @@ class AuthController extends Controller
         //         } elseif ($ranking == 'B') {
         //             $reg_fee = 2000000 * 0.75;
         //         } else {
-        //             $reg_fee = 2000000 * 0.5;
+        //             $reg_fee = 2000000;
         //         }
         //     } else {
         //         $reg_fee = 0;
@@ -106,7 +106,7 @@ class AuthController extends Controller
         //         } elseif ($ranking == 'B') {
         //             $reg_fee = 1500000 * 0.75;
         //         } else {
-        //             $reg_fee = 1500000 * 0.5;
+        //             $reg_fee = 1500000;
         //         }
         //     } else {
         //         $reg_fee = 0;

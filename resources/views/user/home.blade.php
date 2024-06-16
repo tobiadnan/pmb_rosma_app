@@ -383,11 +383,11 @@
                                     accept=".pdf,.jpeg,.jpg,.png" required>
                             </div>
                         @elseif($registration->jalur == 'Yaperos')
-                            <div class="mb-2">
+                            {{-- <div class="mb-2">
                                 <label for="yaperos_letter" class="form-label">Yaperos Letter*</label>
                                 <input name="yaperos_letter" class="form-control" type="file" id="formFile"
                                     accept=".pdf,.jpeg,.jpg,.png" required>
-                            </div>
+                            </div> --}}
                         @endif
                         <div class="mb-2">
                             <label for="bukti_tf" class="form-label">Bukti Pembayaran*</label>

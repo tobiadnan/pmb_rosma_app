@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/',  [NavController::class, 'index'])->name('main_page');
+Route::get('/',  [NavController::class, 'index'])->name('main_page');
 
 Route::prefix('content')->group(function () {
     Route::get('/prodi/{content}',  [NavController::class, 'showContentProdi'])->name('content.show');

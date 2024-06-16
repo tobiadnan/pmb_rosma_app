@@ -17,7 +17,7 @@ class Appendix extends Model
         'bukti_tf',
         'raport',
         'kip',
-        'yaperos_letter',
+        // 'yaperos_letter',
     ];
 
     // Relasi dengan model Registration

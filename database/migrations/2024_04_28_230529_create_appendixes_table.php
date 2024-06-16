@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('bukti_tf');
             $table->string('raport')->nullable();
             $table->string('kip')->nullable();
-            $table->string('yaperos_letter')->nullable();
+            // $table->string('yaperos_letter')->nullable();
             $table->timestamps();
         });
     }

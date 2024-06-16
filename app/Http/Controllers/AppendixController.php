@@ -31,7 +31,7 @@ class AppendixController extends Controller
 
         $raport = $request->file('raport');
         $kip = $request->file('kip');
-        $yaperos_letter = $request->file('yaperos_letter');
+        // $yaperos_letter = $request->file('yaperos_letter');
 
         if ($raport != null) {
             $appendix->raport = $raport->hashName();
@@ -40,9 +40,9 @@ class AppendixController extends Controller
             $appendix->kip = $kip->hashName();
             # code...
         }
-        if ($yaperos_letter != null) {
-            $appendix->yaperos_letter = $yaperos_letter->hashName();
-        }
+        // if ($yaperos_letter != null) {
+        //     $appendix->yaperos_letter = $yaperos_letter->hashName();
+        // }
 
 
         $appendix->save();
@@ -67,9 +67,9 @@ class AppendixController extends Controller
             $request->file('kip')->storeAs('public/appendix_files', $appendix->kip);
         }
 
-        if ($appendix->yaperos_letter != null) {
-            $request->file('yaperos_letter')->storeAs('public/appendix_files', $appendix->yaperos_letter);
-        }
+        // if ($appendix->yaperos_letter != null) {
+        //     $request->file('yaperos_letter')->storeAs('public/appendix_files', $appendix->yaperos_letter);
+        // }
 
 
         return redirect()->route('home')->with([

@@ -45,8 +45,8 @@ class HomeUserController extends Controller
         $ranking = ($jalur != 'Prestaka') ? null : $request->ranking;
 
         $prodiCode = substr($kode_prodi, -2);
-        $reg_fee_s1 = 2000000;
-        $reg_fee_d3 = 1500000;
+        $reg_fee_s1 = 2450000;
+        $reg_fee_d3 = 2000000;
 
         // if ($prodiCode == 'S1') {
         //     if ($jalur == 'Reguler') {
@@ -59,7 +59,7 @@ class HomeUserController extends Controller
         //         } elseif ($ranking == 'B') {
         //             $reg_fee = $reg_fee_s1reg * 0.75;
         //         } else {
-        //             $reg_fee = $reg_fee_s1reg * 0.5;
+        //             $reg_fee = $reg_fee_s1reg;
         //         }
         //     } else {
         //         $reg_fee = 0;
@@ -75,7 +75,7 @@ class HomeUserController extends Controller
         //         } elseif ($ranking == 'B') {
         //             $reg_fee = $reg_fee_d3reg * 0.75;
         //         } else {
-        //             $reg_fee = $reg_fee_d3reg * 0.5;
+        //             $reg_fee = $reg_fee_d3reg;
         //         }
         //     } else {
         //         $reg_fee = 0;
@@ -93,7 +93,7 @@ class HomeUserController extends Controller
             if ($jalur == 'Reguler' || $jalur == 'Prestaka') {
                 $reg_fee = $reg_fee_s1;
             } elseif ($jalur == 'Yaperos') {
-                $reg_fee = $reg_fee_s1 * 0.5;
+                $reg_fee = $reg_fee_s1;
             } else {
                 $reg_fee = 0;
             }
@@ -103,7 +103,7 @@ class HomeUserController extends Controller
             ) {
                 $reg_fee = $reg_fee_d3;
             } elseif ($jalur == 'Yaperos') {
-                $reg_fee = $reg_fee_d3 * 0.5;
+                $reg_fee = $reg_fee_d3;
             } else {
                 $reg_fee = 0;
             }
