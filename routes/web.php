@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AppendixController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\HomeAdminController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\NavController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterAdminController;
 use App\Http\Controllers\RegistrationController;
@@ -69,4 +71,13 @@ Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(functio
         Route::get('/unuploaded', [RegisterAdminController::class, 'unuploaded'])->name('admin.unuploaded');
         Route::get('/verified', [RegisterAdminController::class, 'verified'])->name('admin.all_register');
     });
+    // posts
+    Route::get('/post/checkSlug', [DashboardPostController::class, 'checkSlug']);
+    Route::resource('/posts', DashboardPostController::class);
 });
+
+
+// Postingan
+// Route::get('/', [PostController::class, 'index']);
+Route::get('/post', [PostController::class, 'index']);
+Route::get('/{post:slug}', [PostController::class, 'show']);

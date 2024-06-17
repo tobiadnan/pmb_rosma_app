@@ -11433,6 +11433,80 @@ body {
         border-bottom: 0.25rem solid #64a19d;
     }
 }
+#postNav {
+    min-height: 3.5rem;
+    background-color: #fff;
+}
+#postNav .navbar-toggler {
+    font-size: 80%;
+    padding: 0.75rem;
+    color: #64a19d;
+    border: 1px solid #64a19d;
+}
+#postNav .navbar-toggler:focus {
+    outline: none;
+}
+#postNav .navbar-brand {
+    color: #000;
+    font-weight: 700;
+    padding: 0.9rem 0;
+}
+#postNav .navbar-nav .nav-item:hover {
+    color: fade(#000, 80%);
+    outline: none;
+    background-color: transparent;
+}
+#postNav .navbar-nav .nav-item:active,
+#postNav .navbar-nav .nav-item:focus {
+    outline: none;
+    background-color: transparent;
+}
+@media (min-width: 992px) {
+    #postNav {
+        padding-top: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+        background-color: transparent;
+        transition: background-color 0.3s ease-in-out;
+    }
+    #postNav .navbar-brand {
+        padding: 0.5rem 0;
+        color: rgba(255, 255, 255, 0.5);
+    }
+    #postNav .nav-link {
+        transition: none;
+        padding: 1rem 1em;
+        color: rgba(255, 255, 255, 0.5);
+    }
+    #postNav .nav-link:hover {
+        color: rgba(255, 255, 255, 0.75);
+    }
+    #postNav .nav-link:active {
+        color: #fff;
+    }
+    #postNav.navbar-shrink {
+        background-color: #fff;
+    }
+    #postNav.navbar-shrink .navbar-brand {
+        color: #000;
+    }
+    #postNav.navbar-shrink .nav-link {
+        color: #000;
+        padding: 1rem 1rem 1.25rem;
+        border-bottom: 0.25rem solid transparent;
+    }
+    #postNav.navbar-shrink .nav-link:hover {
+        color: #64a19d;
+    }
+    #postNav.navbar-shrink .nav-link:active {
+        color: #467370;
+    }
+    #postNav.navbar-shrink .nav-link.active {
+        color: #64a19d;
+        outline: none;
+        border-bottom: 0.25rem solid #64a19d;
+    }
+}
 
 .btn {
     box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
@@ -11580,7 +11654,7 @@ body {
     background: linear-gradient(
         to bottom,
         #000 0%,
-        rgb(0,0,0,0.4) 9%,
+        rgb(0, 0, 0, 0.4) 9%,
         #fff 75%
     );
 }
