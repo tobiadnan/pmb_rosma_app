@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\PostCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class PostFactory extends Factory
             'slug'          => $this->faker->slug(),
             'excerpt'       => $this->faker->paragraph(),
             'body'          => '<p>' . implode('</p><p>', $this->faker->paragraphs(mt_rand(5, 10))) . '</p><p>',
+            'post_category_id'   => PostCategory::inRandomOrder()->first()->id,
             'user_id'       => 1
         ];
     }

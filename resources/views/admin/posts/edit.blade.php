@@ -33,18 +33,19 @@
                                 @enderror
                             </div>
 
-                            {{-- <div class="mb-3">
+                            <div class="mb-3">
                                 <label for="category" class="form-label">Category</label>
-                                <select class="form-select" aria-label="Default select example" id="category" name="category_id">
+                                <select class="form-select" aria-label="Default select example" id="category"
+                                    name="post_category_id">
                                     @foreach ($categories as $category)
-                                        @if (old('category_id', $post->category_id) == $category->id)
+                                        @if (old('post_category_id', $post->post_category_id) == $category->id)
                                             <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
                                         @else
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endif
                                     @endforeach
                                 </select>
-                            </div> --}}
+                            </div>
 
                             <div class="mb-3">
                                 <label for="image" class="form-label @error('image') is-invalid @enderror">Gambar
@@ -82,4 +83,15 @@
             </div>
         </div>
     </div>
+    {{-- Show Slug Otomatis --}}
+    <script>
+        const title = document.querySelector('#title');
+        const slug = document.querySelector('#slug');
+
+        title.addEventListener('change', function() {
+            fetch('/admin/post/checkSlug?title=' + title.value)
+                .then(response => response.json())
+                .then(data => slug.value = data.slug)
+        });
+    </script>
 @endsection

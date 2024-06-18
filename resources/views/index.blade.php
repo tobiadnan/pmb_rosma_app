@@ -3,11 +3,19 @@
 @section('content')
     <div class="container text-justify justify-content-center m-25">
         <div class="row mt-5">
-            <h2> {{ $page }}</h2>
+            <div class="d-flex justify-content-center">
+                <h2>{{ $page }}</h2>
+            </div>
+            <form action="{{ route('posts') }}" class="d-flex ms-auto p-2" role="search">
+                <input class="form-control form-control-sm me-2" type="search" placeholder="Cari Artikel" aria-label="Search"
+                    name="search" value="{{ request('search') }}">
+                <button type="submit" class="btn btn-primary btn-sm">Cari</button>
+                {{-- <button class="btn btn-primary btn-sm" type="submit">Search</button> --}}
+            </form>
+
             <b>
                 <hr>
             </b>
-
 
             @foreach ($posts as $post)
                 <div class="col-md-4 ">

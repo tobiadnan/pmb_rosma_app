@@ -5,12 +5,9 @@
     <div class="container m-5">
         <div class="row justify-content-center">
             <div class="col-md-9">
-                {{-- <h6><a href="/categories/{{ $post->category->slug }}"
-                        style="text-decoration: none">{{ $post->category->name }}</a></h6>
-                <h1>{{ $post->title }}</h1>
-                <h6><a href="/author/{{ $post->user->username }}" style="text-decoration: none">{{ $post->user->name }}</a>
-                </h6> --}}
                 <div class="mt-5">
+                    <h6><a href="/categories/{{ $postcat->category->slug }}"
+                            style="text-decoration: none">{{ $post->category->name }}</a></h6>
                     <h1>{{ $post->title }}</h1>
                     <h6>Admin PMB STMIK Rosma</h6>
                 </div>

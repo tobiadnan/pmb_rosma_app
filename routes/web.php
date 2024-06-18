@@ -2,15 +2,19 @@
 
 use App\Http\Controllers\AppendixController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\HomeAdminController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\NavController;
+use App\Http\Controllers\PostCategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterAdminController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\TestController;
+use App\Models\PostCategory;
+use Database\Factories\PostCategoryFactory;
 use Illuminate\Support\Facades\Route;
 
 
@@ -74,10 +78,13 @@ Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(functio
     // posts
     Route::get('/post/checkSlug', [DashboardPostController::class, 'checkSlug']);
     Route::resource('/posts', DashboardPostController::class);
+    Route::resource('/category', DashboardCategoryController::class);
 });
 
 
 // Postingan
 // Route::get('/', [PostController::class, 'index']);
-Route::get('/post', [PostController::class, 'index']);
+Route::get('/posts', [PostController::class, 'index'])->name('posts');
 Route::get('/{post:slug}', [PostController::class, 'show']);
+
+Route::get('/categories/{category:slug}', [PostCategoryController::class, 'index'])->name('categories');

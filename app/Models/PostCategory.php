@@ -4,19 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
 
-class Post extends Model
+class PostCategory extends Model
 {
     use HasFactory;
-    use Sluggable;
-
-    protected $fillable = ['title', 'post_category_id', 'slug', 'excerpt', 'image', 'body', 'user_id'];
+    protected $fillable = ['name', 'user_id', 'slug', 'body'];
     // protected $guarded = ['id'];
 
-    public function category()
+    public function post()
     {
-        return $this->belongsTo(PostCategory::class, 'post_category_id', 'id');
+        return $this->hasMany(Post::class, 'post_category_id', 'id');
     }
 
     public function user()
@@ -33,7 +30,7 @@ class Post extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'name'
             ]
         ];
     }

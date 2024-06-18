@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PostCategory;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +26,9 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        return view('admin.posts.create', [
+            'categories' => PostCategory::all()
+        ]);
     }
 
     /**
@@ -36,6 +39,7 @@ class DashboardPostController extends Controller
         $validated = $request->validate([
             'title'         => 'required|max:255',
             'slug'          => 'required|unique:posts',
+            'post_category_id'   => 'required',
             'image'         => 'image|file|max:1024',
             'body'          => 'required'
         ]);
@@ -73,6 +77,7 @@ class DashboardPostController extends Controller
     {
         return view('admin.posts.edit', [
             'post' => $post,
+            'categories' => PostCategory::all()
         ]);
     }
 
@@ -83,6 +88,7 @@ class DashboardPostController extends Controller
     {
         $rules = [
             'title'         => 'required|max:255',
+            'post_category_id'   => 'required',
             'image'         => 'image|file|max:1024',
             'body'          => 'required'
         ];

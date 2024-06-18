@@ -76,7 +76,7 @@
                             <div class="d-flex justify-content-center align-items-center h-100">
                                 <div>
                                     <h5>Klik tombol ini untuk melihat semua aktivitas</h5>
-                                    <a href="#" class="btn btn-primary">Selengkapnya</a>
+                                    <a href="{{ route('posts') }}" class="btn btn-primary">Selengkapnya</a>
                                 </div>
                             </div>
                         </div>

@@ -32,7 +32,7 @@
                                 @enderror
                             </div>
 
-                            {{-- <div class="mb-3">
+                            <div class="mb-3">
                                 <label for="category" class="form-label">Category</label>
                                 <select class="form-select" aria-label="Default select example" id="category"
                                     name="category_id">
@@ -44,7 +44,7 @@
                                         @endif
                                     @endforeach
                                 </select>
-                            </div> --}}
+                            </div>
 
                             <div class="mb-3">
                                 <label for="image" class="form-label @error('image') is-invalid @enderror">Gambar

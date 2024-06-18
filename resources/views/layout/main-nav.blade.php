@@ -75,6 +75,12 @@
                     </ul>
                 </div>
                 {{-- end beasiswa --}}
+
+                {{-- kegiatan --}}
+                <div class="nav-item">
+                    <a class="nav-link" href="{{ route('posts') }}">Kegiatan</a>
+                </div>
+                {{-- end kegiatan --}}
             </div>
         </div>
         {{-- right --}}

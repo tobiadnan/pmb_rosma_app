@@ -6,7 +6,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <h2>Semua Post</h2>
+                        <h2>Semua Kegiatan</h2>
 
                         @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -21,7 +21,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Judul</th>
+                                    <th>Judul Kegiatan</th>
+                                    <th>Kategori</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -31,7 +32,7 @@
                                     <tr>
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $post->title }}</td>
-                                        {{-- <td>{{ $post->category->name }}</td> --}}
+                                        <td>{{ $post->category->name }}</td>
                                         <td>
                                             <a class="btn btn-primary btn-sm mb-1" href="/admin/posts/{{ $post->slug }}"
                                                 role="button"><i class="fa-solid fa-eye"></i></a>
