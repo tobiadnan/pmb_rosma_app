@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SendPaymentInfoMail;
 use App\Models\Registration;
+use App\Models\Test;
 use Illuminate\Http\Request;
 
 class HomeUserController extends Controller
@@ -13,6 +14,11 @@ class HomeUserController extends Controller
 
         $profile = $request->user()->profile;
         $registration = $profile->registrations()->first();
+        if ($registration->is_set) {
+            $no_test = 'PMB-TEST/' . date('Y') . '/' . $registration->id;
+        } else {
+            $no_test = '-';
+        }
 
         if ($registration) {
             $prodi = $registration->prodie()->first();
@@ -30,6 +36,7 @@ class HomeUserController extends Controller
             'prodi' => $prodi,
             'registration' => $registration,
             'no_reg' => $no_reg,
+            'no_test' => $no_test,
         ]);
     }
 
@@ -47,40 +54,6 @@ class HomeUserController extends Controller
         $prodiCode = substr($kode_prodi, -2);
         $reg_fee_s1 = 2450000;
         $reg_fee_d3 = 2000000;
-
-        // if ($prodiCode == 'S1') {
-        //     if ($jalur == 'Reguler') {
-        //         $reg_fee = $reg_fee_s1reg;
-        //     } elseif ($jalur == 'Yaperos') {
-        //         $reg_fee = $reg_fee_s1reg * 0.75;
-        //     } elseif ($jalur == 'Prestaka') {
-        //         if ($ranking == 'A') {
-        //             $reg_fee = 0;
-        //         } elseif ($ranking == 'B') {
-        //             $reg_fee = $reg_fee_s1reg * 0.75;
-        //         } else {
-        //             $reg_fee = $reg_fee_s1reg;
-        //         }
-        //     } else {
-        //         $reg_fee = 0;
-        //     }
-        // } elseif ($prodiCode == 'D3') {
-        //     if ($jalur == 'Reguler') {
-        //         $reg_fee = $reg_fee_d3reg;
-        //     } elseif ($jalur == 'Yaperos') {
-        //         $reg_fee = $reg_fee_d3reg * 0.75;
-        //     } elseif ($jalur == 'Prestaka') {
-        //         if ($ranking == 'A') {
-        //             $reg_fee = 0;
-        //         } elseif ($ranking == 'B') {
-        //             $reg_fee = $reg_fee_d3reg * 0.75;
-        //         } else {
-        //             $reg_fee = $reg_fee_d3reg;
-        //         }
-        //     } else {
-        //         $reg_fee = 0;
-        //     }
-        // }
 
         if ($jalur != 'KIP') {
             $pendaftaran_fee = 200000;

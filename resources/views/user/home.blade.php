@@ -28,7 +28,7 @@
                             <div class="col-9">
                                 <h3 class="card-title">{{ $profile->nama_d }} {{ $profile->nama_b }}</h3>
                                 @if ($registration->is_set == true)
-                                    <h6 class="card-subtitle mb-2 text-muted">No. Test: <strong>Test1235</strong>
+                                    <h6 class="card-subtitle mb-2 text-muted">No. Test: <strong>{{ $no_test }}</strong>
                                     </h6>
                                 @else
                                     <h6 class="card-subtitle mb-2 text-muted">No. Reg: <strong>{{ $no_reg }}</strong>
@@ -97,7 +97,8 @@
                                 mendapatkan informasi selanjutnya.
                             @elseif($registration->appendix_id != null && $registration->is_set == true)
                                 Selamat! Pendaftaran kamu telah berhasil diverifikasi. Kamu telah terdaftar untuk
-                                mengikuti tes dengan nomor tes <strong>{ Nomor Test }</strong>. Kami harap kamu dapat
+                                mengikuti tes dengan nomor tes <strong>{{ $no_test }}</strong>. Kami harap kamu
+                                dapat
                                 mencetak kartu tes sebagai bukti pendaftaran kamu dan untuk akses ke tes yang akan
                                 datang. Terima kasih atas partisipasi kamu!<br><br>
                                 Seluruh informasi test akan diberikan pada grup WhatsApp yang telah kami kirimkan, atau

@@ -17,9 +17,8 @@ class Test extends Model
         'registration_id',
     ];
 
-
     public function registrations()
     {
-        return $this->hasMany(Registration::class, 'no_test');
+        return $this->hasMany(Registration::class);
     }
 }

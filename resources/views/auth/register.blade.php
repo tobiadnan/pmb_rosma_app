@@ -45,11 +45,11 @@
                                     <div class="form-card">
                                         <h4 class="fs-title">Informasi Akun</h4>
                                         <input class="form-control" type="email" name="email" placeholder="Email*"
-                                            required value="user@gmail.com" />
-                                        <input type="password" name="password" id="pwd" placeholder="Password"
-                                            required value="password" />
+                                            required value="" />
+                                        <input type="password" name="password" id="pwd" placeholder="Password*"
+                                            required value="" />
                                         <input type="password" name="cpwd" id="cpwd"
-                                            placeholder="Confirm Password" required value="password" />
+                                            placeholder="Confirm Password*" required value="" />
                                     </div>
                                     <div id="divCheckPasswordMatch" class="text-danger"></div>
                                     <input type="button" name="next" class="next action-button" value="Next"
@@ -84,27 +84,27 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="nama_d" placeholder="Nama Depan*" required
-                                                    value="Nama D" />
+                                                    value="" />
                                             </div>
                                             <div class="col-6">
                                                 <input type="text" name="nama_b" placeholder="Nama Belakang"
-                                                    value="Nama B" />
+                                                    value="" />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="nik" placeholder="No. Induk KTP"
-                                                    required value="123456" />
+                                                    required value="" />
                                             </div>
                                             <div class="col-6">
                                                 <input type="text" name="nkk" placeholder="No. KK*" required
-                                                    value="123456" />
+                                                    value="" />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="tempat_lahir" placeholder="Tempat Lahir*"
-                                                    required value="Data Sample" />
+                                                    required value="" />
                                             </div>
                                             <div class="col-2 text-end">
                                                 <p style="color: grey">Tanggal Lahir:*</p>
@@ -138,7 +138,7 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="no_hp" placeholder="No. Hp/WhatsApp*"
-                                                    required value="088888888888" />
+                                                    required value="" />
                                             </div>
                                             <div class="col-6">
                                                 <input type="text" name="no_hp2"
@@ -156,25 +156,25 @@
                                     <div class="form-card">
                                         <h4 class="fs-title">Alamat Domisili</h4>
                                         <textarea style="background-color: transparent" rows="1" id="alamat" name="alamat"
-                                            placeholder="Jl. XYZ No. X RT XX/RW YY" required>Jl. Sample</textarea>
+                                            placeholder="Jl. XYZ No. X RT XX/RW YY" required></textarea>
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="desa" placeholder="Desa / Kelurahan*"
-                                                    required value="Data Sample" />
+                                                    required value="" />
                                             </div>
                                             <div class="col-6">
                                                 <input type="text" name="kecamatan" placeholder="Kecamatan*"
-                                                    required value="Data Sample" />
+                                                    required value="" />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="text" name="kota" placeholder="Kab. / Kota*"
-                                                    required value="Data Sample" />
+                                                    required value="" />
                                             </div>
                                             <div class="col-6">
                                                 <input type="text" name="provinsi" placeholder="Provinsi*"
-                                                    required value="Data Sample" />
+                                                    required value="" />
                                             </div>
                                         </div>
                                     </div>
@@ -188,11 +188,11 @@
                                     <div class="form-card">
                                         <h4 class="fs-title">Pendidikan Terakhir</h4>
                                         <input type="text" name="pend_terakhir" placeholder="Pendidikan Terakhir*"
-                                            required value="SMK Sample" />
+                                            required value="" />
                                         <div class="row">
                                             <div class="col-6 mt-1">
                                                 <input type="text" name="no_ijazah" placeholder="No. Ijazah*"
-                                                    required value="12345" />
+                                                    required value="" />
                                             </div>
                                             <div class="col-6">
                                                 <select class="list-dt form-select" id="tahun" name="tahun_lulus"

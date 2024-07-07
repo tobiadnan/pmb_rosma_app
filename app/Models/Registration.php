@@ -63,9 +63,8 @@ class Registration extends Model
     // Relasi dengan model tests
     public function test()
     {
-        return $this->belongsTo(Test::class, 'no_test');
+        return $this->belongsTo(Test::class);
     }
-
 
     // Relasi dengan model Appendix
     public function appendix()
