@@ -13,12 +13,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterAdminController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\TestController;
-use App\Models\PostCategory;
-use Database\Factories\PostCategoryFactory;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/',  [NavController::class, 'index'])->name('main_page');
 Route::get('/',  [NavController::class, 'index'])->name('main_page');
 
 Route::prefix('content')->group(function () {

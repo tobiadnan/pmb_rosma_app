@@ -11,7 +11,7 @@ use App\Models\PostCategory;
 class PostController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
 
         $posts = Post::latest();
@@ -20,25 +20,36 @@ class PostController extends Controller
             $posts->where('title', 'like', '%' . request('search') . '%');
         }
 
-        return view('index', [
+        $data = [
             'title' => 'Artikel Kegiatan Mahasiswa',
             'page'  => 'Semua Artikel',
             'posts' => $posts->paginate(6),
-            'active' => '/'
-        ]);
+            'active' => '/',
+        ];
+
+        if (auth()->check()) {
+            $data['profile'] = $request->user()->profile;
+        }
+
+        return view('index', $data);
     }
 
-    public function show(Post $post)
+    public function show(Post $post, Request $request)
     {
         $postcat = Post::with('category')->findOrFail($post->id);
         // dd($post->category->slug);
         $posts = Post::latest();
-
-        return view('post', [
+        $data = [
             'title' => $post->title,
             'post' => $post,
             'postcat' => $postcat,
             'posts' => $posts->paginate(6),
-        ]);
+        ];
+
+        if (auth()->check()) {
+            $data['profile'] = $request->user()->profile;
+        }
+
+        return view('post', $data);
     }
 }
