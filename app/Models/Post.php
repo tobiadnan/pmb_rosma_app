@@ -11,12 +11,12 @@ class Post extends Model
     use HasFactory;
     use Sluggable;
 
-    protected $fillable = ['title', 'post_category_id', 'slug', 'excerpt', 'image', 'body', 'user_id'];
+    protected $fillable = ['title', 'category_id', 'slug', 'excerpt', 'image', 'body', 'user_id'];
     // protected $guarded = ['id'];
 
     public function category()
     {
-        return $this->belongsTo(PostCategory::class, 'post_category_id', 'id');
+        return $this->belongsTo(PostCategory::class, 'category_id', 'id');
     }
 
     public function user()

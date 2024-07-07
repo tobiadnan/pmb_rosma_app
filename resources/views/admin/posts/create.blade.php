@@ -24,7 +24,7 @@
                             <div class="mb-3">
                                 <label for="slug" class="form-label @error('slug') is-invalid @enderror">Slug</label>
                                 <input type="text" class="form-control" id="slug" name="slug" required
-                                    value="{{ old('title') }}">
+                                    value="{{ old('slug') }}">
                                 @error('slug')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -61,7 +61,7 @@
 
                             <div class="mb-3">
                                 <label for="body" class="form-label @error('body') is-invalid @enderror">Body</label>
-                                <textarea name="body" id="editor"></textarea>
+                                <textarea name="body" id="editor">{{ old('body') }}</textarea>
                                 @error('body')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -76,15 +76,18 @@
             </div>
         </div>
     </div>
+
     {{-- Show Slug Otomatis --}}
     <script>
-        const title = document.querySelector('#title');
-        const slug = document.querySelector('#slug');
+        document.addEventListener('DOMContentLoaded', function() {
+            const title = document.querySelector('#title');
+            const slug = document.querySelector('#slug');
 
-        title.addEventListener('change', function() {
-            fetch('/admin/post/checkSlug?title=' + title.value)
-                .then(response => response.json())
-                .then(data => slug.value = data.slug)
+            title.addEventListener('change', function() {
+                fetch('/admin/post/checkSlug?title=' + title.value)
+                    .then(response => response.json())
+                    .then(data => slug.value = data.slug)
+            });
         });
     </script>
 @endsection

@@ -39,7 +39,7 @@ class DashboardPostController extends Controller
         $validated = $request->validate([
             'title'         => 'required|max:255',
             'slug'          => 'required|unique:posts',
-            'post_category_id'   => 'required',
+            'category_id'   => 'required',
             'image'         => 'image|file|max:1024',
             'body'          => 'required'
         ]);
@@ -53,7 +53,11 @@ class DashboardPostController extends Controller
         }
 
         $validated['user_id'] = auth()->user()->id;
+        $validated['user_id'] = auth()->user()->id;
         $validated['excerpt'] = Str::limit(strip_tags($request->body), 150);
+
+        // dd($validated);
+
 
         Post::create($validated);
         return redirect('/admin/posts')->with('success', 'Post Baru Berhasil Ditambahkan');
